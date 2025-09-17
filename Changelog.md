@@ -154,3 +154,10 @@
 - 在根目录下添加了`LICENSE-toml4j`文件（很抱歉之前因为疏忽没有添加）。 | Added the `LICENSE-toml4j` file to the root directory (sorry for missing this earlier).
 - 在`README.md`中添加了对上述文件的引用。 | Added a reference to the above files in `README.md`.
 - 回退了0.3.0-pre1对`toml4j`库的误更改。 | Reverted the change to `toml4j` library in 0.3.0-pre1.
+
+## 0.3.3.2 - 2025-9-17
+
+### 漏洞修复 | Bug Fixes
+
+- 修复了在Minecraft 1.21.2至1.21.5版本无法启动的问题。 | Fixed that the mod could not launch properly in versions 1.21.2 to 1.21.5 of Minecraft.
+- 修复了Modrinth上未正确标识支持的游戏版本的问题。 | Fixed that the supported game versions on Modrinth were not correctly identified.

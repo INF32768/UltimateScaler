@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
 @Mixin(Entity.class)
-public abstract class MixinEntityAfter1_21_2 {
+public abstract class MixinEntityAfter1_21_6 {
     @Redirect(method = "readData", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;clamp(DDD)D"))
     private static double modifyClampX(double value, double min, double max) {
         if (config.expandWorldBorder) {

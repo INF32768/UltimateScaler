@@ -10,7 +10,7 @@ import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
 
 @Mixin(Entity.class)
-public abstract class MixinEntityBefore1_21_2 {
+public abstract class MixinEntityBefore1_21_6 {
     @Redirect(method = "method_5651", at = @At(value = "INVOKE", target = "Lnet/minecraft/class_3532;method_15350(DDD)D", remap = false), remap = false)
     private static double modifyClampX(double value, double min, double max) {
         if (config.expandWorldBorder) {

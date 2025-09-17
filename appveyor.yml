@@ -3,10 +3,10 @@ skip_tags: true
 clone_depth: 1
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
-  VERSION: 0.3.3.1-1.21
+  VERSION: 0.3.3.2-1.21
   RELEASE_TYPE: release
   MODRINTH_TOKEN:
-    secure: TsbufWPo0KHWJvMF45poicdUr9g5333TCoJnOxfhD5kH7oM7zkboVn2ilHXVKdrIf8/S6GAGlUrsy2JRA/pPcFA+ela442QsFq/dzSrNuYQ= #有效期至2025-9-11
+    secure: whz1rSvaHvbEh/tU/gZSr1yDtw5rEuUhGTNWAcchA+sh2F3zrmv5o4qH1YYAL8qyCLqOBJFlTrT/Yjco5/NHJI8UTmtLwDpbZRVJn3pF674= #有效期至2025-10-17
   CURSEFORGE_API_KEY:
     secure: +FY0Vsp+IhDmayrqsjt/MbDCRDB9v5hb/BhjPK1oC+yvxytK7RaSNp2cld7Z80iX #无限期有效（？
 cache:
@@ -30,9 +30,9 @@ deploy:
   - provider: GitHub
     tag: v$(VERSION)
     release: $(VERSION)
-    description: '## 0.3.3.1 - 2025-8-23\n\n### 改进 | Improvements\n\n- 把`MixinAbstractChunkHolder`和`MixinMineshaftPart`两个类移动到`fixing`包中。 | Moved `MixinAbstractChunkHolder` and `MixinMineshaftPart` two classes to the `fixing` package.\n- 把`shadowed`包移动到`src\main\java`目录下。 | Moved the `shadowed` package to the `src\main\java` directory.\n\n### 漏洞修复 | Bug Fixes\n\n- 修复了在1.21.2以上版本中，X/Z坐标超过±30000512或Y坐标超过±20000000的实体，在加载时会被限制到此位置的问题。 | Fixed that entities with X/Z coordinates beyond ±30000512 or Y coordinates beyond ±20000000 in versions 1.21.2 and above, will be restricted to this position when loading.\n- 在根目录下添加了`LICENSE-toml4j`文件（很抱歉之前因为疏忽没有添加）。 | Added the `LICENSE-toml4j` file to the root directory (sorry for missing this earlier).\n- 在`README.md`中添加了对上述文件的引用。 | Added a reference to the above files in `README.md`.\n- 回退了0.3.0-pre1对`toml4j`库的误更改。 | Reverted the change to `toml4j` library in 0.3.0-pre1.'
+    description: '## 0.3.3.2 - 2025-9-17\n\n### 漏洞修复 | Bug Fixes\n\n- 修复了在Minecraft 1.21.2至1.21.5版本无法启动的问题。 | Fixed that the mod could not launch properly in versions 1.21.2 to 1.21.5 of Minecraft.\n- 修复了Modrinth上未正确标识支持的游戏版本的问题。 | Fixed that the supported game versions on Modrinth were not correctly identified.'
     auth_token:
-      secure: MuYLGwuMDMlX3bB/PQL+ww4cs9Mmc2Nb0I2L4Ps2+GASo/K26MEUbFY1UVIgS2HR #有效期至2025-9-8
+      secure: mIxbyFSpUuMyOA9YhYQO586jIfX1Al1bt3VTMQ9bDsIf7aG/xBbmjVewvgHU7DQCTULnoV4rCfWc846u1WG6lnTt5EFGBpBaytTDdxbLjRvfVIZeg3g5+T17Lk22M/Nx #有效期至2025-10-17
     artifact: UltimateScaler-$(VERSION).jar
     draft: false
     prerelease: false
