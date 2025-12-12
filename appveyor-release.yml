@@ -1,0 +1,35 @@
+version: $(VERSION) (#{build})
+skip_non_tags: true
+clone_depth: 1
+environment:
+  JAVA_HOME: C:\Program Files\Java\jdk21
+  VERSION: 0.4.0-1.21.2
+  MODRINTH_TOKEN:
+    secure: bfjh/wWW2wVw0atTgZDwcelyOBIN6lt+UGMHk3KZtlbED4wmjuadyGEXWV8wF63LVfvO40GKqvZKJul1Uy6XdU53K1Zvw0IEVV0iT3lWjKQ= #有效期至2026-05-28
+  CURSEFORGE_API_KEY:
+    secure: +FY0Vsp+IhDmayrqsjt/MbDCRDB9v5hb/BhjPK1oC+yvxytK7RaSNp2cld7Z80iX #无限期有效（？
+cache:
+  - C:\Users\appveyor\.gradle\caches\fabric-loom
+  - C:\Users\appveyor\.gradle\caches\modules-2
+build_script:
+  - cmd: >-
+      gradlew build --no-daemon
+      
+      gradlew curseforge --no-daemon
+      
+      gradlew modrinth --no-daemon
+artifacts:
+  - path: .\build\libs\UltimateScaler-$(VERSION).jar
+    name: UltimateScaler-$(VERSION).jar
+  - path: .\build\libs\UltimateScaler-$(VERSION)-sources.jar
+    name: UltimateScaler-$(VERSION)-sources.jar
+deploy:
+  - provider: GitHub
+    tag: v$(VERSION)
+    release: $(VERSION)
+    description:
+    auth_token:
+      secure: tUvjufRIPG6IV4pB9jRiNUfgD/Heb1TiwBkYJZvnfSOjDqoTu6d843oxOfZdTxsV #有效期至2026-05-28
+    artifact: UltimateScaler-$(VERSION).jar
+    draft: false
+    prerelease: false
