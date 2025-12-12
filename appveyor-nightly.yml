@@ -1,0 +1,174 @@
+version: $(VERSION)-alpha (#{build})
+skip_non_tags: true
+clone_depth: 1
+environment:
+  JAVA_HOME: C:\Program Files\Java\jdk21
+  GITHUB_TOKEN:
+    secure: tUvjufRIPG6IV4pB9jRiNUfgD/Heb1TiwBkYJZvnfSOjDqoTu6d843oxOfZdTxsV #有效期至2026-05-28
+  PROJECT_NAME: UltimateScaler
+  VERSION: 0.4.0-1.21.2
+cache:
+  - C:\Users\appveyor\.gradle\caches\fabric-loom
+  - C:\Users\appveyor\.gradle\caches\modules-2
+install:
+  - ps: >-
+      $ErrorActionPreference = "Stop"
+      function Write-Log {
+          param([string]$Message)
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+          Write-Host "[$timestamp] $Message"
+      }
+      function Invoke-GitHubAPI {
+          param(
+              [string]$Endpoint,
+              [string]$Method = "GET"
+          )
+
+          $headers = @{
+              "Authorization" = "token $env:GITHUB_TOKEN"
+              "Accept" = "application/vnd.github.v3+json"
+              "User-Agent" = "PowerShell-CI-Script"
+          }
+
+          try {
+              $response = Invoke-RestMethod -Uri "https://api.github.com/$Endpoint" `
+                                            -Method $Method `
+                                            -Headers $headers `
+                                            -ContentType "application/json"
+              return $response
+          }
+          catch {
+              Write-Log "GitHub API调用失败: $($_.Exception.Message)"
+              exit 1
+          }
+      }
+      if ($env:APPVEYOR_REPO_TAG) {
+          Write-Log "检测到标签触发: $env:APPVEYOR_REPO_TAG_NAME，跳过每日构建"
+          Exit-AppVeyorBuild
+          return
+      }
+      Write-Log "开始构建前验证..."
+      Write-Log "查询GitHub仓库分支..."
+      $branches = Invoke-GitHubAPI -Endpoint "repos/$env:APPVEYOR_REPO_NAME/branches"
+      $targetBranches = $branches | Where-Object {
+          $_.name -eq "main" -or 
+          $_.name -match "^feat/" -or 
+          $_.name -match "^fix/" -or 
+          $_.name -match "^refactor/" -or 
+          $_.name -match "^perf/"
+      }
+      if ($targetBranches.Count -eq 0) {
+          Write-Log "未找到目标分支"
+          exit 1
+      }
+      $latestBranch = $null
+      $latestCommitDate = [DateTime]::MinValue
+      foreach ($branch in $targetBranches) {
+          $commit = Invoke-GitHubAPI -Endpoint "repos/$env:APPVEYOR_REPO_NAME/commits/$($branch.commit.sha)"
+          $commitDate = [DateTime]$commit.commit.committer.date
+          if ($commitDate -gt $latestCommitDate) {
+              $latestCommitDate = $commitDate
+              $latestBranch = $branch
+          }
+      }
+      if (-not $latestBranch) {
+          Write-Log "无法确定最新分支"
+          exit 1
+      }
+      Write-Log "选择分支: $($latestBranch.name) (最新提交: $latestCommitDate)"
+      $currentSha = $latestBranch.commit.sha
+      Write-Log "当前最新提交SHA: $currentSha"
+      $env:CI_TARGET_BRANCH = $latestBranch.name
+      $env:CI_TARGET_SHA = $currentSha
+      Write-Log "构建验证通过，开始处理分支: $($latestBranch.name)"
+      if ($latestBranch.name -eq "main") {
+          Write-Log "目标分支为main，无需签出"
+      }
+      else {
+          Write-Log "签出到分支: $($latestBranch.name)"
+          git checkout -q $latestBranch.name
+      }
+      $buildDate = Get-Date -Format "yyyyMMdd"
+      $shortSha = $currentSha.Substring(0, 8)
+      $nightlyFileName = "{0}-{1}-nightly-{2}-{3}.jar" -f $env:PROJECT_NAME, $env:VERSION, $buildDate, $shortSha
+      $env:NIGHTLY_FILENAME = $nightlyFileName
+      Write-Log "设置构建产物文件名: $nightlyFileName"
+      Write-Log "构建前准备完成，开始构建..."
+build_script:
+  - cmd: >-
+      gradlew build --no-daemon
+test_script:
+  - ps: >-
+      $ErrorActionPreference = "Stop"
+      function Write-Log {
+          param([string]$Message)
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+          Write-Host "[$timestamp] $Message"
+      }
+      Write-Log "开始重命名构建产物..."
+      if (-not $env:NIGHTLY_FILENAME) {
+          Write-Log "错误: NIGHTLY_FILENAME 环境变量未设置"
+          exit 1
+      }
+      if (-not $env:PROJECT_NAME -or -not $env:VERSION) {
+          Write-Log "错误: PROJECT_NAME 或 VERSION 环境变量未设置"
+          exit 1
+      }
+      $sourceDir = "build\libs"
+      $originalFileName = "{0}-{1}.jar" -f $env:PROJECT_NAME, $env:VERSION
+      $sourceFilePath = Join-Path $sourceDir $originalFileName
+      $targetFilePath = Join-Path $sourceDir $env:NIGHTLY_FILENAME
+      if (-not (Test-Path $sourceFilePath)) {
+          Write-Log "警告: 原始文件不存在: $sourceFilePath"
+          $possibleFiles = Get-ChildItem -Path $sourceDir -Filter "*.jar" | Where-Object {
+              $_.Name -match "^$([regex]::Escape($env:PROJECT_NAME))-$([regex]::Escape($env:VERSION))"
+          }
+          if ($possibleFiles.Count -eq 0) {
+              Write-Log "错误: 未找到任何匹配的构建产物"
+              exit 1
+          }
+          $mainJar = $possibleFiles | Where-Object { $_.Name -match "^$([regex]::Escape($env:PROJECT_NAME))-$([regex]::Escape($env:VERSION))\.jar$" }
+          if ($mainJar) {
+              $sourceFilePath = $mainJar.FullName
+              Write-Log "找到主JAR文件: $sourceFilePath"
+          }
+          else {
+              $sourceFilePath = $possibleFiles[0].FullName
+              Write-Log "使用找到的JAR文件: $sourceFilePath"
+          }
+      }
+      if (-not (Test-Path $sourceDir)) {
+          Write-Log "错误: 构建目录不存在: $sourceDir"
+          exit 1
+      }
+      try {
+          Write-Log "重命名文件:"
+          Write-Log "  从: $(Split-Path $sourceFilePath -Leaf)"
+          Write-Log "  到: $(Split-Path $targetFilePath -Leaf)"
+          if (Test-Path $targetFilePath) {
+              Remove-Item -Path $targetFilePath -Force
+              Write-Log "已删除已存在的目标文件"
+          }
+          Rename-Item -Path $sourceFilePath -NewName $env:NIGHTLY_FILENAME -Force
+          Write-Log "文件重命名成功"
+          $symlinkPath = Join-Path $sourceDir $originalFileName
+          if (-not (Test-Path $symlinkPath)) {
+              try {
+                  New-Item -ItemType SymbolicLink -Path $symlinkPath -Target $targetFilePath -Force | Out-Null
+                  Write-Log "已创建符号链接: $originalFileName -> $env:NIGHTLY_FILENAME"
+              }
+              catch {
+                  Write-Log "警告: 无法创建符号链接: $_"
+              }
+          }
+          $env:NIGHTLY_FILE_PATH = $targetFilePath
+          Write-Log "设置文件路径变量: $targetFilePath"
+      }
+      catch {
+          Write-Log "重命名文件失败: $($_.Exception.Message)"
+          exit 1
+      }
+      Write-Log "打包前处理完成"
+artifacts:
+  - path: $(NIGHTLY_FILE_PATH)
+    name: UltimateScaler.jar

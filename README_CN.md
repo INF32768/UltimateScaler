@@ -117,4 +117,4 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 
 本Mod遵循MIT许可证，可以在[LICENSE](LICENSE)文件中找到相关信息。
 
-本Mod内置了[toml4j](https://github.com/mwanji/toml4j)库，该库遵循MIT许可证，可以在[LICENSE-toml4j](LICENSE-toml4j)中找到相关信息。
+本Mod内置了[toml4j](https://github.com/mwanji/toml4j)库，该库遵循MIT许可证，可以在[LICENSE-toml4j](third-party-licenses/LICENSE-toml4j)中找到相关信息。

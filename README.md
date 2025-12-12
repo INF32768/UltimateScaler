@@ -123,4 +123,4 @@ This Mod is under the MIT license <!-- modrinth_exclude.start -->
 , and you can find the relevant information in the [LICENSE](LICENSE) file<!-- modrinth_exclude.end -->.
 
 This Mod includes the [toml4j](https://github.com/mwanji/toml4j) library, which is licensed under the MIT license<!-- modrinth_exclude.start -->
-, and you can find the relevant information in the [LICENSE-toml4j](LICENSE-toml4j) file<!-- modrinth_exclude.end -->.
+, and you can find the relevant information in the [LICENSE-toml4j](third-party-licenses/LICENSE-toml4j) file<!-- modrinth_exclude.end -->.
