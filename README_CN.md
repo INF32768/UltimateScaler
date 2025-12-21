@@ -2,119 +2,132 @@
 
 [English](README.md) | **简体中文**
 
-[![](https://s21.ax1x.com/2025/05/28/pVpUmYq.jpg)]()
-
-[![Build status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
+[![CI Status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler)](https://github.com/INF32768/ultimatescaler)
-![CurseForge Game Versions](https://img.shields.io/curseforge/game-versions/1323296)
 
 [![CurseForge Downloads](https://img.shields.io/curseforge/dt/1323296?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ultimate-scaler)
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/ktrA4Qtm?style=for-the-badge&logo=modrinth)](https://www.modrinth.com/mod/ultimate-scaler)
 
-## 介绍
+**一个用于突破 Minecraft 地形生成边界，对地形生成（尤其是边境之地等距离现象）进行深度研究与探索的 Fabric 模组**
 
-Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生成的修改功能，主要用于探索边境之地和各种与地形生成有关的距离现象。
+注：此文档主要面向开发者和高级用户，对于想要体验内容的普通玩家，请点击上面的徽章进入 CurseForge 或 Modrinth 页面，那里有详细的安装说明、截图和用户讨论。
 
-此Mod仍处于开发阶段，功能仍在不断增加中，且可能存在一些Bug。
+> **🛠️ 开发状态：重构进行时**
+>
+> 我们正在对代码库与工作流进行现代化重构，目标包括：**语义化版本控制**、**自动化 CI/CD 流水线**、**规范化提交历史**与**完善的贡献者指南**。[点击此处](https://github.com/INF32768/UltimateScaler/wiki/Project_Refactoring_zh)前往项目Wiki了解更多详情。
 
-**警告：修改的结果不一定100%符合理论实际。**
+## 技术概览
 
-**警告：请在使用前备份存档，若因使用本Mod而造成存档破坏或损失，作者概不负责！**
+本模组通过一系列对 Minecraft 地形生成系统的底层修改，实现了以下核心能力：
 
-## 前置
+- **🧬 地形生成偏移**：通过拦截并修改噪声采样坐标，在大尺度上稳定地偏移地形。目前已经能够偏移绝大多数地形生成。
+- **🔧 距离现象修复**：修复某些距离现象，如“末地环”、废弃矿井无法生成等，甚至是修复边境之地本身。
+- **🌐 解除软性限制**：解除各种人为设定的限制，如世界边界、命令中坐标值和数据包中某些数值的限制等。
+- **🔬 更多修改功能**：数不胜数的杂项修改功能，比如修改噪声采样算法中的数值，或是复现经典的“天空网格”等。
 
-- [Fabric API](https://github.com/FabricMC/fabric)：用于提供Mod加载、配置、命令等功能。
-  - 即使不安装Fabric API，本Mod也能正常运行，但可能无法使用部分重要功能。
-- （可选）[Cloth Config](https://github.com/shedaniel/cloth-config)：用于提供配置界面。
+几乎所有功能都是可选的，可以根据自己的需求选择开启或关闭。
 
-## 功能
+## 开始开发
 
-- 偏移地形生成：在大范围内偏移大多数地形生成，目前支持偏移的内容有：
-  - 密度函数：
-    - `old_blended_noise`,
-    - `noise`,
-    - `shifted_noise`,
-    - `shift_A`,
-    - `shift_B`,
-    - `shift`,
-    - `weird_scaled_sampler`,
-    - `y_clamped_gradient`（可选）.
-  - 海平面和地底熔岩层（可选）。
-  - 若开启“BigInteger重写”（_实验性_），则可以额外偏移密度函数`end_islands`，并实现精准偏移。
-- 扩展世界边界；
-- 修改 `maintainPrecision` 方法，实现更改边境之地生成的位置、移除边缘之地等功能；
-- `locate pos` 命令，用于定位一个特定位置偏移后的坐标；
-- 修复各种原版地形生成算法的Bug；
+**环境配置：**
+- **JDK 21+**
+- **Fabric Toolchain**
+- **依赖**: Fabric API (运行时), Cloth Config API (可选，用于GUI)
 
-## 配置
+**快速构建：**
+```bash
+git clone https://github.com/INF32768/UltimateScaler.git
 
-在安装了*Cloth Config*的情况下，配置界面可以通过*Mod Menu*，或是按下快捷键（默认是 `Ctrl + U`）来打开，否则需要通过配置文件来进行修改。
+cd UltimateScaler
 
-配置文件位于 `config/ultimate_scaler.toml` 中，修改后执行 `/reload` 命令使配置生效。
+./gradlew build
+```
 
-## 兼容性
+随后，在 `build/libs` 目录下找到 jar 文件（选择文件名中不带有`source`的），将其放入 `.minecraft/mods` 目录即可。
 
-### Minecraft版本
+**配置文件：**`.minecraft/config/ultimate_scaler.toml`（可在游戏内使用快捷键打开配置GUI，默认`Ctrl+U`，若手动修改配置文件，在游戏内执行`/reload`命令即可生效）。
 
-本Mod目前支持Minecraft 1.21 - 1.21.9（25w33a）。
+**贡献：** 我们欢迎包括问题报告、功能建议和代码提交在内的所有贡献。在开始前，请阅读 [贡献指南](./CONTRIBUTING.md)。
 
-### 其他Mod
+## 每日构建版
 
-- 本Mod与大多数无关地形生成的mod互不影响。
-- 本Mod兼容几乎所有通过数据包新增自定义地形生成，或是微调原版地形生成的mod，且可以偏移其生成的地形，如《The Aether》；
-    - 得益于数据包的强大能力，大多数mod都使用了数据包来新增自定义地形生成。
-- 本Mod兼容，但不影响大多数通过数据包以外的其他方法新增地形生成的mod，如《Modern Beta》；
-- 本Mod不兼容对原版生成器进行了大量侵入式修改的mod，同时安装通常会使游戏无法启动，如《Concurrent Chunk Management Engine》。
+[![Build status](https://ci.appveyor.com/api/projects/status/gf3ma7wu8cd6uf23?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler-nightly)
 
-## 更新计划
+想要体验或测试最新的代码变动？如果某天有代码变动，我们会在当晚或次日发布一个每日构建版。
 
-### 短期计划
+1.  **访问工作流页面**：点击上面的徽章进入 AppVeyor 页面。
+2.  **选择最新成功的构建**。
+3.  在构建详情页的 **“Artifacts” (制品)** 标签页下载文件。
 
-- [ ] 向上移植到1.21.9；
-- [ ] 实现客户端和服务端的简单通信；
-- [ ] 禁用指定噪声：让指定噪声在采样时始终返回0；
-- [ ] 向下移植到1.18.2 ~ 1.19.3；
-- [ ] 新命令：`noiseinfo`，给定一个噪声的名称或定义，显示其相关信息（如值域、频率、溢出位置等）；
-- [ ] 将调试屏幕中过大的数值显示为科学计数法；
-- [x] 偏移末地岛屿的生成；
-- [x] 偏移密度函数 `weird_scaled_sampler`。
-- [x] 使用 BigInteger 重写噪声类密度函数；
-- [x] 依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示。
-- [x] 兼容服务端；
-- [x] 为配置文件添加注释；
-- [x] 偏移海平面和地底熔岩层；
-- [x] 全局流体替换：在地形生成时替换指定的流体，防止流体过多导致游戏卡顿；
-- [x] 向下移植到1.21 ~ 1.21.1；
-- [x] 在选项界面中添加使用说明
-- [x] 让运行在1.21 - 1.21.1版本的Mod也能使用配置界面；
+这些构建包含了最新的特性与修复，但也可能包含不稳定的更改，**请勿用于生产环境**。
 
-### 中期计划
+## 兼容性说明
 
-- [ ] 向下移植到1.18.1及以下版本；
-- [ ] 移植到Forge加载器；
-- [ ] 添加Java版不同版本的地形生成算法，如1.18.1，1.12.2，Beta版等，直至Pre-Classic版本；
-- [ ] 修复坐标超过33554432时出现的一系列Bug，如崩溃、方块停止渲染、光照效果异常等；
-- [ ] 在边缘之地生成天空网格；
-- [ ] 添加“不保存并退出”功能；
-- [ ] 阻止游戏在区块生成失败时崩溃。
-- [x] 移除30000000处的空气墙，破除/tp的坐标限制；
-
-### 长期计划
-
-- [ ] 用BigInteger重写地形生成算法，支持偏移更多的地形生成，包括结构、地物等，预计届时模组将发布1.0版本；
-- [ ] 添加基岩版地形生成算法，包括旧版本；
-- [ ] 与某个小地图模组（尚未确定）联动，将噪声、密度函数的图像绘制在地图上；
-- [ ] 在世界界限方面突破32位整数限制、64位整数限制、单精度浮点数乃至双精度浮点数的限制，预计届时模组将发布2.0版本并更换名称。
-- [ ] 在世界界限方面突破Y轴限制，支持生成高度达到2147483647的地形（未来也有可能支持更高的高度）。
-
-## 鸣谢
-
-- 感谢 @SysWOWBrO3([BiliBili](https://space.bilibili.com/482351725)) 为本Mod提供图标、封面和建议。
+- **支持版本**：![CurseForge Game Versions](https://img.shields.io/curseforge/game-versions/1323296)
+- **兼容性**：
+  - ✅ 与基于数据包的地形生成模组兼容，偏移算法对其生效（如 _The Aether_）。
+  - ⚠️ 与注入式修改地形生成的模组部分兼容，偏移算法通常不生效，但可共存（如 _Modern Beta_）。
+  - ❌ 与侵入式修改地形生成的模组不兼容，同时装载会导致游戏崩溃或各种奇怪的问题（如 _Concurrent Chunk Management Engine_）。
 
 ## 许可证
 
-本Mod遵循MIT许可证，可以在[LICENSE](LICENSE)文件中找到相关信息。
+本项目依据 MIT 许可证开源。详见 [LICENSE](LICENSE) 文件。
 
-本Mod内置了[toml4j](https://github.com/mwanji/toml4j)库，该库遵循MIT许可证，可以在[LICENSE-toml4j](third-party-licenses/LICENSE-toml4j)中找到相关信息。
+本项目内置了 toml4j 库，其许可证为 MIT，详见 [LICENSE-toml4j](third-party-licenses/LICENSE-toml4j)
+
+---
+
+## 附录：技术细节
+
+*此部分包含详细的技术规范与开发规划，内容将在项目重构稳定后迁移至项目Wiki。*
+
+### A1. 当前支持的密度函数偏移列表
+本模组目前通过坐标变换，支持对以下核心密度函数进行偏移：
+- `old_blended_noise`
+- `noise`
+- `shifted_noise`
+- `shift_A`
+- `shift_B`
+- `shift`
+- `weird_scaled_sampler`
+- `y_clamped_gradient`（可选）
+- `end_island`（需开启 BigInteger 重写）
+
+### A2. 完整的开发路线图
+
+#### 短期计划
+- [ ] 向上移植到 1.21.9
+- [ ] 实现客户端和服务端的简单通信
+- [ ] 禁用指定噪声：让指定噪声在采样时始终返回0
+- [ ] 向下移植到 1.18.2 ~ 1.20.6
+- [ ] 新命令：`noiseinfo`，显示噪声的详细信息（值域、频率、溢出位置等）
+- [ ] 将调试屏幕中过大的数值显示为科学计数法
+- [x] 偏移末地岛屿的生成
+- [x] 偏移密度函数 `weird_scaled_sampler`
+- [x] 使用 BigInteger 重写噪声类密度函数
+- [x] 依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示
+- [x] 兼容服务端
+- [x] 为配置文件添加注释
+- [x] 偏移海平面和地底熔岩层
+- [x] 全局流体替换
+- [x] 向下移植到 1.21 ~ 1.21.1
+- [x] 在选项界面中添加使用说明
+- [x] 让运行在 1.21 - 1.21.1 版本的 Mod 也能使用配置界面
+
+#### 中期计划
+- [ ] 向下移植到 1.18.1 及以下版本
+- [ ] 移植到 Forge 加载器
+- [ ] 添加 Java 版不同版本的地形生成算法
+- [ ] 修复坐标超过 33554432 时出现的一系列 Bug
+- [ ] 在边缘之地生成天空网格
+- [ ] 添加“不保存并退出”功能
+- [ ] 阻止游戏在区块生成失败时崩溃
+- [x] 移除 30000000 处的空气墙，破除 /tp 的坐标限制
+
+#### 长期计划
+- [ ] 用 BigInteger 完全重写地形生成算法，支持偏移更多的地形生成，包括结构、地物等（v1.0目标）
+- [ ] 添加基岩版地形生成算法
+- [ ] 与小地图模组联动，将噪声图像绘制在地图上
+- [ ] 突破32位整数限制、64位整数限制（v2.0目标）
+- [ ] 突破Y轴限制，支持生成高度达到2147483647（甚至更高？）的地形
