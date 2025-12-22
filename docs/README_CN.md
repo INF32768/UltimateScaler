@@ -1,6 +1,6 @@
 # Ultimate Scaler
 
-[English](README.md) | **简体中文**
+[English](../README.md) | **简体中文**
 
 [![CI Status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
@@ -48,7 +48,7 @@ cd UltimateScaler
 
 **配置文件：**`.minecraft/config/ultimate_scaler.toml`（可在游戏内使用快捷键打开配置GUI，默认`Ctrl+U`，若手动修改配置文件，在游戏内执行`/reload`命令即可生效）。
 
-**贡献：** 我们欢迎包括问题报告、功能建议和代码提交在内的所有贡献。在开始前，请阅读 [贡献指南](./CONTRIBUTING.md)。
+**贡献：** 我们欢迎包括问题报告、功能建议和代码提交在内的所有贡献。在开始前，请阅读 [贡献指南](CONTRIBUTING.md)。
 
 ## 每日构建版
 
@@ -72,9 +72,9 @@ cd UltimateScaler
 
 ## 许可证
 
-本项目依据 MIT 许可证开源。详见 [LICENSE](LICENSE) 文件。
+本项目依据 MIT 许可证开源。详见 [LICENSE](../LICENSE) 文件。
 
-本项目内置了 toml4j 库，其许可证为 MIT，详见 [LICENSE-toml4j](third-party-licenses/LICENSE-toml4j)
+本项目内置了 toml4j 库，其许可证为 MIT，详见 [LICENSE-toml4j](../third-party-licenses/LICENSE-toml4j)
 
 ---
 

@@ -1,6 +1,6 @@
 # Ultimate Scaler
 
-**English** | [简体中文](README_CN.md)
+**English** | [简体中文](docs/README_CN.md)
 
 [![CI Status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
@@ -48,7 +48,7 @@ Then, find the jar file in the `build/libs` directory (select the one without `s
 
 **Configuration file**: `.minecraft/config/ultimate_scaler.toml` (You can open the configuration GUI in the game using a hotkey, which is `Ctrl U` by default. If you manually modify the configuration file, you can execute the `/reload` command in the game for it to take effect.)
 
-**Contribution:** We welcome all contributions, including issue reports, feature suggestions, and code commits. Before you begin, please read the [Contribution Guidelines](./CONTRIBUTING.md).
+**Contribution:** We welcome all contributions, including issue reports, feature suggestions, and code commits. Before you begin, please read the [Contribution Guidelines](docs/CONTRIBUTING.md).
 
 ## Nightly builds
 
