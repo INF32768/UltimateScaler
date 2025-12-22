@@ -15,7 +15,7 @@ Note: This document is primarily for developers and advanced users, for casual p
 
 > **Development Status: 🛠️ Refactoring in progress**
 >
-> We're modernizing our codebase and workflows with goals such as semantic version control, automated CI/CD pipelines, normalized commit history, and improved contributor guidelines. [Click here](https://github.com/INF32768/UltimateScaler/wiki/Project_Refactoring_zh) to go to the project wiki for more details.
+> We're modernizing our codebase and workflows with goals such as semantic version control, automated CI/CD pipelines, normalized commit history, and improved contributor guidelines. [Click here](https://github.com/INF32768/UltimateScaler/wiki/Project_Refactoring) to go to the project wiki for more details.
 
 ## Technology Overview
 
