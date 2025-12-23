@@ -57,7 +57,7 @@ If you have any ideas that can enhance mod research or user experience, please f
 
 _Don't be intimidated by these rules, be bold and present your ideas! We take every suggestion seriously and are happy to help you achieve it. _
 
-## 🧑 💻 Contribute Code
+## 🧑‍💻 Contribute Code
 
 Code contributions are warmly welcome! Here's a quick guide to getting started:
 
