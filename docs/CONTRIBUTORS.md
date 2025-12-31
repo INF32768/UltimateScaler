@@ -4,7 +4,7 @@
 
 Thanks to every community member/developer listed below for contributing to the Ultimate Scaler project! (Listed in order of first contribution)
 
-_Anyone can be listed in multiple ways! For more information, please see the [Contribution Guide](CONTRIBUTING.md)_
+_Anyone can be listed in multiple ways! For more information, please see the [Contribution Guide](CONTRIBUTING.md#-our-contributors)_
 
 | CONTRIBUTOR                                                | CONTRIBUTION DESC                                                                                                           | FIRST CONTRIBUTION DATE | Notes                                                                                                                                                                                |
 |------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

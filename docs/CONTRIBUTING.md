@@ -67,7 +67,7 @@ Code contributions are warmly welcome! Here's a quick guide to getting started:
     ```bash
     git clone https://github.com/<Your GitHub Username>/UltimateScaler.git
     ```
-3. Configure the development environment as described in the [README](../README.md).
+3. Configure the development environment as described in the [README](../README.md#start-development).
 4. Create a new feature branch:
    ```bash
    git checkout -b feat/your-feature-name

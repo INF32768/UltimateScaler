@@ -67,7 +67,7 @@ _不要被这些规则吓到，大胆地提出你的想法！我们对每一份�
     ```bash
     git clone https://github.com/<你的用户名>/UltimateScaler.git
     ```
-3.  按照 [README](README_CN.md) 中的说明配置开发环境。
+3.  按照 [README](README_CN.md#开始开发) 中的说明配置开发环境。
 4.  创建一个新的功能分支：
     ```bash
     git checkout -b feat/your-feature-name
