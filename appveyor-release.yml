@@ -7,7 +7,7 @@ environment:
   MODRINTH_TOKEN:
     secure: bfjh/wWW2wVw0atTgZDwcelyOBIN6lt+UGMHk3KZtlbED4wmjuadyGEXWV8wF63LVfvO40GKqvZKJul1Uy6XdU53K1Zvw0IEVV0iT3lWjKQ= #有效期至2026-05-28
   CURSEFORGE_API_KEY:
-    secure: +FY0Vsp+IhDmayrqsjt/MbDCRDB9v5hb/BhjPK1oC+yvxytK7RaSNp2cld7Z80iX #无限期有效（？
+    secure: /RPZ/RoQddhnUHnXdS5JqC84Pe/yERje6+Dc/1KEiXnnckybjPBSvynyHNujYB17 #无限期有效，计划于2026-05-28手动更新
 cache:
   - C:\Users\appveyor\.gradle\caches\fabric-loom
   - C:\Users\appveyor\.gradle\caches\modules-2
