@@ -1,0 +1,62 @@
+name: "💡 提供反馈（中文）"
+description: "为这个项目提出一个想法或建议"
+title: "[Suggestion]: "
+labels: ["pending-enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **欢迎提出想法！**
+        在提交前，请先搜索现有 Issues，避免重复。
+        ---
+
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: "请求类型"
+      options:
+        - "新功能"
+        - "现有功能改进"
+        - "用户体验优化"
+        - "性能优化"
+        - "其他"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "问题描述"
+      description: "清晰描述您遇到的问题或不方便之处。"
+      placeholder: "示例：当我尝试做 XXX 时，会遇到 YYY 问题，因为当前系统缺少 ZZZ 功能。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "建议的解决方案"
+      description: "详细描述您希望如何实现这个功能。"
+      placeholder: "示例：我建议添加一个配置选项，允许用户调整 AAA 参数，或者增加一个 BBB 指令来实现 CCC 效果。"
+
+  - type: textarea
+    id: feasibility
+    attributes:
+      label: "可行性"
+      description: "（可选，填写此项可大幅提升被接受的可能性）如果您研究过相关技术或代码，认为这个功能具有代码上的可行性，请描述，并简述解决思路。"
+
+  - type: checkboxes
+    id: contribution_willingness
+    attributes:
+      label: "参与意愿"
+      description: "（可选）如果您愿意为此功能做出贡献，请勾选"
+      options:
+        - label: "我愿意为此功能编写代码（Pull Request）"
+        - label: "我可以协助测试此功能"
+        - label: "我可以提供设计建议或反馈"
+
+  - type: markdown
+    attributes:
+      value: |
+        **提示：**功能越具体、描述越详细，被实现的可能性越大。

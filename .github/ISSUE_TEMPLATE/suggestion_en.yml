@@ -1,0 +1,59 @@
+name: "💡 Feedback"
+description: "Provide ideas or suggestions for this project"
+title: "[Suggestion]: "
+labels: ["pending-enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome to suggest!
+        Before submitting, please search for existing Issues to avoid duplicates.
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: "Request Type"
+      options:
+        - "New Feature"
+        - "Improvement to Existing Feature"
+        - "User Experience Improvement"
+        - "Performance Optimization"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem Description"
+      description: "Clearly describe the problem or inconvenience you are facing."
+      placeholder: "i.e. When I try to do XXX, I encounter YYY problem because the current system lacks ZZZ feature."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed Solution"
+      description: "Detailed description of how you would like to implement this feature."
+      placeholder: "i.e. I suggest adding a configuration option to allow users to adjust AAA parameter, or add a BBB command to achieve CCC effect."
+
+  - type: textarea
+    id: feasibility
+    attributes:
+      label: "Feasibility"
+      description: "(Optional, filling in this item can greatly increase the chances of acceptance) If you have researched related technologies or code, and believe this feature has code feasibility, please describe, and briefly describe the solution approach."
+
+  - type: checkboxes
+    id: contribution_willingness
+    attributes:
+      label: "Contribution Willingness"
+      description: "(Optional) If you are willing to contribute to this feature, please check."
+      options:
+        - label: "I am willing to write code for this feature (Pull Request)"
+        - label: "I can assist with testing this feature"
+        - label: "I can provide further design suggestions or feedback"
+
+  - type: markdown
+    attributes:
+      value: "Note: The more specific and detailed the feature description, the higher the chances of it being implemented."
