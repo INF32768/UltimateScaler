@@ -70,7 +70,7 @@ These builds include the latest features and fixes, but may also contain unstabl
 
 ## Update Schedule
 
-The update schedule has been moved to the project Wiki, please click [here](https://github.com/INF32768/UltimateScaler/wiki/Project_Refactoring).
+The update schedule has been moved to the project Wiki, please click [here](https://github.com/INF32768/UltimateScaler/wiki/Project_Roadmap).
 
 ## License
 
