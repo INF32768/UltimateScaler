@@ -1,0 +1,15 @@
+# Contributors
+
+**English** | [简体中文](CONTRIBUTORS_CN.md)
+
+Thanks to every community member/developer listed below for contributing to the Ultimate Scaler project! (Listed in order of first contribution)
+
+_Anyone can be listed in multiple ways! For more information, please see the [Contribution Guide](CONTRIBUTING.md#-our-contributors)_
+
+| CONTRIBUTOR                                                | CONTRIBUTION DESC                                                                                                           | FIRST CONTRIBUTION DATE | Notes                                                                                                                                                                                |
+|------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [INF32768](https://github.com/INF32768)                    | The creator/maintainer of the project                                                                                       | 2025-04-30              |                                                                                                                                                                                      |
+| [PercyDan54](https://github.com/PercyDan54)                | Ultimate Scaler was once a fork of this contributor's project [Border Remover](https://github.com/PercyDan54/BorderRemover) | 2025-04-30              | Although Ultimate Scaler has become an independent project, many aspects still refer to the practices of Border Remover, such as the choice of loader and configuration file format. |
+| [SysWOWBrO3\[↗\]](https://space.bilibili.com/482351725)    | Provided a cover, icon, and multiple suggestions for this project                                                           | 2025-05-28              |                                                                                                                                                                                      |
+| [1SWASP_J1407b](https://github.com/1SWASP-J1407b-bilibili) | Reported multiple bugs and provided several suggestions and code implementation references                                  | 2025-06-20              |                                                                                                                                                                                      |
+| [IVBXData](https://github.com/IVBXData)                    | Submitted [Issue (#2)](https://github.com/INF32768/UltimateScaler/issues/2)                                                 | 2025-08-31              |                                                                                                                                                                                      |

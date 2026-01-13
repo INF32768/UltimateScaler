@@ -1,0 +1,96 @@
+name: "🪲 Bug Report"
+description: "Report a reproducible bug or error"
+title: "[Bug]: "
+labels: ["pending-bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for submitting a bug report!
+        Please fill in as much information as possible, which will help us locate and fix the problem faster.
+        ---
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: "🚨 Please check before submitting"
+      description: "Please check and tick the following items before submitting a bug report to ensure that the bug report meets the requirements."
+      options:
+        - label: "I am using the latest official release or nightly build version of the mod and have not made any modifications to it."
+        - label: "I have already read the FAQs and the descriptions of the corresponding options in the configuration GUI, and I believe this issue is neither expected behavior nor a known issue that will not be fixed."
+        - label: "This bug can also be reproduced with only the dependencies mods and this mod installed."
+        - label: "I have read the Wiki and did not find a solution to my problem."
+        - label: "This issue has not been reported before in the Issues list."
+
+  - type: dropdown
+    id: mod_version
+    attributes:
+      label: "Mod version"
+      description: "Choose the version of the mod you are using when the problem occurred"
+      options:
+        - "Latest release"
+        - "Latest nightly build"
+    validations:
+      required: true
+
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: "Minecraft version"
+      description: "Provide the version of Minecraft you are using"
+      placeholder: "i.e. 1.21.8"
+    validations:
+      required: true
+
+  - type: input
+    id: dependencies_version
+    attributes:
+      label: "Dependencies version"
+      description: "If it is confirmed that the uploaded logs or crash reports already include the versions of the dependencies mods, there is no need to fill this in here."
+      placeholder: "i.e. Fabric Loader: 0.18.4, Fabric API: 0.136.1+1.21.8, Cloth Config: v19.0.147"
+
+  - type: textarea
+    id: content
+    attributes:
+      label: "Bug overview"
+      description: "Describe the details and phenomenon of the bug simply"
+      placeholder: "i.e. When using the command /example, the console displays 'An unexpected error occurred trying to execute that command'"
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: "Steps to reproduce"
+      description: "Describe in detail how to reproduce the bug"
+      placeholder: |
+        i.e.
+        1. Launch the game and enter the world...
+        2. Use the command /example ...
+        3. Observe the console, and see the error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected behavior"
+      description: "Describe the normal behavior you expected to see"
+      placeholder: "i.e. The console should not display any error messages."
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Related logs/screenshots"
+      description: |
+        Please provide the latest crash report or game log (recommended to use [gist](https://gist.github.com)), or any other screenshots that may help locate the problem.
+      placeholder: |
+        Log example:
+        [20:35:10] [Render thread/ERROR]: Something went wrong!
+        at com.example.ModClass.method(ModClass.java:123)
+
+  - type: textarea
+    id: extra_notes
+    attributes:
+      label: "Extra notes"
+      description: "Any other information that may be helpful"
+      placeholder: "i.e. This bug seems to only occur in a specific dimension..."
