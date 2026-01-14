@@ -22,40 +22,14 @@ We firmly believe that everyone who contributes to the project deserves to be re
 
 We believe that the strength of community comes from every small contribution. This list is our sincerest thanks to all those who helped.
 
-## 🪲 Report a problem
+## 🪲 Report a problem / 💡 Give feedback
 
-Before you submit an issue, search for an existing issue.
+No matter if you're reporting a bug or proposing a new feature, we welcome **submitting an Issue**! To ensure that we can respond efficiently, we've prepared two pre-filled templates:
 
-A good issue should include:
-1. **Clear title**: e.g. `[1.21.1] Crashes when entering the world after enabling BigInteger rewrite`.
-2. **Detailed Description**:
-   - Minecraft version, mod version, Fabric Loader version.
-   - Reproduce steps (as concise as possible).
-   - Expected vs. actual behavior.
-   - Relevant game logs (pasted using [gist](https://gist.github.com/) or a similar service).
-3. **(Optional) Additional Info**: Screenshots, crash reports, list of related mods.
+*   **[Report a bug](https://github.com/INF32768/UltimateScaler/issues/new?template=bug_report_zh.yml)** for reproducible bugs.
+*   **[Provide feedback](https://github.com/INF32768/UltimateScaler/issues/new?template=suggestion_zh.yml)** for new features or improvements.
 
-**Before submitting an issue, verify:**
-- You've read the **FAQs** and **descriptions** of the options in the configuration GUI, and try to make sure that your issue isn’t expected or a known issue that won't be fixed.
-- There are no duplicate issues in the current Issues list.
-- Your issue is **reproducible** under given conditions.
-- You are using the mod for the **latest official release or the latest nightly build**.
-
-## 💡 Propose new features
-
-If you have any ideas that can enhance mod research or user experience, please feel free to submit a suggestion issue!
-
-**Think Before Proposing:**
-- Does this feature align with the mod's core goal of "Exploring Terrain Generation Boundaries and Distance Effects"?
-- Are there workarounds? How much improvement can your proposal bring?
-- How feasible is this feature? Do you have technology or tools in place?
-
-**Please specify when submitting:**
-1. **Feature Overview**.
-2. **Motivation**: Why is it needed? What existing problems does it solve?
-3. **(Optional) Implementation Ideas**: If you have technical ideas, feel free to propose them together.
-
-_Don't be intimidated by these rules, be bold and present your ideas! We take every suggestion seriously and are happy to help you achieve it. _
+Before submitting, [search existing Issues](https://github.com/INF32768/UltimateScaler/issues) and [read the Wiki](https://github.com/INF32768/UltimateScaler/wiki) might help you find the answer quickly.
 
 ## 🧑‍💻 Contribute Code
 
