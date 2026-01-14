@@ -2,7 +2,7 @@
 
 [English](../README.md) | **简体中文**
 
-[![CI Status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
+![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
 
@@ -52,7 +52,7 @@ cd UltimateScaler
 
 ## 每日构建版
 
-[![Build status](https://ci.appveyor.com/api/projects/status/gf3ma7wu8cd6uf23?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler-nightly)
+![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler-nightly)
 
 想要体验或测试最新的代码变动？如果某天有代码变动，我们会在当晚或次日发布一个每日构建版。
 

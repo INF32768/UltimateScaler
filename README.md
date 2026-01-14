@@ -2,7 +2,7 @@
 
 **English** | [简体中文](docs/README_CN.md)
 
-[![CI Status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
+![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
 
@@ -52,7 +52,7 @@ Then, find the jar file in the `build/libs` directory (select the one without `s
 
 ## Nightly builds
 
-[![Build status](https://ci.appveyor.com/api/projects/status/gf3ma7wu8cd6uf23?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler-nightly)
+![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler-nightly)
 
 Want to experience or test the latest code changes? If there is a code change on a given day, we release a nightly build that night or the next day.
 
