@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.11-SNAPSHOT'
+    id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.8.10"
     id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -54,9 +54,6 @@ modrinth {
 
 loom {
 	accessWidenerPath = file 'src/main/resources/ultimate_scaler.accessWidener'
-    mixin {
-        defaultRefmapName = "ultimate_scaler.refmap.json"
-    }
 }
 
 repositories {
