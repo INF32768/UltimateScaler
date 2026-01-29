@@ -28,12 +28,6 @@ public final class MixinConfigPlugin implements IMixinConfigPlugin {
             if (mixinClassName.contains("MixinEntityAfter1_21_6")) return false;
         }
 
-        if (VersionHelper.isVersionAtLeast("1.21.9")) {
-            if (mixinClassName.contains("MixinDebugHud")) return false;
-        } else {
-            if (mixinClassName.contains("MixinChunkGenerationStatsDebugHudEntry")) return false;
-        }
-
         return true;
     }
 

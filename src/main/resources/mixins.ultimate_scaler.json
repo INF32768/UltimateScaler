@@ -34,7 +34,6 @@
     "offset.MixinYClampedGradient"
   ],
   "client": [
-    "MixinChunkGenerationStatsDebugHudEntry",
     "MixinDebugHud",
     "MixinTitleScreen"
   ],
