@@ -8,7 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
-import shadowed.com.moandjiezana.toml.Toml;
+import com.moandjiezana.toml.Toml;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

@@ -1,8 +1,11 @@
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
     id 'fabric-loom' version '1.15-SNAPSHOT'
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.8.10"
     id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id 'com.gradleup.shadow' version '9.3.1'
 }
 
 version = project.mod_version
@@ -77,6 +80,7 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 		exclude(group: "net.fabricmc", module: "fabric-loader")
 	}
+    api("com.moandjiezana.toml:toml4j:0.7.2")
 }
 
 processResources {
@@ -105,6 +109,36 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
+}
+
+shadowJar {
+    archiveClassifier = 'dev-all'
+    destinationDirectory = file('build/devlibs')
+    minimize()
+
+    dependencies {
+        include(dependency('com.moandjiezana.toml:toml4j:0.7.2'))
+    }
+
+    exclude 'mappings/mappings.tiny'
+
+    relocate 'com.moandjiezana.toml', 'shadowed.com.moandjiezana.toml'
+}
+
+tasks.register('remapShadowJar', RemapJarTask) {
+    group = 'build'
+    description = 'Assembles a remapped jar with all the dependencies'
+    dependsOn tasks.shadowJar
+
+    inputFile = tasks.shadowJar.archiveFile
+    archiveClassifier = ''
+
+    addNestedDependencies = tasks.remapJar.addNestedDependencies
+    targetNamespace = tasks.remapJar.targetNamespace
+}
+
+tasks.assemble {
+	dependsOn tasks.remapShadowJar
 }
 
 // configure the maven publication
