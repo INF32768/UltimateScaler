@@ -2,7 +2,6 @@
   "required": true,
   "package": "me.inf32768.ultimate_scaler.mixins",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "ultimate_scaler.refmap.json",
   "mixins": [
     "MixinDensityFunctionTypes",
     "MixinOctavePerlinNoiseSampler",
@@ -34,7 +33,6 @@
     "offset.MixinYClampedGradient"
   ],
   "client": [
-    "MixinChunkGenerationStatsDebugHudEntry",
     "MixinDebugHud",
     "MixinTitleScreen"
   ],
