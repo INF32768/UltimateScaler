@@ -13,11 +13,10 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 public class UltimateScaler implements ModInitializer {
-
-public static final boolean IS_RUNNING_ON_CLIENT = FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT);
-public static final boolean IS_CLOTH_CONFIG_PRESENT = FabricLoader.getInstance().isModLoaded("cloth-config2");
-public static final boolean IS_FABRIC_API_PRESENT = FabricLoader.getInstance().isModLoaded("fabric-api");
-public static final Logger LOGGER = LoggerFactory.getLogger("ultimate_scaler");
+    public static final boolean IS_RUNNING_ON_CLIENT = FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT);
+    public static final boolean IS_CLOTH_CONFIG_PRESENT = FabricLoader.getInstance().isModLoaded("cloth-config2");
+    public static final boolean IS_FABRIC_API_PRESENT = FabricLoader.getInstance().isModLoaded("fabric-api");
+    public static final Logger LOGGER = LoggerFactory.getLogger("ultimate_scaler");
 
     @Override
     public void onInitialize() {
