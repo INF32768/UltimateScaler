@@ -13,11 +13,7 @@ import java.io.IOException;
 public abstract class MixinTitleScreen {
     //客户端更新配置文件
     @Inject(method = "init", at = @At("HEAD"))
-    private void modifyTitleScreen(CallbackInfo info) {
-        try {
+    private void modifyTitleScreen(CallbackInfo info) throws IOException {
             UltimateScalerOptions.saveConfig();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
