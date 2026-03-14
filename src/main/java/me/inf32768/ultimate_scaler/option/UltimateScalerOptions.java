@@ -136,6 +136,7 @@ public final class UltimateScalerOptions {
     /**
      * 将 {@link #config} 实例中的配置选项的值写入配置文件。若配置文件不存在，则会自动创建。
      * @throws IOException 配置文件读取或写入时出错
+     * @see ConfigManager
      */
     public static void saveConfig() throws IOException {
         if (!CONFIG_PATH.toFile().exists()) {
