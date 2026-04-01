@@ -4,15 +4,17 @@
 
 ---
 
-## 🔴 Urgent Notice: This Mod Will Switch to Paid Closed-Source Development
+## 🎉 I Won the Lottery!
 
-Operating at a loss, with nothing to spare. Ultimate Scaler will stop being open-source starting today and will switch to a paid model.
+Thank you all for your care and support. Just now, the lottery ticket I bought won the second prize, and after taxes, it’s just enough for me to continue maintaining the free and open-source development of the mod.
 
-The detailed announcement has been posted on the GitHub repository, and all users are required to read it.
+So…
 
-I know this will disappoint everyone, but please understand that even a developer working for passion needs to eat.
+Let’s just pretend everything that happened today never happened.
 
-🔗 [Announcement Link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)
+The originally planned commercialization ([announcement link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)) is canceled, the code remains open-source, the mod remains free, and tomorrow is a new day.
+
+Oh, by the way, that purchase link really was a Rickroll. Happy April Fools’ Day :D
 
 ---
 
@@ -21,15 +23,17 @@ I know this will disappoint everyone, but please understand that even a develope
 
 ---
 
-## 🔴 紧急通知：本模组将转向付费闭源开发
+## 🎉 我中彩票了！
 
-入不敷出，家徒四壁。Ultimate Scaler 从今天起，停止开源，转向付费。
+感谢大家的关心和支持。就在刚才，我买的彩票中了二等奖，刚好够我继续维持模组的免费开源开发。
 
-详细公告已发布在 GitHub 仓库，请所有用户务必阅读。
+所以……
 
-我知道这会让大家失望，但请理解一个为爱发电的开发者也需要吃饭。
+今天发生的一切，就当没发生过。
 
-🔗 [公告链接](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md)
+原定的商业化计划（[公告链接](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md)）取消，代码继续开源，模组继续免费，明天又是新的一天。
+
+哦对了，那个购买链接确实是 Rickroll。愚人节快乐（
 
 ---
 

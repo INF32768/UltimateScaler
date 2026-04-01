@@ -4,15 +4,17 @@
 
 ---
 
-## 🔴 Urgent Notice: This Mod Will Switch to Paid Closed-Source Development
+## 🎉 I Won the Lottery!
 
-Operating at a loss, with nothing to spare. Ultimate Scaler will stop being open-source starting today and will switch to a paid model.
+Thank you all for your care and support. Just now, the lottery ticket I bought won the second prize, and after taxes, it’s just enough for me to continue maintaining the free and open-source development of the mod.
 
-The detailed announcement has been posted on the GitHub repository, and all users are required to read it.
+So…
 
-I know this will disappoint everyone, but please understand that even a developer working for passion needs to eat.
+Let’s just pretend everything that happened today never happened.
 
-🔗 [Announcement Link](/ANNOUNCEMENT.md)
+The originally planned commercialization ([announcement link](/ANNOUNCEMENT_CN.md)) is canceled, the code remains open-source, the mod remains free, and tomorrow is a new day.
+
+Oh, by the way, that purchase link really was a Rickroll. Happy April Fools’ Day :D
 
 ---
 

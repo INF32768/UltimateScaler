@@ -4,26 +4,29 @@
 
 ---
 
-## 🔴 Urgent Notice: This Mod Will Switch to Paid Closed-Source Development
+## 🎉 I Won the Lottery!
 
-Operating at a loss, with nothing to spare. Ultimate Scaler will stop being open-source starting today and will switch to a paid model.
+Thank you all for your care and support. Just now, the lottery ticket I bought won the second prize, and after taxes, it’s just enough for me to continue maintaining the free and open-source development of the mod.
 
-The detailed announcement has been posted on the GitHub repository, and all users are required to read it.
+So…
 
-I know this will disappoint everyone, but please understand that even a developer working for passion needs to eat.
+Let’s just pretend everything that happened today never happened.
 
-🔗 [Announcement Link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)
+The originally planned commercialization ([announcement link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)) is canceled, the code remains open-source, the mod remains free, and tomorrow is a new day.
+
+Oh, by the way, that purchase link really was a Rickroll. Happy April Fools’ Day :D
 
 ---
 
 👇 点击“Show spoiler”查看**简体中文版** | Click “Show spoiler” to view **Chinese version**
 
 <div class="spoiler">
-    <h2>🔴 紧急通知：本模组将转向付费闭源开发</h2>
-    <p>入不敷出，家徒四壁。Ultimate Scaler 从今天起，停止开源，转向付费。</p>
-    <p>详细公告已发布在 GitHub 仓库，请所有用户务必阅读。</p>
-    <p>我知道这会让大家失望，但请理解一个为爱发电的开发者也需要吃饭。</p>
-    <p>🔗 <a href="https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md">公告链接</a></p>
+    <h2>🎉 我中彩票了！</h2>
+    <p>感谢大家的关心和支持。就在刚才，我买的彩票中了二等奖，刚好够我继续维持模组的免费开源开发。</p>
+    <p>所以……</p>
+    <p>今天发生的一切，就当没发生过。</p>
+    <p>原定的商业化计划（<a href="https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md">公告链接</a>）取消，代码继续开源，模组继续免费，明天又是新的一天。</p>
+    <p>哦对了，那个购买链接确实是 Rickroll。愚人节快乐（</p>
     <hr>
 	<h3 id="🧭-开启你的边界探索之旅">🧭 <strong>开启你的边界探索之旅</strong></h3>
 	<p>你是否曾对“边境之地”的传说心驰神往？是否好奇在数亿亿方块之外，Minecraft 的世界会如何崩溃与扭曲？Ultimate Scaler 正是为此而生。让你不仅能<strong>稳定抵达</strong>边境之地，更能<strong>亲手调整</strong>地形生成的规则，看到别人看不到的景观。</p>
