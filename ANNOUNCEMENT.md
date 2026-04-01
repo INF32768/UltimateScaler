@@ -33,7 +33,7 @@ The ideals of the open-source community are beautiful, but a developer's stomach
 
 ### 1. Code Repository
 
-- This repository will be archived as **read-only on April 2, 2025, at 00:00 UTC+8**
+- This repository will be archived as **read-only on April 2, 2026, at 00:00 UTC+8**
 - All future code updates will no longer be public
 - The existing code will be retained as a historical archive but will no longer accept PRs or Issues
 
@@ -73,7 +73,7 @@ After careful consideration, we have formulated the following payment plans:
 | **Quarterly** | ¥79.9 / quarter | Save 10%                         |
 | **Annual**    | ¥299 / year     | Save 20%                         |
 
-> *Orders placed before 00:00 on April 2, 2025 (UTC+8), will enjoy a 30% discount. Don't miss this opportunity!*
+> *Orders placed before 00:00 on April 2, 2026 (UTC+8), will enjoy a 30% discount. Don't miss this opportunity!*
 
 ### Lifetime License (Limited Sale)
 
@@ -117,7 +117,7 @@ If one day my financial situation improves, if one day I can once again afford t
 ---
 
 **—— INF32768**
-**April 1, 2025**
+**April 1, 2026**
 
 ---
 
