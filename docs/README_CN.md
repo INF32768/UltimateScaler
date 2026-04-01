@@ -2,6 +2,20 @@
 
 [English](../README.md) | **简体中文**
 
+---
+
+## 🔴 紧急通知：本模组将转向付费闭源开发
+
+入不敷出，家徒四壁。Ultimate Scaler 从今天起，停止开源，转向付费。
+
+详细公告已发布在 GitHub 仓库，请所有用户务必阅读。
+
+我知道这会让大家失望，但请理解一个为爱发电的开发者也需要吃饭。
+
+🔗 [公告链接](/ANNOUNCEMENT_CN.md)
+
+---
+
 ![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)

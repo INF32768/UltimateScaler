@@ -2,8 +2,36 @@
 
 ![](https://cdn.modrinth.com/data/ktrA4Qtm/images/a4d03f4dfa10357cde067446c9128873a7d4bef5.jpeg)
 
+---
+
+## 🔴 Urgent Notice: This Mod Will Switch to Paid Closed-Source Development
+
+Operating at a loss, with nothing to spare. Ultimate Scaler will stop being open-source starting today and will switch to a paid model.
+
+The detailed announcement has been posted on the GitHub repository, and all users are required to read it.
+
+I know this will disappoint everyone, but please understand that even a developer working for passion needs to eat.
+
+🔗 [Announcement Link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)
+
+---
+
 <details>
 <summary>点击查看简体中文版 | Click to view Chinese version</summary>
+
+---
+
+## 🔴 紧急通知：本模组将转向付费闭源开发
+
+入不敷出，家徒四壁。Ultimate Scaler 从今天起，停止开源，转向付费。
+
+详细公告已发布在 GitHub 仓库，请所有用户务必阅读。
+
+我知道这会让大家失望，但请理解一个为爱发电的开发者也需要吃饭。
+
+🔗 [公告链接](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md)
+
+---
 
 ### 🧭 **开启你的边界探索之旅**
 

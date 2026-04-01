@@ -2,6 +2,20 @@
 
 **English** | [简体中文](docs/README_CN.md)
 
+---
+
+## 🔴 Urgent Notice: This Mod Will Switch to Paid Closed-Source Development
+
+Operating at a loss, with nothing to spare. Ultimate Scaler will stop being open-source starting today and will switch to a paid model.
+
+The detailed announcement has been posted on the GitHub repository, and all users are required to read it.
+
+I know this will disappoint everyone, but please understand that even a developer working for passion needs to eat.
+
+🔗 [Announcement Link](/ANNOUNCEMENT.md)
+
+---
+
 ![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)

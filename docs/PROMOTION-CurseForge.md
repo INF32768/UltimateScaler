@@ -2,9 +2,29 @@
 
 ![](https://media.forgecdn.net/attachments/1440/848/a8b2e8ef7319cf080da09830ac1ddd34482351725-jpg.jpg)
 
+---
+
+## 🔴 Urgent Notice: This Mod Will Switch to Paid Closed-Source Development
+
+Operating at a loss, with nothing to spare. Ultimate Scaler will stop being open-source starting today and will switch to a paid model.
+
+The detailed announcement has been posted on the GitHub repository, and all users are required to read it.
+
+I know this will disappoint everyone, but please understand that even a developer working for passion needs to eat.
+
+🔗 [Announcement Link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)
+
+---
+
 👇 点击“Show spoiler”查看**简体中文版** | Click “Show spoiler” to view **Chinese version**
 
 <div class="spoiler">
+    <h2>🔴 紧急通知：本模组将转向付费闭源开发</h2>
+    <p>入不敷出，家徒四壁。Ultimate Scaler 从今天起，停止开源，转向付费。</p>
+    <p>详细公告已发布在 GitHub 仓库，请所有用户务必阅读。</p>
+    <p>我知道这会让大家失望，但请理解一个为爱发电的开发者也需要吃饭。</p>
+    <p>🔗 <a href="https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md">公告链接</a></p>
+    <hr>
 	<h3 id="🧭-开启你的边界探索之旅">🧭 <strong>开启你的边界探索之旅</strong></h3>
 	<p>你是否曾对“边境之地”的传说心驰神往？是否好奇在数亿亿方块之外，Minecraft 的世界会如何崩溃与扭曲？Ultimate Scaler 正是为此而生。让你不仅能<strong>稳定抵达</strong>边境之地，更能<strong>亲手调整</strong>地形生成的规则，看到别人看不到的景观。</p>
 	<h3 id="🎯-为什么选择-ultimate-scaler">🎯 <strong>为什么选择 Ultimate Scaler</strong></h3>
