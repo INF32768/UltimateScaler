@@ -2,22 +2,6 @@
 
 [English](../README.md) | **简体中文**
 
----
-
-## 🎉 我中彩票了！
-
-感谢大家的关心和支持。就在刚才，我买的彩票中了二等奖，刚好够我继续维持模组的免费开源开发。
-
-所以……
-
-今天发生的一切，就当没发生过。
-
-原定的商业化计划（[公告链接](/ANNOUNCEMENT_CN.md)）取消，代码继续开源，模组继续免费，明天又是新的一天。
-
-哦对了，那个购买链接确实是 Rickroll。愚人节快乐（
-
----
-
 ![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)

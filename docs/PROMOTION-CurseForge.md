@@ -2,32 +2,9 @@
 
 ![](https://media.forgecdn.net/attachments/1440/848/a8b2e8ef7319cf080da09830ac1ddd34482351725-jpg.jpg)
 
----
-
-## 🎉 I Won the Lottery!
-
-Thank you all for your care and support. Just now, the lottery ticket I bought won the second prize, and after taxes, it’s just enough for me to continue maintaining the free and open-source development of the mod.
-
-So…
-
-Let’s just pretend everything that happened today never happened.
-
-The originally planned commercialization ([announcement link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)) is canceled, the code remains open-source, the mod remains free, and tomorrow is a new day.
-
-Oh, by the way, that purchase link really was a Rickroll. Happy April Fools’ Day :D
-
----
-
 👇 点击“Show spoiler”查看**简体中文版** | Click “Show spoiler” to view **Chinese version**
 
 <div class="spoiler">
-    <h2>🎉 我中彩票了！</h2>
-    <p>感谢大家的关心和支持。就在刚才，我买的彩票中了二等奖，刚好够我继续维持模组的免费开源开发。</p>
-    <p>所以……</p>
-    <p>今天发生的一切，就当没发生过。</p>
-    <p>原定的商业化计划（<a href="https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md">公告链接</a>）取消，代码继续开源，模组继续免费，明天又是新的一天。</p>
-    <p>哦对了，那个购买链接确实是 Rickroll。愚人节快乐（</p>
-    <hr>
 	<h3 id="🧭-开启你的边界探索之旅">🧭 <strong>开启你的边界探索之旅</strong></h3>
 	<p>你是否曾对“边境之地”的传说心驰神往？是否好奇在数亿亿方块之外，Minecraft 的世界会如何崩溃与扭曲？Ultimate Scaler 正是为此而生。让你不仅能<strong>稳定抵达</strong>边境之地，更能<strong>亲手调整</strong>地形生成的规则，看到别人看不到的景观。</p>
 	<h3 id="🎯-为什么选择-ultimate-scaler">🎯 <strong>为什么选择 Ultimate Scaler</strong></h3>

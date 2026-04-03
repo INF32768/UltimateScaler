@@ -2,22 +2,6 @@
 
 **English** | [简体中文](docs/README_CN.md)
 
----
-
-## 🎉 I Won the Lottery!
-
-Thank you all for your care and support. Just now, the lottery ticket I bought won the second prize, and after taxes, it’s just enough for me to continue maintaining the free and open-source development of the mod.
-
-So…
-
-Let’s just pretend everything that happened today never happened.
-
-The originally planned commercialization ([announcement link](/ANNOUNCEMENT_CN.md)) is canceled, the code remains open-source, the mod remains free, and tomorrow is a new day.
-
-Oh, by the way, that purchase link really was a Rickroll. Happy April Fools’ Day :D
-
----
-
 ![AppVeyor Build](https://img.shields.io/appveyor/build/inf32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)

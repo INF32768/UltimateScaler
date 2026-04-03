@@ -2,40 +2,8 @@
 
 ![](https://cdn.modrinth.com/data/ktrA4Qtm/images/a4d03f4dfa10357cde067446c9128873a7d4bef5.jpeg)
 
----
-
-## 🎉 I Won the Lottery!
-
-Thank you all for your care and support. Just now, the lottery ticket I bought won the second prize, and after taxes, it’s just enough for me to continue maintaining the free and open-source development of the mod.
-
-So…
-
-Let’s just pretend everything that happened today never happened.
-
-The originally planned commercialization ([announcement link](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT.md)) is canceled, the code remains open-source, the mod remains free, and tomorrow is a new day.
-
-Oh, by the way, that purchase link really was a Rickroll. Happy April Fools’ Day :D
-
----
-
 <details>
 <summary>点击查看简体中文版 | Click to view Chinese version</summary>
-
----
-
-## 🎉 我中彩票了！
-
-感谢大家的关心和支持。就在刚才，我买的彩票中了二等奖，刚好够我继续维持模组的免费开源开发。
-
-所以……
-
-今天发生的一切，就当没发生过。
-
-原定的商业化计划（[公告链接](https://github.com/INF32768/UltimateScaler/blob/main/ANNOUNCEMENT_CN.md)）取消，代码继续开源，模组继续免费，明天又是新的一天。
-
-哦对了，那个购买链接确实是 Rickroll。愚人节快乐（
-
----
 
 ### 🧭 **开启你的边界探索之旅**
 
