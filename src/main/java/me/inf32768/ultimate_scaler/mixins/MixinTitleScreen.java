@@ -12,7 +12,7 @@ import java.io.IOException;
 @Mixin(TitleScreen.class)
 public abstract class MixinTitleScreen {
     /**
-     * （仅客户端）在标题画面初始化时初始化配置
+     * （仅客户端）在标题画面初始化时初始化配置。
      * <p>
      * 在模组入口加载时，本地化系统还未初始化，此时写入配置文件会导致其中的注释变为原始的键名，因此配置初始化需要在标题画面初始化时进行（此时本地化系统已初始化）。
      * <p>
