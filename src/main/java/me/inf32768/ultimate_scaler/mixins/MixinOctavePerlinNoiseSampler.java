@@ -9,8 +9,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
+/**
+ * {@link OctavePerlinNoiseSampler} 类的 Mixin，用于修改坐标变换算法，进而修改边境之地的位置。
+ */
 @Mixin(OctavePerlinNoiseSampler.class)
 public abstract class MixinOctavePerlinNoiseSampler {
+    /**
+     * 根据配置项 {@code farLandsPos} 等的值修改算法。关于具体的工作原理和目的，请参见 Wiki 上的文章。
+     * @see <a href="https://github.com/INF32768/UltimateScaler/wiki/Reference.maintainPrecision.zh">《maintainPrecision 方法》</a>
+     */
    @Inject(method = "maintainPrecision", at = @At("HEAD"), cancellable = true)
    private static void modifyMaintainPrecision(double value, CallbackInfoReturnable<Double> cir) {
         double result =  switch (config.farLandsPos) {

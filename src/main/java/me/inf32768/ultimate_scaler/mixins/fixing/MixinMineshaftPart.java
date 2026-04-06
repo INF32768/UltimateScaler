@@ -9,8 +9,20 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
+/**
+ * {@code MineshaftPart} 类的 Mixin。
+ */
+// FIXME: 这里的注释有误，应该是 MixinMineshaftGenerator$MineshaftPart
 @Mixin(targets = "net.minecraft.structure.MineshaftGenerator.MineshaftPart")
 public abstract class MixinMineshaftPart {
+    /**
+     * 修改 {@code MineshaftPart.cannotGenerate} 方法。
+     * <p>
+     * <strong>原版问题：</strong>尝试在 X/Y/Z 坐标的绝对值大于 1073741824 的位置生成废弃矿井会导致游戏崩溃，这是因为传统的平均数算法出现了整数溢出。
+     * <p>
+     * <strong>解决方案：</strong>修改相关方法，改用基于位运算的平均数算法，使废弃矿井可以在更远处生成（仅在启用了 {@code fixMineshaftCannotGenerate} 选项时生效）。
+     * @see Util#average(int, int)
+     */
     @ModifyVariable(method = "cannotGenerate", at = @At("STORE"))
     private static BlockPos.Mutable modifyPos(
         BlockPos.Mutable pos,

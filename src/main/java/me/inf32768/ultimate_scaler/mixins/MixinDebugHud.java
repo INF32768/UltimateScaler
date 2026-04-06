@@ -18,11 +18,18 @@ import java.util.Locale;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
+/**
+ * {@link DebugHud} 类的 Mixin，用于在调试屏幕中添加偏移于缩放后的坐标 {@code TerrainPos}.
+ */
 @Environment(EnvType.CLIENT)
 @Mixin(DebugHud.class)
 public abstract class MixinDebugHud {
+    /**
+     * 添加调试信息。
+     */
     @Inject(at = @At(value = "INVOKE", target = "Ljava/util/List;add(Ljava/lang/Object;)Z", ordinal = 4), method = "getLeftText")
     protected void getLeftText(CallbackInfoReturnable<List<String>> cir, @Local List<String> list) {
+        // 获取摄像机所在的方块的坐标。之所以不获取玩家实体的坐标，是因为在使用某模组的“灵魂出窍”（FreeCam）功能移动时，仅有摄像机坐标变化而玩家坐标不会变化
         MinecraftClient mc = MinecraftClient.getInstance();
         BlockPos pos = null;
         if (mc.getCameraEntity() != null) {
@@ -31,7 +38,8 @@ public abstract class MixinDebugHud {
         if (pos == null) {
             return;
         }
-
+        // 计算坐标并添加到信息列表中
+        // TODO: 可以将计算好的坐标缓存，仅在摄像机坐标或便宜设置变化时重新计算，以此提高性能
         if (config.showTerrainPos) {
             if (config.bigIntegerRewrite) {
                 String x = Util.getBigIntegerOffsetPos(pos.getX(), Direction.Axis.X).toString();

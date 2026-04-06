@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Stream;
 
+// AI 写的神秘东西，在下看不懂，反正暂时用不上而且迟早得换掉就不写注释了
 public class RegistryAccessor {
 
     private static final ConcurrentMap<Class<?>, MethodHandle> GET_METHOD_CACHE = new ConcurrentHashMap<>();

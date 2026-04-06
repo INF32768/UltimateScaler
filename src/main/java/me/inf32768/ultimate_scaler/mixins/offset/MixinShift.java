@@ -11,8 +11,14 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
+/**
+ * {@code DensityFunctionTypes.Shift} 类的 Mixin，用于对密度函数 {@code minecraft:shift} 施加偏移和缩放。
+ */
 @Mixin(DensityFunctionTypes.Shift.class)
 public abstract class MixinShift {
+    /**
+     * 施加偏移与缩放。
+     */
     @ModifyArgs(method = "sample", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunctionTypes$Shift;sample(DDD)D"))
     private void modifyArgs(Args args, DensityFunction.NoisePos pos) {
         double x = config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockX(), Direction.Axis.X).doubleValue() : Util.getDoubleOffsetPos(pos.blockX(), Direction.Axis.X);

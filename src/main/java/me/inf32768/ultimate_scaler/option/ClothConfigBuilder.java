@@ -30,11 +30,20 @@ import java.util.stream.Collectors;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
+/**
+ * Cloth Config API 的集成类，提供了构造配置界面的方法。
+ */
 @Environment(EnvType.CLIENT)
 public class ClothConfigBuilder {
 
+    /**
+     * 定义配置界面，包括其中的配置项和常见问题的部分，以及保存的逻辑。
+     * @return 配置界面构建器，共 Cloth Config API 使用。
+     * @see UltimateScalerOptions.ConfigImpl
+     */
     @SuppressWarnings("UnstableApiUsage")
     public static ConfigBuilder getConfigBuilder() {
+        // 配置项
         ConfigBuilder builder = ConfigBuilder.create().setTitle(Text.translatable("ultimate_scaler.options"));
         builder.setGlobalized(true);
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
@@ -45,6 +54,7 @@ public class ClothConfigBuilder {
         BooleanListEntry showTerrainPosEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.general.showTerrainPos"), config.showTerrainPos)
                 .setDefaultValue(true)
                 .build();
+
         general.addEntry(optionMenuEntry);
         general.addEntry(showTerrainPosEntry);
 
@@ -64,6 +74,7 @@ public class ClothConfigBuilder {
                 .setDeleteButtonEnabled(false)
                 .build();
         try {
+            // farLandsPos 项在配置文件中以字符串形式存储，可能无法对应到枚举中的项，因此需要处理空指针异常防止无法构建
             entryBuilder.startEnumSelector(Text.translatable("ultimate_scaler.options.worldgen.farLandsPos"), UltimateScalerOptions.FarLandsPos.class, config.farLandsPos);
         } catch (NullPointerException e) {
             SystemToast.show(MinecraftClient.getInstance().getToastManager(), new SystemToast.Type(), Text.translatable("ultimate_scaler.options.worldgen.offset.invalidInput"), Text.of("For enum: " + ConfigManager.readString(UltimateScalerOptions.CONFIG_PATH, "farLandsPos")));
@@ -211,8 +222,11 @@ public class ClothConfigBuilder {
         faq.addEntry(question9);
         faq.addEntry(answer9);
 
+        // 保存逻辑。将输入值保存到 config 实例中，再尝试保存到文件中
         builder.setSavingRunnable(() -> {
             try {
+                // 这两项在日志界面中以字符串形式输入，输入值不一定能被解析为 BigDecimal 类型，因此需要校验
+                // TODO: 可以在配置项定义中用 .setErrorSupplier() 来实现更好的校验效果
                 config.globalBigDecimalOffset = globalOffsetEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
                 config.globalBigDecimalScale = globalScaleEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
             } catch (NumberFormatException e) {
