@@ -13,7 +13,7 @@
 	<p>你不需要理解复杂的噪声算法。跟着这个简单的“开箱即用”配置，就能立刻见证奇迹：</p>
 	<ol>
 		<li><strong>安装模组</strong>后进入游戏世界。</li>
-		<li>按下 <strong><code>Ctrl + U</code></strong> 打开配置界面。</li>
+		<li>按下 <strong><code>Ctrl + U</code></strong> 打开配置界面（需要安装 Cloth Config Mod）。</li>
 		<li>找到 <strong>“边境之地位置”</strong> 选项，将其切换为 <code>Pre-B-1.7.3</code>——这是许多研究的起点；随后，找到 <strong>“全局坐标偏移(X, Y, Z)”</strong> 并展开，尝试在第一行输入一个你可能在哪里听到过的的坐标，比如：<ul>
 				<li><code>12550824</code> （经典的边境之地坐标）</li>
 				<li><code>4218498800</code> （Minecraft 1.18+ 新增的主世界边境之地水平分层之一，很少有人知道）</li>
@@ -81,7 +81,7 @@ Because it is one of the mods that currently enables the **most comprehensive an
 You don't need to understand complex noise algorithms. Follow this simple "out-of-the-box" configuration to witness the miracle immediately:
 
 1.  Enter your game world **after installing the mod**.
-2.  Press **`Ctrl + U`** to open the configuration screen.
+2.  Press **`Ctrl + U`** to open the configuration screen (Requires Cloth Config Mod).
 3.  Find the **"Far Lands Position"** option and switch it to `Pre-B-1.7.3`—the starting point for much research. Then, find and expand **"Global Coordinate Offset (X, Y, Z)"**. Try entering a coordinate you might have heard of, such as:
     *   `12550824` (The classic Far Lands coordinate)
     *   `4218498800` (One of the new horizontal layering points for the Overworld Far Lands added in Minecraft 1.18+, known to few)
