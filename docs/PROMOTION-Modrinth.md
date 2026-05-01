@@ -57,7 +57,7 @@ _0.3.3.2 的配置界面一览_
 
 **如何获取？**
 
-每日构建版的二进制文件部署在一个统一的 GitHub Release 页面上，点击[此处](https://github.com/INF32768/UltimateScaler/releases/latest)并根据说明下载文件即可。
+每日构建版的二进制文件部署在一个统一的 GitHub Release 页面上，点击[此处](https://github.com/INF32768/UltimateScaler/releases/nightly)并根据说明下载文件即可。
 
 **重要提示：**
 - ⚠️ **稳定性**：每日构建版**可能包含未完成的特性或未知的Bug**，仅推荐给愿意承担风险、并愿意反馈问题的资深用户。

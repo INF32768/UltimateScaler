@@ -56,7 +56,7 @@ Then, find the jar file in the `build/libs` directory (select the one without `s
 
 Want to experience or test the latest code changes? If there is a code change on a given day, we release a nightly build that night or the next day.
 
-The nightly build binaries are deployed on a **unified GitHub Release page**. Click [here](https://github.com/INF32768/UltimateScaler/releases/latest) and follow the instructions to download the files.
+The nightly build binaries are deployed on a **unified GitHub Release page**. Click [here](https://github.com/INF32768/UltimateScaler/releases/nightly) and follow the instructions to download the files.
 
 These builds include the latest features and fixes, but may also contain unstable changes. **Do not use for production environments.**
 

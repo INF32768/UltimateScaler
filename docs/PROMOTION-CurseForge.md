@@ -45,7 +45,7 @@
 		<li>它是你<strong>反馈问题、影响开发方向</strong>的最直接渠道。</li>
 	</ul>
 	<p><strong>如何获取？</strong></p>
-	<p>每日构建版的二进制文件部署在一个统一的 GitHub Release 页面上，点击<a href="https://github.com/INF32768/UltimateScaler/releases/latest" target="_blank" rel="noopener noreferrer">此处</a>并根据说明下载文件即可。</p>
+	<p>每日构建版的二进制文件部署在一个统一的 GitHub Release 页面上，点击<a href="https://github.com/INF32768/UltimateScaler/releases/nightly" target="_blank" rel="noopener noreferrer">此处</a>并根据说明下载文件即可。</p>
 	<p><strong>重要提示：</strong></p>
 	<ul>
 		<li>⚠️ <strong>稳定性</strong>：每日构建版<strong>可能包含未完成的特性或未知的Bug</strong>，仅推荐给愿意承担风险、并愿意反馈问题的资深用户。</li>
