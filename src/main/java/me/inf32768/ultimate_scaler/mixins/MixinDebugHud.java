@@ -42,15 +42,15 @@ public abstract class MixinDebugHud {
         // TODO: 可以将计算好的坐标缓存，仅在摄像机坐标或便宜设置变化时重新计算，以此提高性能
         if (config.showTerrainPos) {
             if (config.bigIntegerRewrite) {
-                String x = Util.getBigIntegerOffsetPos(pos.getX(), Direction.Axis.X).toString();
-                String y = Util.getBigIntegerOffsetPos(pos.getY(), Direction.Axis.Y).toString();
-                String z = Util.getBigIntegerOffsetPos(pos.getZ(), Direction.Axis.Z).toString();
+                String x = Util.RepositionBigDecimal(pos.getX(), Direction.Axis.X).toString();
+                String y = Util.RepositionBigDecimal(pos.getY(), Direction.Axis.Y).toString();
+                String z = Util.RepositionBigDecimal(pos.getZ(), Direction.Axis.Z).toString();
                 list.add(String.format(Locale.ROOT, "TerrainXYZ: %s %s %s", x, y, z));
                 list.add(String.format(Locale.ROOT, "TerrainXYZ (double): %.0f %.0f %.0f", Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(z)));
             } else {
-                double x = Util.getDoubleOffsetPos(pos.getX(), Direction.Axis.X);
-                double y = Util.getDoubleOffsetPos(pos.getY(), Direction.Axis.Y);
-                double z = Util.getDoubleOffsetPos(pos.getZ(), Direction.Axis.Z);
+                double x = Util.RepositionDouble(pos.getX(), Direction.Axis.X);
+                double y = Util.RepositionDouble(pos.getY(), Direction.Axis.Y);
+                double z = Util.RepositionDouble(pos.getZ(), Direction.Axis.Z);
                 list.add(String.format(Locale.ROOT, "TerrainXYZ: %.0f %.0f %.0f", x, y, z));
             }
         }

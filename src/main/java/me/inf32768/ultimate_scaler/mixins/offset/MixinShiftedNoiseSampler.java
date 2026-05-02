@@ -22,9 +22,9 @@ public abstract class MixinShiftedNoiseSampler {
      */
     @ModifyArgs(method = "sample", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunction$Noise;sample(DDD)D"))
     private void modifyNoiseSampleArgs(Args args, DensityFunction.NoisePos pos) {
-        double d = (config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockX(), Direction.Axis.X).doubleValue() : Util.getDoubleOffsetPos(pos.blockX(), Direction.Axis.X)) * this.getXzScale() + this.getShiftX().sample(pos);
-        double e = (config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.getDoubleOffsetPos(pos.blockY(), Direction.Axis.Y)) * this.getYScale() + this.getShiftY().sample(pos);
-        double f = (config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.getDoubleOffsetPos(pos.blockZ(), Direction.Axis.Z)) * this.getXzScale() + this.getShiftZ().sample(pos);
+        double d = (config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X)) * this.getXzScale() + this.getShiftX().sample(pos);
+        double e = (config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y)) * this.getYScale() + this.getShiftY().sample(pos);
+        double f = (config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z)) * this.getXzScale() + this.getShiftZ().sample(pos);
 
         args.set(0, d);
         args.set(1, e);

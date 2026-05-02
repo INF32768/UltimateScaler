@@ -3,7 +3,6 @@ package me.inf32768.ultimate_scaler.util;
 import net.minecraft.util.math.Direction;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
@@ -34,7 +33,7 @@ public class Util {
      * @see me.inf32768.ultimate_scaler.option.UltimateScalerOptions.ConfigImpl
      */
     @SuppressWarnings("unused")
-    public static double getDoubleOffsetPos(double pos, Direction.Axis axis) {
+    public static double RepositionDouble(double pos, Direction.Axis axis) {
         return pos * config.globalBigDecimalScale[axis.ordinal()].doubleValue() + config.globalBigDecimalOffset[axis.ordinal()].doubleValue();
     }
 
@@ -45,35 +44,34 @@ public class Util {
      * @return 偏移和缩放后的坐标
      * @see me.inf32768.ultimate_scaler.option.UltimateScalerOptions.ConfigImpl
      */
-    public static double getDoubleOffsetPos(int pos, Direction.Axis axis) {
+    public static double RepositionDouble(int pos, Direction.Axis axis) {
         return pos * config.globalBigDecimalScale[axis.ordinal()].doubleValue() + config.globalBigDecimalOffset[axis.ordinal()].doubleValue();
     }
 
     /**
-     * 获取一个一维 {@code double} 坐标经过偏移和缩放后的对应 {@code BigInteger} 坐标（不存在精度损失），使用当前配置的偏移量和缩放比例。
+     * 获取一个一维 {@code double} 坐标经过偏移和缩放后的对应 {@code BigDecimal} 坐标（不存在精度损失），使用当前配置的偏移量和缩放比例。
      * <p>
      * 注：运算速度较慢。
      * @param pos 原坐标
      * @param axis 此坐标在空间中对应的轴
      * @return 偏移和缩放后的坐标
-     * @see #getDoubleOffsetPos(double, Direction.Axis)
+     * @see #RepositionDouble(double, Direction.Axis)
      */
     @SuppressWarnings("unused")
-    // FIXME: 我是傻*吧为什么要返回 BigInteger
-    public static BigInteger getBigIntegerOffsetPos(double pos, Direction.Axis axis) {
-        return BigDecimal.valueOf(pos).multiply(config.globalBigDecimalScale[axis.ordinal()]).add(config.globalBigDecimalOffset[axis.ordinal()]).toBigInteger();
+    public static BigDecimal RepositionBigDecimal(double pos, Direction.Axis axis) {
+        return BigDecimal.valueOf(pos).multiply(config.globalBigDecimalScale[axis.ordinal()]).add(config.globalBigDecimalOffset[axis.ordinal()]);
     }
 
     /**
-     * 获取一个一维 {@code int} 坐标经过偏移和缩放后的对应 {@code BigInteger} 坐标（不存在精度损失），使用当前配置的偏移量和缩放比例。
+     * 获取一个一维 {@code int} 坐标经过偏移和缩放后的对应 {@code BigDecimal} 坐标（不存在精度损失），使用当前配置的偏移量和缩放比例。
      * <p>
      * 注：运算速度较慢。
      * @param pos 原坐标
      * @param axis 此坐标在空间中对应的轴
      * @return 偏移和缩放后的坐标
-     * @see #getDoubleOffsetPos(int, Direction.Axis)
+     * @see #RepositionDouble(int, Direction.Axis)
      */
-    public static BigInteger getBigIntegerOffsetPos(int pos, Direction.Axis axis) {
-        return BigDecimal.valueOf(pos).multiply(config.globalBigDecimalScale[axis.ordinal()]).add(config.globalBigDecimalOffset[axis.ordinal()]).toBigInteger();
+    public static BigDecimal RepositionBigDecimal(int pos, Direction.Axis axis) {
+        return BigDecimal.valueOf(pos).multiply(config.globalBigDecimalScale[axis.ordinal()]).add(config.globalBigDecimalOffset[axis.ordinal()]);
     }
 }

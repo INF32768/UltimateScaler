@@ -66,7 +66,7 @@ public abstract class MixinInterpolatedNoiseSampler {
      */
     @ModifyVariable(method = "sample", at = @At("STORE"), ordinal = 0)
     private double modifyBlockX(double x, DensityFunction.NoisePos pos) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockX(), Direction.Axis.X).doubleValue() * getScaledXzScale() : Util.getDoubleOffsetPos(pos.blockX(), Direction.Axis.X) * getScaledXzScale();
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X) * getScaledXzScale();
     }
 
     /**
@@ -74,7 +74,7 @@ public abstract class MixinInterpolatedNoiseSampler {
      */
     @ModifyVariable(method = "sample", at = @At("STORE"), ordinal = 1)
     private double modifyBlockY(double y, DensityFunction.NoisePos pos) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockY(), Direction.Axis.Y).doubleValue() * getScaledYScale() : Util.getDoubleOffsetPos(pos.blockY(), Direction.Axis.Y) * getScaledYScale();
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() * getScaledYScale() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y) * getScaledYScale();
     }
 
     /**
@@ -82,7 +82,7 @@ public abstract class MixinInterpolatedNoiseSampler {
      */
     @ModifyVariable(method = "sample", at = @At("STORE"), ordinal = 2)
     private double modifyBlockZ(double z, DensityFunction.NoisePos pos) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockZ(), Direction.Axis.Z).doubleValue() * getScaledXzScale() : Util.getDoubleOffsetPos(pos.blockZ(), Direction.Axis.Z) * getScaledXzScale();
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z) * getScaledXzScale();
     }
 
     /**

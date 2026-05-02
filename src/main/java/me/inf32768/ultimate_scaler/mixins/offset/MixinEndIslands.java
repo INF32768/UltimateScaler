@@ -39,28 +39,28 @@ public abstract class MixinEndIslands {
      */
     @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 2)
     private static int modifySampleX(int original, SimplexNoiseSampler sampler, int x, int z) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(16)).intValue() : original;
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(16)).intValue() : original;
     }
     /**
      * 给第二个中间坐标 {@code int j = z / 2} 施加偏移和缩放。
      */
     @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 3)
     private static int modifySampleZ(int original, SimplexNoiseSampler sampler, int x, int z) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(16)).intValue() : original;
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(16)).intValue() : original;
     }
     /**
      * 给第三个中间坐标 {@code int k = x % 2} 施加偏移和缩放。
      */
     @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 4)
     private static int modifySampleX1(int original, SimplexNoiseSampler sampler, int x, int z) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
     }
     /**
      * 给第四个中间坐标 {@code int l = z % 2} 施加偏移和缩放。
      */
     @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 5)
     private static int modifySampleZ2(int original, SimplexNoiseSampler sampler, int x, int z) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
     }
     /**
      * 给 {@code MathHelper.sqrt} 方法传入的坐标 {@code (x * x + z * z)} 施加偏移和缩放，并根据 {@code fixEndRings} 选项决定是否修复末地环（修复整数溢出）。
@@ -69,18 +69,18 @@ public abstract class MixinEndIslands {
     private static void modifySqrt(Args args, SimplexNoiseSampler sampler, int x, int z) {
         if (config.fixEndRings) {
             if (config.bigIntegerRewrite) {
-                BigInteger offsetX = Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(8));
-                BigInteger offsetZ = Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8));
+                BigInteger offsetX = Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8));
+                BigInteger offsetZ = Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8));
                 args.set(0, offsetX.multiply(offsetX).add(offsetZ.multiply(offsetZ)).floatValue());
             } else {
                 // FIXME: 在未启用 bigIntegerRewrite 时不应施加偏移和缩放
-                double xDouble = Util.getDoubleOffsetPos(x, Direction.Axis.X);
-                double zDouble = Util.getDoubleOffsetPos(z, Direction.Axis.Z);
+                double xDouble = Util.RepositionDouble(x, Direction.Axis.X);
+                double zDouble = Util.RepositionDouble(z, Direction.Axis.Z);
                 args.set(0, (float) (xDouble * xDouble + zDouble * zDouble));
             }
         } else if (config.bigIntegerRewrite) {
-            int offsetX = Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(8)).intValue();
-            int offsetZ = Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8)).intValue();
+            int offsetX = Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8)).intValue();
+            int offsetZ = Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8)).intValue();
             args.set(0, (float) (offsetX * offsetX + offsetZ * offsetZ));
         }
     }

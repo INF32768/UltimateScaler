@@ -21,7 +21,7 @@ public abstract class MixinYClampedGradient {
     @ModifyArgs(method = "sample", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;clampedMap(DDDDD)D"))
     private void modifyArgs(Args args, DensityFunction.NoisePos pos) {
         if (config.extraYOffset) {
-            double y = config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.getDoubleOffsetPos(pos.blockY(), Direction.Axis.Y);
+            double y = config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y);
             args.set(0, y);
         }
     }
