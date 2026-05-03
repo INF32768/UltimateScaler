@@ -9,10 +9,13 @@ import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,6 +27,16 @@ import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 @Environment(EnvType.CLIENT)
 @Mixin(DebugHud.class)
 public abstract class MixinDebugHud {
+    // 缓存变量，仅在任意变量变化时重新计算，可大幅提高静息性能
+    @Unique
+    private static BlockPos previousCamPos;
+    @Unique
+    private static BigDecimal[] previousOffset;
+    @Unique
+    private static BigDecimal[] previousScale;
+    @Unique
+    private static String[] terrainPosLines;
+
     /**
      * 添加调试信息。
      */
@@ -38,20 +51,34 @@ public abstract class MixinDebugHud {
         if (pos == null) {
             return;
         }
-        // 计算坐标并添加到信息列表中
-        // TODO: 可以将计算好的坐标缓存，仅在摄像机坐标或便宜设置变化时重新计算，以此提高性能
+
+        // 计算坐标
         if (config.showTerrainPos) {
+            if (!pos.equals(previousCamPos) || !Arrays.equals(config.globalBigDecimalOffset, previousOffset) || !Arrays.equals(config.globalBigDecimalScale, previousScale)) {
+                // 缓存变量与当前实际不一致，需重新计算并更新缓存
+                previousCamPos = pos;
+                previousOffset = config.globalBigDecimalOffset;
+                previousScale = config.globalBigDecimalScale;
+
+                if (config.bigIntegerRewrite) {
+                    String x = Util.RepositionBigDecimal(pos.getX(), Direction.Axis.X).toString();
+                    String y = Util.RepositionBigDecimal(pos.getY(), Direction.Axis.Y).toString();
+                    String z = Util.RepositionBigDecimal(pos.getZ(), Direction.Axis.Z).toString();
+                    terrainPosLines = new String[]{String.format(Locale.ROOT, "TerrainXYZ: %s %s %s", x, y, z), String.format(Locale.ROOT, "TerrainXYZ (double): %.0f %.0f %.0f", Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(z))};
+                } else {
+                    double x = Util.RepositionDouble(pos.getX(), Direction.Axis.X);
+                    double y = Util.RepositionDouble(pos.getY(), Direction.Axis.Y);
+                    double z = Util.RepositionDouble(pos.getZ(), Direction.Axis.Z);
+                    terrainPosLines = new String[]{String.format(Locale.ROOT, "TerrainXYZ: %.0f %.0f %.0f", x, y, z), null};
+                }
+            }
+
+            // 将条目添加到信息列表中
             if (config.bigIntegerRewrite) {
-                String x = Util.RepositionBigDecimal(pos.getX(), Direction.Axis.X).toString();
-                String y = Util.RepositionBigDecimal(pos.getY(), Direction.Axis.Y).toString();
-                String z = Util.RepositionBigDecimal(pos.getZ(), Direction.Axis.Z).toString();
-                list.add(String.format(Locale.ROOT, "TerrainXYZ: %s %s %s", x, y, z));
-                list.add(String.format(Locale.ROOT, "TerrainXYZ (double): %.0f %.0f %.0f", Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(z)));
+                list.add(terrainPosLines[0]);
+                list.add(terrainPosLines[1]);
             } else {
-                double x = Util.RepositionDouble(pos.getX(), Direction.Axis.X);
-                double y = Util.RepositionDouble(pos.getY(), Direction.Axis.Y);
-                double z = Util.RepositionDouble(pos.getZ(), Direction.Axis.Z);
-                list.add(String.format(Locale.ROOT, "TerrainXYZ: %.0f %.0f %.0f", x, y, z));
+                list.add(terrainPosLines[0]);
             }
         }
     }
