@@ -95,10 +95,10 @@ public class VersionHelper {
      * @return 如果 {@code version1} 版本号比 {@code version2} 版本号新，返回正数；如果 {@code version1} 版本号和 {@code version2} 版本号相同，返回 0；如果 {@code version1} 版本号比 {@code version2} 版本号旧，返回负数。
      */
     public static int compareVersions(String version1, String version2) {
-        String[] version1Array = parseVersion(version1);
-        String[] version2Array = parseVersion(version2);
+        Integer[] version1Array = parseVersion(version1);
+        Integer[] version2Array = parseVersion(version2);
         for (int i = 0; i < 4; i++) {
-            int compare = Integer.compare(Integer.parseInt(version1Array[i]), Integer.parseInt(version2Array[i]));
+            int compare = Integer.compare(version1Array[i], version2Array[i]);
             if (compare != 0) {
                 return compare;
             }
@@ -109,7 +109,7 @@ public class VersionHelper {
     /**
      * 解析版本号字符串。
      * <p>
-     * 将通过 {@code getFriendlyString()} 方法获取到的版本号字符串解析为 {@code {major, minor, patch, snapshot}} 格式的 {@code String} 数组，以便于比较。
+     * 将通过 {@code getFriendlyString()} 方法获取到的版本号字符串解析为 {@code {major, minor, patch, snapshot}} 格式的 {@code Integer} 数组，以便于比较。
      * <p>
      * 注意：对于正式版（原版本号字符串中没有 {@code -alpha} 部分），则数组的第四个元素将为 {@code 99}，这样可以使比较更方便。
      *
@@ -117,17 +117,17 @@ public class VersionHelper {
      * @return 解析后的版本号数组。
      */
 
-    public static String[] parseVersion(String version) {
-        ArrayList<String> split = new ArrayList<>(Stream.of(version.split("\\.|-alpha")).map(String::valueOf).toList());
+    public static Integer[] parseVersion(String version) {
+        ArrayList<Integer> split = new ArrayList<>(Stream.of(version.split("\\.|-alpha")).map(Integer::valueOf).toList());
 
         if (split.size() <= 3) {
-            split.add("0");
+            split.add(0);
         }
 
         if (split.size() <= 4) {
-            split.add("99");
+            split.add(99);
         }
 
-        return split.toArray(new String[0]);
+        return split.toArray(new Integer[0]);
     }
 }
