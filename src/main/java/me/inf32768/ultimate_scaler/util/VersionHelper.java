@@ -1,12 +1,13 @@
-// 这是我们 Ultimate Scaler 质量最高的实用工具类（五
 package me.inf32768.ultimate_scaler.util;
 
 import net.fabricmc.loader.api.FabricLoader;
 
+import java.util.ArrayList;
+import java.util.stream.Stream;
+
 /**
  * Minecraft 版本号实用工具。提供版本号的比较、判断、解析等功能。
  */
-// TODO: 比较精确到快照
 @SuppressWarnings("unused")
 public class VersionHelper {
     // 禁止实例化
@@ -18,11 +19,10 @@ public class VersionHelper {
     public static final String CURRENT_VERSION = FabricLoader.getInstance().getModContainer("minecraft").orElseThrow().getMetadata().getVersion().getFriendlyString();
 
     /**
-     * 判断当前版本号是否与指定版本号相同。
+     * 判断当前版本号是否与指定版本号完全相同（精确到快照）。
      * @param version 要比较的版本号。
      * @return 两个版本号是否相同。
      */
-    // FIXME: 快照版本号无法判断
     public static boolean isVersion(String version) {
         return CURRENT_VERSION.equals(version);
     }
@@ -97,7 +97,7 @@ public class VersionHelper {
     public static int compareVersions(String version1, String version2) {
         String[] version1Array = parseVersion(version1);
         String[] version2Array = parseVersion(version2);
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             int compare = Integer.compare(Integer.parseInt(version1Array[i]), Integer.parseInt(version2Array[i]));
             if (compare != 0) {
                 return compare;
@@ -109,23 +109,25 @@ public class VersionHelper {
     /**
      * 解析版本号字符串。
      * <p>
-     * 将通过 {@code getFriendlyString()} 方法获取到的版本号字符串解析为 {@code {major, minor, patch}} 格式的字符串数组，以便于比较。
+     * 将通过 {@code getFriendlyString()} 方法获取到的版本号字符串解析为 {@code {major, minor, patch, snapshot}} 格式的 {@code String} 数组，以便于比较。
      * <p>
-     * <strong>注意：快照（alpha）部分会被舍去</strong>
+     * 注意：对于正式版（原版本号字符串中没有 {@code -alpha} 部分），则数组的第四个元素将为 {@code 99}，这样可以使比较更方便。
+     *
      * @param version 要解析的版本号字符串。
      * @return 解析后的版本号数组。
      */
-    // FIXME: 为什么不用整数数组
+
     public static String[] parseVersion(String version) {
-        String[] preSplit = version.split("-alpha");
-        String[] split = preSplit[0].split("\\.");
-        if (split.length == 2) {
-            String[] parsed = new String[3];
-            parsed[0] = split[0];
-            parsed[1] = split[1];
-            parsed[2] = "0";
-            return parsed;
+        ArrayList<String> split = new ArrayList<>(Stream.of(version.split("\\.|-alpha")).map(String::valueOf).toList());
+
+        if (split.size() <= 3) {
+            split.add("0");
         }
-        return split;
+
+        if (split.size() <= 4) {
+            split.add("99");
+        }
+
+        return split.toArray(new String[0]);
     }
 }
