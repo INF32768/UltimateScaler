@@ -6,6 +6,7 @@ import me.inf32768.ultimate_scaler.util.VersionHelper;
 import me.shedaniel.clothconfig2.api.*;
 import me.shedaniel.clothconfig2.gui.entries.*;
 import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
+import me.shedaniel.clothconfig2.impl.builders.StringListBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
@@ -35,6 +37,18 @@ import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
  */
 @Environment(EnvType.CLIENT)
 public class ClothConfigBuilder {
+
+    /**
+     * 十进制数（{@code BigDecimal}）的输入检测器，可通过 {@link StringListBuilder#setCellErrorSupplier} 调用，用于在相关配置条目内检测输入值是否能被解析为十进制数。
+     */
+    public static final Function<String, Optional<Text>> DECIMAL_CELL_ERROR_SUPPLIER = (s -> {
+        try {
+            new BigDecimal(s);
+        } catch (NumberFormatException e) {
+            return Optional.of(Text.translatable("ultimate_scaler.options.worldgen.offset.invalidInput"));
+        }
+        return Optional.empty();
+    });
 
     /**
      * 定义配置界面，包括其中的配置项和常见问题的部分，以及保存的逻辑。
@@ -66,12 +80,14 @@ public class ClothConfigBuilder {
                 .setDefaultValue(Arrays.asList("0", "0", "0"))
                 .setInsertButtonEnabled(false)
                 .setDeleteButtonEnabled(false)
+                .setCellErrorSupplier(DECIMAL_CELL_ERROR_SUPPLIER)
                 .build();
         StringListListEntry globalScaleEntry = entryBuilder.startStrList(Text.translatable("ultimate_scaler.options.worldgen.offset.globalScale"), Arrays.stream(config.globalBigDecimalScale).map(BigDecimal::toString).toList())
                 .setTooltip(Text.translatable("ultimate_scaler.options.parsableDecimal.tooltip"))
                 .setDefaultValue(Arrays.asList("1", "1", "1"))
                 .setInsertButtonEnabled(false)
                 .setDeleteButtonEnabled(false)
+                .setCellErrorSupplier(DECIMAL_CELL_ERROR_SUPPLIER)
                 .build();
         try {
             // farLandsPos 项在配置文件中以字符串形式存储，可能无法对应到枚举中的项，因此需要处理空指针异常防止无法构建
@@ -224,14 +240,8 @@ public class ClothConfigBuilder {
 
         // 保存逻辑。将输入值保存到 config 实例中，再尝试保存到文件中
         builder.setSavingRunnable(() -> {
-            try {
-                // 这两项在日志界面中以字符串形式输入，输入值不一定能被解析为 BigDecimal 类型，因此需要校验
-                // TODO: 可以在配置项定义中用 .setErrorSupplier() 来实现更好的校验效果
-                config.globalBigDecimalOffset = globalOffsetEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
-                config.globalBigDecimalScale = globalScaleEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
-            } catch (NumberFormatException e) {
-                SystemToast.show(MinecraftClient.getInstance().getToastManager(), new SystemToast.Type(), Text.translatable("ultimate_scaler.options.worldgen.offset.invalidInput"), Text.of(e.getMessage()));
-            }
+            config.globalBigDecimalOffset = globalOffsetEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
+            config.globalBigDecimalScale = globalScaleEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
             config.optionMenuKeyCode = optionMenuEntry.getValue().getKeyCode().getCode();
             config.optionMenuModifierValue = optionMenuEntry.getValue().getModifier().getValue();
             config.showTerrainPos = showTerrainPosEntry.getValue();
