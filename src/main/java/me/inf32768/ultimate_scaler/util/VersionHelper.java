@@ -47,27 +47,6 @@ public class VersionHelper {
     }
 
     /**
-     * 判断一个版本号是否小于另一个版本号。
-     * @param version 第一个要比较的版本号。
-     * @param compareVersion 第二个要比较的版本号。
-     * @return 第一个版本号是否小于第二个版本号。
-     */
-    // FIXME: 这个方法通过颠倒参数顺序来实现与上一个方法相反的功能，这很具有误导性。
-    public static boolean isVersionBelow(String version, String compareVersion) {
-        return compareVersions(compareVersion, version) > 0;
-    }
-
-    /**
-     * 判断当前版本号是否小于指定版本号（与当前版本相同或更旧）。
-     * @param version 要比较的版本号。
-     * @return 当前版本号是否小于指定版本号。
-     */
-    // FIXME: 这个方法的功能与反转后的 isVersionAtLeast 相同，不必要重复实现。
-    public static boolean isVersionBelow(String version) {
-        return isVersionBelow(CURRENT_VERSION, version);
-    }
-
-    /**
      * 判断当前版本号是否在指定范围内。
      * @param minVersion 最小版本号。
      * @param maxVersion 最大版本号。
