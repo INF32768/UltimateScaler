@@ -73,10 +73,7 @@ public abstract class MixinEndIslands {
                 BigInteger offsetZ = Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8));
                 args.set(0, offsetX.multiply(offsetX).add(offsetZ.multiply(offsetZ)).floatValue());
             } else {
-                // FIXME: 在未启用 bigIntegerRewrite 时不应施加偏移和缩放
-                double xDouble = Util.RepositionDouble(x, Direction.Axis.X);
-                double zDouble = Util.RepositionDouble(z, Direction.Axis.Z);
-                args.set(0, (float) (xDouble * xDouble + zDouble * zDouble));
+                args.set(0, (float) ((double) x * (double) x + (double) z * (double) z));
             }
         } else if (config.bigIntegerRewrite) {
             int offsetX = Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8)).intValue();
