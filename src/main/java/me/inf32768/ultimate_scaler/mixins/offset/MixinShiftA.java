@@ -24,7 +24,6 @@ public abstract class MixinShiftA {
         double x = config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X);
         double z = config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z);
         args.set(0, x);
-        args.set(1, 0.0D); // TODO: 默认就是 0 了，不用改
         args.set(2, z);
     }
 }
