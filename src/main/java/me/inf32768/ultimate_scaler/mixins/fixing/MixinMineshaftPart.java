@@ -12,8 +12,7 @@ import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 /**
  * {@code MineshaftPart} 类的 Mixin。
  */
-// FIXME: 这里的注释有误，应该是 MixinMineshaftGenerator$MineshaftPart
-@Mixin(targets = "net.minecraft.structure.MineshaftGenerator.MineshaftPart")
+@Mixin(targets = "net.minecraft.structure.MineshaftGenerator$MineshaftPart")
 public abstract class MixinMineshaftPart {
     /**
      * 修改 {@code MineshaftPart.cannotGenerate} 方法。
