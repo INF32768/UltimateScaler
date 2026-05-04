@@ -2,8 +2,8 @@ package me.inf32768.ultimate_scaler.mixins.border;
 
 import net.minecraft.server.dedicated.ServerPropertiesHandler;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
@@ -19,9 +19,11 @@ public abstract class MixinServerPropertiesHandler {
      * <p>
      * <strong>解决方案：</strong>修改相关方法，解除上述限制，可自由设定世界边界的大小（仅在启用了“扩展世界边界”选项时生效）。
      */
-    // TODO: 可以利用 @Redirect 注解重定向 transformedParseInt 方法为 getInt 方法，可避免 @ModifyConstant 注解的使用
-    @ModifyConstant(method = "<init>", constant = @Constant(intValue = 29999984))
-    private int modifyMaxWorldSize(int original) {
-        return config.expandWorldBorder ? Integer.MAX_VALUE : original;
+    @ModifyArgs(method = "method_16715", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;clamp(III)I"))
+    private static void modifyMaxWorldSize(Args args) {
+        if (config.expandWorldBorder) {
+            args.set(1, Integer.MIN_VALUE);
+            args.set(2, Integer.MAX_VALUE);
+        }
     }
 }

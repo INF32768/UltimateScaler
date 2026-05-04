@@ -2,8 +2,9 @@ package me.inf32768.ultimate_scaler.mixins;
 
 import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
@@ -19,17 +20,11 @@ public abstract class MixinDensityFunctionTypes {
      * <p>
      * <strong>解决方案：</strong>修改相关方法，解除上述限制，使得参数范围可以为任意值（仅在启用了 {@code expandDatapackValueRange} 选项时生效）。
      */
-    // TODO: 下面两项都可以改用 @ModifyArgs 或 @Redirect 注解，避免使用 @ModifyConstant 注解
-    @ModifyConstant(method = "<clinit>", constant = @Constant(doubleValue = 1000000.0))
-    private static double modifyMaxConstantRange(double original) {
-        return config.expandDatapackValueRange ? Double.POSITIVE_INFINITY : original;
-    }
-
-    /**
-     * @see #modifyMaxConstantRange(double)
-     */
-    @ModifyConstant(method = "<clinit>", constant = @Constant(doubleValue = -1000000.0))
-    private static double modifyMinConstantRange(double original) {
-        return config.expandDatapackValueRange ? Double.NEGATIVE_INFINITY : original;
+    @ModifyArgs(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;doubleRange(DD)Lcom/mojang/serialization/Codec;"))
+    private static void modifyConstantRange(Args args) {
+        if (config.expandDatapackValueRange) {
+            args.set(0, Double.NEGATIVE_INFINITY);
+            args.set(1, Double.POSITIVE_INFINITY);
+        }
     }
 }

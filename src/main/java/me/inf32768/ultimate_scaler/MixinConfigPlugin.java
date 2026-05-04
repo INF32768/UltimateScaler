@@ -46,8 +46,11 @@ public final class MixinConfigPlugin implements IMixinConfigPlugin {
         if (VersionHelper.isVersionAtLeast("1.21.6")) {
             if (mixinClassName.contains("MixinEntityBefore1_21_6")) return false;
         } else {
-            if (mixinClassName.contains("MixinAbstractChunkHolder")) return false; // FIXME: 版本判断有误，1.21.2 起就应该启用
             if (mixinClassName.contains("MixinEntityAfter1_21_6")) return false;
+        }
+
+        if (!VersionHelper.isVersionAtLeast("1.21.2")) {
+            if (mixinClassName.contains("MixinAbstractChunkHolder")) return false;
         }
 
         return true;

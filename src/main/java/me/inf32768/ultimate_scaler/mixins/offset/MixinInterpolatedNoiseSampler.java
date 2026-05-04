@@ -1,15 +1,14 @@
 package me.inf32768.ultimate_scaler.mixins.offset;
 
+import me.inf32768.ultimate_scaler.option.UltimateScalerOptions;
 import me.inf32768.ultimate_scaler.util.Util;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.noise.InterpolatedNoiseSampler;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
@@ -27,18 +26,12 @@ public abstract class MixinInterpolatedNoiseSampler {
      * <p>
      * <strong>解决方案：</strong>修改相关方法，解除上述限制，使得参数范围可以为任意值（仅在启用了 {@code expandDatapackValueRange} 选项时生效）。
      */
-    // TODO: 下面四项都可以改用 @ModifyArgs 或 @Redirect 注解，避免使用 @ModifyConstant 注解
-    @ModifyConstant(method = "<clinit>", constant = @Constant(doubleValue = 0.001))
-    private static double modifyMinScaleAndFactorRange(double original) {
-        return config.expandDatapackValueRange ? Double.NEGATIVE_INFINITY : original;
-    }
-
-    /**
-     * @see #modifyMinScaleAndFactorRange(double)
-     */
-    @ModifyConstant(method = "<clinit>", constant = @Constant(doubleValue = 1000.0))
-    private static double modifyMaxScaleAndFactorRange(double original) {
-        return config.expandDatapackValueRange ? Double.POSITIVE_INFINITY : original;
+    @ModifyArgs(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;doubleRange(DD)Lcom/mojang/serialization/Codec;"))
+    private static void modifyScaleAndFactorRange(Args args) {
+        if (UltimateScalerOptions.config.expandDatapackValueRange) {
+            args.set(0, Double.NEGATIVE_INFINITY);
+            args.set(1, Double.POSITIVE_INFINITY);
+        }
     }
 
     /**
@@ -48,17 +41,12 @@ public abstract class MixinInterpolatedNoiseSampler {
      * <p>
      * <strong>解决方案：</strong>修改相关方法，解除上述限制，使得参数范围可以为任意值（仅在启用了 {@code expandDatapackValueRange} 选项时生效）。
      */
-    @ModifyConstant(method = "method_42385", constant = @Constant(doubleValue = 1.0))
-    private static double modifyMinSmearScaleMultiplierRange(double original) {
-        return config.expandDatapackValueRange ? Double.NEGATIVE_INFINITY : original;
-    }
-
-    /**
-     * @see #modifyMinSmearScaleMultiplierRange(double)
-     */
-    @ModifyConstant(method = "method_42385", constant = @Constant(doubleValue = 8.0))
-    private static double modifyMaxSmearScaleMultiplierRange(double original) {
-        return config.expandDatapackValueRange ? Double.POSITIVE_INFINITY : original;
+    @ModifyArgs(method = "method_42385", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;doubleRange(DD)Lcom/mojang/serialization/Codec;"))
+    private static void modifySmearScaleMultiplierRange(Args args) {
+        if (UltimateScalerOptions.config.expandDatapackValueRange) {
+            args.set(0, Double.NEGATIVE_INFINITY);
+            args.set(1, Double.POSITIVE_INFINITY);
+        }
     }
 
     /**
@@ -66,7 +54,7 @@ public abstract class MixinInterpolatedNoiseSampler {
      */
     @ModifyVariable(method = "sample", at = @At("STORE"), ordinal = 0)
     private double modifyBlockX(double x, DensityFunction.NoisePos pos) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockX(), Direction.Axis.X).doubleValue() * getScaledXzScale() : Util.getDoubleOffsetPos(pos.blockX(), Direction.Axis.X) * getScaledXzScale();
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X) * getScaledXzScale();
     }
 
     /**
@@ -74,7 +62,7 @@ public abstract class MixinInterpolatedNoiseSampler {
      */
     @ModifyVariable(method = "sample", at = @At("STORE"), ordinal = 1)
     private double modifyBlockY(double y, DensityFunction.NoisePos pos) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockY(), Direction.Axis.Y).doubleValue() * getScaledYScale() : Util.getDoubleOffsetPos(pos.blockY(), Direction.Axis.Y) * getScaledYScale();
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() * getScaledYScale() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y) * getScaledYScale();
     }
 
     /**
@@ -82,7 +70,7 @@ public abstract class MixinInterpolatedNoiseSampler {
      */
     @ModifyVariable(method = "sample", at = @At("STORE"), ordinal = 2)
     private double modifyBlockZ(double z, DensityFunction.NoisePos pos) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockZ(), Direction.Axis.Z).doubleValue() * getScaledXzScale() : Util.getDoubleOffsetPos(pos.blockZ(), Direction.Axis.Z) * getScaledXzScale();
+        return config.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z) * getScaledXzScale();
     }
 
     /**
