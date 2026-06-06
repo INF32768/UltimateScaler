@@ -41,6 +41,7 @@ public class TextEventFactory {
      * @param text 要复制到剪贴板的文本。
      * @return 点击事件，可供 {@code withClickEvent(...)} 方法使用。
      */
+    @SuppressWarnings("JavaReflectionInvocation") // 不同版本获取到的构造函数不同，因此此警告通常不会导致实际问题
     public static ClickEvent createCopyEvent(String text) {
         if (VersionHelper.isVersionAtLeast(VERSION_THRESHOLD)) {
             try {
@@ -64,6 +65,7 @@ public class TextEventFactory {
      * @param text 要展示的文本。
      * @return 悬浮事件，可供 {@code withHoverEvent(...)} 方法使用。
      */
+   @SuppressWarnings("JavaReflectionInvocation")
     public static HoverEvent createShowTextEvent(Text text) {
         if (VersionHelper.isVersionAtLeast(VERSION_THRESHOLD)) {
             try {
