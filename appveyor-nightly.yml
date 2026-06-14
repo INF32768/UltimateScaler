@@ -3,7 +3,7 @@ skip_tags: true
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
   GITHUB_TOKEN:
-    secure: tUvjufRIPG6IV4pB9jRiNUfgD/Heb1TiwBkYJZvnfSOjDqoTu6d843oxOfZdTxsV #有效期至2026-05-28
+    secure: mIxbyFSpUuMyOA9YhYQO55Y5v2HzI49xxtm1MjiCHuqRfKXZhxE1znPZO+knOueMIuq6xI51zkpmKNENLAx60R5q0RufPptQvWjaTS/phRObFBrw8W/P3KEHmwS0cV5C #有效期至2026-09-12
   PROJECT_NAME: ultimatescaler-nightly
   VERSION: 0.4.0-1.21.2
   DEPLOYMENT_LINK: "https://github.com/INF32768/UltimateScaler/releases/tag/nightly"
