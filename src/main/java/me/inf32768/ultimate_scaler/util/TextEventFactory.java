@@ -86,8 +86,8 @@ public class TextEventFactory {
         // 从 ClickEvent 和 HoverEvent 类中提取需要的构造方法
         if (VersionHelper.isVersionAtLeast(VERSION_THRESHOLD)) {
             try {
-                CLICK_EVENT_COPY_TO_CLIPBOARD_CONSTRUCTOR = Class.forName(ClickEvent.CopyToClipboard.class.getName()).getConstructor(String.class);
-                HOVER_EVENT_SHOW_TEXT_CONSTRUCTOR = Class.forName(HoverEvent.ShowText.class.getName()).getConstructor(Text.class);
+                CLICK_EVENT_COPY_TO_CLIPBOARD_CONSTRUCTOR = Class.forName(ClickEvent.class.getName() + "$CopyToClipboard").getConstructor(String.class);
+                HOVER_EVENT_SHOW_TEXT_CONSTRUCTOR = Class.forName(HoverEvent.class.getName() + "$ShowText").getConstructor(Text.class);
             } catch (NoSuchMethodException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
