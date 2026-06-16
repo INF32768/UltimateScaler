@@ -1,5 +1,6 @@
 package me.inf32768.ultimate_scaler.mixins.offset;
 
+import me.inf32768.ultimate_scaler.util.RegistryAccessor;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
@@ -33,8 +34,9 @@ public abstract class MixinNoiseChunkGenerator {
             int lavaLevelY = config.extraYOffset ? (int) ((-54D - offset) / scale) : -54;
             int seaLevelY = config.extraYOffset ? (int) ((settings.seaLevel() - offset) / scale) : settings.seaLevel();
             // 替换流体
-            AquiferSampler.FluidLevel lavaLevel = new AquiferSampler.FluidLevel(lavaLevelY, config.replaceUndergroundLava ? Registries.BLOCK.get(Identifier.of(config.replaceUndergroundLavaBlock)).getDefaultState() : Blocks.LAVA.getDefaultState());
-            AquiferSampler.FluidLevel waterLevel = new AquiferSampler.FluidLevel(seaLevelY, config.replaceDefaultFluid ? Registries.BLOCK.get(Identifier.of(config.replaceDefaultFluidBlock)).getDefaultState() : settings.defaultFluid());
+            // 注：由于 1.21.2 前，这里 get 方法的 intermediary 映射名有变化，因此需要使用兼容层。
+            AquiferSampler.FluidLevel lavaLevel = new AquiferSampler.FluidLevel(lavaLevelY, config.replaceUndergroundLava ? RegistryAccessor.get(Registries.BLOCK, Identifier.of(config.replaceUndergroundLavaBlock)).getDefaultState() : Blocks.LAVA.getDefaultState());
+            AquiferSampler.FluidLevel waterLevel = new AquiferSampler.FluidLevel(seaLevelY, config.replaceDefaultFluid ? RegistryAccessor.get(Registries.BLOCK, Identifier.of(config.replaceDefaultFluidBlock)).getDefaultState() : settings.defaultFluid());
             // 应用偏移
             return y < Math.min(lavaLevelY, seaLevelY) ? lavaLevel : waterLevel;
         });
