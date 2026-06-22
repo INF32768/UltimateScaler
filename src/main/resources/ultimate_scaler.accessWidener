@@ -1,8 +1,0 @@
-accessWidener v2 named
-accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$EndIslands
-accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$Noise
-accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$Shift
-accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$ShiftA
-accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$ShiftB
-accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$ShiftedNoise
-accessible class net/minecraft/world/gen/densityfunction/DensityFunctionTypes$WeirdScaledSampler

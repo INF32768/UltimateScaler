@@ -1,43 +1,41 @@
 {
-  "schemaVersion": 1,
-  "id": "ultimate_scaler",
-  "version": "${version}",
-
-  "name": "Ultimate Scaler",
-  "description": "Provides some modification functions related to terrain generation",
-  "authors": [
-    "INF32768"
-  ],
-  "contributors": [
-    "SysWOWBrO3"
-  ],
-  "contact": {
-    "homepage": "https://github.com/INF32768/UltimateScaler",
-    "sources": "https://github.com/INF32768/UltimateScaler",
-    "issues": "https://github.com/INF32768/UltimateScaler/issues"
-  },
-  "license": "MIT",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "me.inf32768.ultimate_scaler.UltimateScaler"
-    ],
-    "modmenu": [
-      "me.inf32768.ultimate_scaler.option.ModMenuIntegration"
-    ]
-  },
-  "mixins": [
-    "mixins.ultimate_scaler.json"
-  ],
-  "icon": "icon.png",
-  "accessWidener": "ultimate_scaler.accessWidener",
-  "depends": {
-    "fabricloader": "*",
-    "minecraft": ">=1.21 <=1.21.8"
-  },
-  "suggests": {
-    "modmenu": "*",
-    "fabric-api": "*",
-    "cloth-config2": "*"
-  }
+	"schemaVersion": 1,
+	"id": "ultimate-scaler",
+	"version": "${version}",
+	"name": "Ultimate Scaler",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/ultimate-scaler/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "xyz.inf32768.ultimatescaler.UltimateScaler"
+		],
+		"client": [
+          "xyz.inf32768.ultimatescaler.client.UltimateScalerClient"
+		],
+		"fabric-datagen": [
+          "xyz.inf32768.ultimatescaler.client.UltimateScalerDataGenerator"
+		]
+	},
+	"mixins": [
+		"ultimate-scaler.mixins.json",
+		{
+			"config": "ultimate-scaler.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.8",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
 }
