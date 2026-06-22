@@ -3,15 +3,19 @@
 	"id": "ultimate-scaler",
 	"version": "${version}",
 	"name": "Ultimate Scaler",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Provides some modification functions related to terrain generation",
 	"authors": [
-		"Me!"
+		"INF32768"
+	],
+	"contributors": [
+		"SysWOWBrO3"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/INF32768/UltimateScaler",
+		"sources": "https://github.com/INF32768/UltimateScaler",
+		"issues": "https://github.com/INF32768/UltimateScaler/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/ultimate-scaler/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -33,9 +37,12 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.19.3",
-		"minecraft": "~1.21.8",
-		"java": ">=21",
-		"fabric-api": "*"
+		"fabricloader": "*",
+		"minecraft": ">=1.21 <=1.21.8"
+	},
+	"suggests": {
+		"modmenu": "*",
+		"fabric-api": "*",
+		"cloth-config2": "*"
 	}
 }
