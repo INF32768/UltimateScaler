@@ -1,0 +1,96 @@
+name: "🪲 报告漏洞（中文）"
+description: "报告一个可复现的错误或异常行为"
+title: "[Bug]: "
+labels: ["pending-bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您提交Bug报告！
+        请尽可能详细地填写以下信息，这将帮助我们更快地定位和解决问题。
+        ---
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: "🚨 请在提交前确认"
+      description: "请依次确认并勾选以下条目，确保提交的 Bug 报告符合要求。"
+      options:
+        - label: "我正在使用最新正式版或最新每日构建版的模组，且未经过任何修改"
+        - label: "我已经阅读过配置 GUI 中的常见问题解答和对应选项的描述，认为此问题不是预期行为或不予修复的已知问题。"
+        - label: "此 Bug 在仅安装前置模组和此模组的情况下也可复现"
+        - label: "我已查阅 Wiki，未找到解决方案"
+        - label: "目前 Issues 列表中没有与此问题重复的 Issue"
+
+  - type: dropdown
+    id: mod_version
+    attributes:
+      label: "模组版本"
+      description: "选择您遇到问题时使用的模组版本"
+      options:
+        - "最新正式版"
+        - "最新每日构建版"
+    validations:
+      required: true
+
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: "Minecraft 版本"
+      description: "请准确填写问题发生时使用的 Minecraft 版本号"
+      placeholder: "例如: 1.21.8"
+    validations:
+      required: true
+
+  - type: input
+    id: dependencies_version
+    attributes:
+      label: "前置模组版本"
+      description: "如果确认上传的日志或崩溃报告中已包含前置模组版本信息，则不必在此填写。"
+      placeholder: "示例：Fabric Loader: 0.18.4, Fabric API: 0.136.1+1.21.8, Cloth Config: v19.0.147"
+
+  - type: textarea
+    id: content
+    attributes:
+      label: "Bug 概况"
+      description: "简述 Bug 的详细情况和现象"
+      placeholder: "示例：在使用指令 /example 时，控制台显示“试图执行此命令时出现意外错误”"
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: "复现步骤"
+      description: "清晰、一步步地描述如何让这个Bug发生"
+      placeholder: |
+        示例：
+        1. 启动游戏，加载世界...
+        2. 使用指令 /example ...
+        3. 观察控制台，发现错误...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "预期行为"
+      description: "描述您期望发生的正常情况"
+      placeholder: "示例：控制台不应报错"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "相关日志/截图"
+      description: |
+        请提供最新的崩溃报告或游戏日志（推荐使用 [gist](https://gist.github.com)），也可以附上其他有助于定位问题的相关截图。
+      placeholder: |
+        日志示例：
+        [20:35:10] [Render thread/ERROR]: Something went wrong!
+        at com.example.ModClass.method(ModClass.java:123)
+
+  - type: textarea
+    id: extra_notes
+    attributes:
+      label: "其他说明"
+      description: "任何其他你认为有帮助的信息"
+      placeholder: "示例：这个Bug似乎只在特定维度出现..."
