@@ -3,7 +3,7 @@ skip_non_tags: true
 clone_depth: 1
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
-  VERSION: 0.4.0-1.21.2
+  VERSION: 0.4.0+1.21
   MODRINTH_TOKEN:
     secure: bfjh/wWW2wVw0atTgZDwcelyOBIN6lt+UGMHk3KZtlbED4wmjuadyGEXWV8wF63LVfvO40GKqvZKJul1Uy6XdU53K1Zvw0IEVV0iT3lWjKQ= #已过期，将于重构完成时替换
   CURSEFORGE_API_KEY:

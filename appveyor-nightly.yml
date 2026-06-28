@@ -5,7 +5,7 @@ environment:
   GITHUB_TOKEN:
     secure: mIxbyFSpUuMyOA9YhYQO55Y5v2HzI49xxtm1MjiCHuqRfKXZhxE1znPZO+knOueMIuq6xI51zkpmKNENLAx60R5q0RufPptQvWjaTS/phRObFBrw8W/P3KEHmwS0cV5C #有效期至2026-09-12
   PROJECT_NAME: ultimatescaler-nightly
-  VERSION: 0.4.0-1.21.2
+  VERSION: 0.4.0+1.21
   DEPLOYMENT_LINK: "https://github.com/INF32768/UltimateScaler/releases/tag/nightly"
 cache:
   - C:\Users\appveyor\.gradle\caches\fabric-loom
