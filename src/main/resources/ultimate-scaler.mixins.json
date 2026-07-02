@@ -3,12 +3,40 @@
 	"package": "xyz.inf32768.ultimatescaler.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-      "ExampleMixin"
+		"MixinDensityFunctions",
+		"MixinPerlinNoise",
+		"border.IMixinLevelReader",
+		"border.MixinChunkPos",
+		"border.MixinDedicatedServerProperties",
+		"border.MixinEntity",
+		"border.MixinEntityAfter1_21_6",
+		"border.MixinEntityBefore1_21_6",
+		"border.MixinForceLoadCommand",
+		"border.MixinLevel",
+		"border.MixinMinecraftServer",
+		"border.MixinPlayer",
+		"border.MixinServerGamePacketListenerImpl",
+		"border.MixinWorldBorder",
+		"border.MixinWorldBorderCommand",
+		"border.MixinWorldBorderSettings",
+		"fixing.MixinGenerationChunkHolder",
+		"fixing.MixinMineShaftPiece",
+		"offset.MixinBlendedNoise",
+		"offset.MixinEndIslandDensityFunction",
+		"offset.MixinNoise",
+		"offset.MixinNoiseBasedChunkGenerator",
+		"offset.MixinShift",
+		"offset.MixinShiftA",
+		"offset.MixinShiftB",
+		"offset.MixinShiftedNoiseSampler",
+		"offset.MixinWeirdScaledSampler",
+		"offset.MixinYClampedGradient"
 	],
 	"injectors": {
 		"defaultRequire": 1
 	},
 	"overwrites": {
 		"requireAnnotations": true
-	}
+	},
+	"plugin": "xyz.inf32768.ultimatescaler.MixinConfigPlugin"
 }
