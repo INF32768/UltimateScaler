@@ -3,7 +3,8 @@
 	"package": "xyz.inf32768.ultimatescaler.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-      "ExampleClientMixin"
+		"MixinDebugHud",
+		"MixinTitleScreen"
 	],
 	"injectors": {
 		"defaultRequire": 1
