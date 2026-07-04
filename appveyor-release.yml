@@ -19,9 +19,9 @@ build_script:
       
       gradlew modrinth --no-daemon
 artifacts:
-  - path: .\build\libs\UltimateScaler-$(VERSION).jar
+  - path: .\build\libs\Ultimate-Scaler-$(VERSION).jar
     name: UltimateScaler-$(VERSION).jar
-  - path: .\build\libs\UltimateScaler-$(VERSION)-sources.jar
+  - path: .\build\libs\Ultimate-Scaler-$(VERSION)-sources.jar
     name: UltimateScaler-$(VERSION)-sources.jar
 deploy:
   - provider: GitHub
