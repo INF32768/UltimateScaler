@@ -169,14 +169,37 @@ public class ConfigManager {
         Files.write(CONFIG_FILE.toPath(), newLines);
     }
 
+    /**
+     * 将 GLFW 键控代码和组合键修饰代码合并成一个整数，也就是用一个 {@code int} 数据表示一个组合键，便于存储和传输。
+     * <p>
+     * 原理：组合键修饰代码固定长度为三位，因此可以将一个整数的低三位用来存组合键，高位来存键控代码。
+     *
+     * @param keyCode  GLFW 键控代码
+     * @param modifier 组合键修饰代码
+     * @return 打包的整数
+     */
     public static int getModifiedKeyCode(int keyCode, short modifier) {
         return (keyCode << 3) | modifier & 0b111;
     }
 
+    /**
+     * 将合并的 GLFW 键控代码和组合键修饰代码还原出键控代码。
+     *
+     * @param modifiedKeyCode 打包的整数
+     * @return 解包得到的 GLFW 键控代码
+     * @see #getModifiedKeyCode
+     */
     public static int getKeyCode(int modifiedKeyCode) {
         return modifiedKeyCode >> 3;
     }
 
+    /**
+     * 将合并的 GLFW 键控代码和组合键修饰代码还原出组合键修饰代码。
+     *
+     * @param modifiedKeyCode 打包的整数
+     * @return 解包得到的组合键修饰代码
+     * @see #getModifiedKeyCode
+     */
     public static short getKeyModifier(int modifiedKeyCode) {
         return (short) (modifiedKeyCode & 0b111);
     }
