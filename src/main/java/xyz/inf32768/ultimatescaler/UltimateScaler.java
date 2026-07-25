@@ -3,10 +3,7 @@ package xyz.inf32768.ultimatescaler;
 import net.fabricmc.api.ModInitializer;
 import xyz.inf32768.ultimatescaler.commands.LocatePosition;
 import xyz.inf32768.ultimatescaler.config.Config;
-import xyz.inf32768.ultimatescaler.config.ConfigManager;
 import xyz.inf32768.ultimatescaler.config.ConfigReloader;
-
-import java.io.IOException;
 
 /**
  * 通用主入口，负责初始化模组的客户端和服务端通用功能。以下是初始化顺序：
