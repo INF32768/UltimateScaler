@@ -34,8 +34,8 @@ public abstract class MixinNoiseBasedChunkGenerator {
             int seaLevelY = ConfigManager.config.worldGen.reposition.extendedYAxisEffect ? (int) ((settings.seaLevel() - offset) / scale) : settings.seaLevel();
             // 替换流体
             // 注：由于 1.21.2 前，这里 get 方法的 intermediary 映射名有变化，因此需要使用兼容层。
-            Aquifer.FluidStatus lavaLevel = new Aquifer.FluidStatus(lavaLevelY, ConfigManager.config.worldGen.fluidReplace.replaceUndergroundLava ? RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.replaceUndergroundLavaBlock)).defaultBlockState() : Blocks.LAVA.defaultBlockState());
-            Aquifer.FluidStatus waterLevel = new Aquifer.FluidStatus(seaLevelY, ConfigManager.config.worldGen.fluidReplace.defaultFluid ? RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.replaceDefaultFluidBlock)).defaultBlockState() : settings.defaultFluid());
+            Aquifer.FluidStatus lavaLevel = new Aquifer.FluidStatus(lavaLevelY, ConfigManager.config.worldGen.fluidReplace.undergroundLava.isEmpty() ? Blocks.LAVA.defaultBlockState() : RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.undergroundLava)).defaultBlockState());
+            Aquifer.FluidStatus waterLevel = new Aquifer.FluidStatus(seaLevelY, ConfigManager.config.worldGen.fluidReplace.defaultFluid.isEmpty() ? settings.defaultFluid() : RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.defaultFluid)).defaultBlockState());
             // 应用偏移
             return y < Math.min(lavaLevelY, seaLevelY) ? lavaLevel : waterLevel;
         });

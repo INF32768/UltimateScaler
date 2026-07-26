@@ -114,11 +114,11 @@ public class ClothConfigBuilder {
                 .setTooltip(Component.translatable("ultimatescaler.config.worldgen.maxNoiseLogarithmValue.tooltip"))
                 .setDisplayRequirement(Requirement.all(limitReturnValueEntry::getValue))
                 .build();
-        BooleanListEntry replaceDefaultFluidEntry = entryBuilder.startBooleanToggle(Component.translatable("ultimatescaler.config.worldgen.replaceDefaultFluid"), ConfigManager.config.worldGen.fluidReplace.defaultFluid)
+        BooleanListEntry replaceDefaultFluidEntry = entryBuilder.startBooleanToggle(Component.translatable("ultimatescaler.config.worldgen.replaceDefaultFluid"), !ConfigManager.config.worldGen.fluidReplace.defaultFluid.isEmpty())
                 .setDefaultValue(false)
                 .setTooltip(Component.translatable("ultimatescaler.config.worldgen.replaceDefaultFluid.tooltip"))
                 .build();
-        DropdownBoxEntry<Block> replaceDefaultFluidBlockEntry = entryBuilder.startDropdownMenu(Component.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.replaceDefaultFluidBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
+        DropdownBoxEntry<Block> replaceDefaultFluidBlockEntry = entryBuilder.startDropdownMenu(Component.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(ConfigManager.config.worldGen.fluidReplace.defaultFluid.isEmpty() ? Blocks.AIR : RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.defaultFluid))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
                 .setDefaultValue(Blocks.AIR)
                 .setSelections(BuiltInRegistries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
                 .setDisplayRequirement(Requirement.all(replaceDefaultFluidEntry::getValue))
@@ -148,11 +148,11 @@ public class ClothConfigBuilder {
                 .setDefaultValue(false)
                 .setTooltip(Component.translatable("ultimatescaler.config.worldgen.extraYOffset.tooltip"))
                 .build();
-        BooleanListEntry replaceUndergroundLavaEntry = entryBuilder.startBooleanToggle(Component.translatable("ultimatescaler.config.worldgen.replaceUndergroundLava"), ConfigManager.config.worldGen.fluidReplace.replaceUndergroundLava)
+        BooleanListEntry replaceUndergroundLavaEntry = entryBuilder.startBooleanToggle(Component.translatable("ultimatescaler.config.worldgen.replaceUndergroundLava"), !ConfigManager.config.worldGen.fluidReplace.undergroundLava.isEmpty())
                 .setDefaultValue(false)
                 .setTooltip(Component.translatable("ultimatescaler.config.worldgen.replaceUndergroundLava.tooltip"))
                 .build();
-        DropdownBoxEntry<Block> replaceUndergroundLavaBlockEntry = entryBuilder.startDropdownMenu(Component.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.replaceUndergroundLavaBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
+        DropdownBoxEntry<Block> replaceUndergroundLavaBlockEntry = entryBuilder.startDropdownMenu(Component.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(ConfigManager.config.worldGen.fluidReplace.undergroundLava.isEmpty() ? Blocks.AIR : RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.config.worldGen.fluidReplace.undergroundLava))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
                 .setDefaultValue(Blocks.AIR)
                 .setSelections(BuiltInRegistries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
                 .setDisplayRequirement(Requirement.all(replaceUndergroundLavaEntry::getValue))
@@ -247,10 +247,8 @@ public class ClothConfigBuilder {
             ConfigManager.config.worldGen.maintainPrecisionControl.customDivisor = maintainPrecisionCustomDivisorEntry.getValue();
             ConfigManager.config.worldGen.maintainPrecisionControl.limitReturnValue = limitReturnValueEntry.getValue();
             ConfigManager.config.worldGen.maintainPrecisionControl.maxLogarithmValue = maxNoiseValueEntry.getValue();
-            ConfigManager.config.worldGen.fluidReplace.defaultFluid = replaceDefaultFluidEntry.getValue();
-            ConfigManager.config.worldGen.fluidReplace.replaceDefaultFluidBlock = BuiltInRegistries.BLOCK.getKey(replaceDefaultFluidBlockEntry.getValue()).toString();
-            ConfigManager.config.worldGen.fluidReplace.replaceUndergroundLava = replaceUndergroundLavaEntry.getValue();
-            ConfigManager.config.worldGen.fluidReplace.replaceUndergroundLavaBlock = BuiltInRegistries.BLOCK.getKey(replaceUndergroundLavaBlockEntry.getValue()).toString();
+            ConfigManager.config.worldGen.fluidReplace.defaultFluid = replaceDefaultFluidEntry.getValue() ? BuiltInRegistries.BLOCK.getKey(replaceDefaultFluidBlockEntry.getValue()).toString() : "";
+            ConfigManager.config.worldGen.fluidReplace.undergroundLava = replaceUndergroundLavaEntry.getValue() ? BuiltInRegistries.BLOCK.getKey(replaceUndergroundLavaBlockEntry.getValue()).toString() : "";
             ConfigManager.config.worldGen.reposition.extendedYAxisEffect = extraYOffsetEntry.getValue();
             ConfigManager.config.worldGen.reposition.highPrecisionMode = bigIntegerRewriteEntry.getValue();
             ConfigManager.config.fixesAndExpansion.endRings = fixEndRingsEntry.getValue();

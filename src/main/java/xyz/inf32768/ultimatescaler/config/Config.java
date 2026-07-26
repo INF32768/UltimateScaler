@@ -79,10 +79,8 @@ public final class Config {
         }
 
         public static class FluidReplace {
-            public boolean defaultFluid = false;
-            public String replaceDefaultFluidBlock = "minecraft:air";
-            public boolean replaceUndergroundLava = false;
-            public String replaceUndergroundLavaBlock = "minecraft:air";
+            public String defaultFluid = "";
+            public String undergroundLava = "";
         }
 
         public static class maintainPrecisionControl {

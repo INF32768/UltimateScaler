@@ -82,13 +82,13 @@ public class ConfigManager {
         }
         try {
             // 确保配置文件中的方块 ID 有效
-            Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.replaceDefaultFluidBlock)));
-            Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.replaceUndergroundLavaBlock)));
+            if (!config.worldGen.fluidReplace.defaultFluid.isEmpty()) Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.defaultFluid)));
+            if (!config.worldGen.fluidReplace.undergroundLava.isEmpty()) Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.undergroundLava)));
         } catch (NullPointerException e) {
             // 方块 ID 无效，使用默认值
             ModMetadata.LOGGER.warn("Invalid block id, resetting to default values", e);
-            config.worldGen.fluidReplace.replaceDefaultFluidBlock = "minecraft:air";
-            config.worldGen.fluidReplace.replaceUndergroundLavaBlock = "minecraft:air";
+            config.worldGen.fluidReplace.defaultFluid = "";
+            config.worldGen.fluidReplace.undergroundLava = "";
         }
     }
 
@@ -136,10 +136,8 @@ public class ConfigManager {
         configV4.worldGen.reposition.extendedYAxisEffect = configV3.extraYOffset;
         configV4.worldGen.reposition.shift = configV3.globalBigDecimalOffset;
         configV4.worldGen.reposition.scale = configV3.globalBigDecimalScale;
-        configV4.worldGen.fluidReplace.defaultFluid = configV3.replaceDefaultFluid;
-        configV4.worldGen.fluidReplace.replaceUndergroundLava = configV3.replaceUndergroundLava;
-        configV4.worldGen.fluidReplace.replaceDefaultFluidBlock = configV3.replaceDefaultFluidBlock;
-        configV4.worldGen.fluidReplace.replaceUndergroundLavaBlock = configV3.replaceUndergroundLavaBlock;
+        configV4.worldGen.fluidReplace.defaultFluid = configV3.replaceDefaultFluid ? configV3.replaceDefaultFluidBlock : "";
+        configV4.worldGen.fluidReplace.undergroundLava = configV3.replaceUndergroundLava ? configV3.replaceUndergroundLavaBlock : "";
         configV4.fixesAndExpansion.worldBorder = configV3.expandWorldBorder;
         configV4.fixesAndExpansion.chunkGenerationOutOfBound = configV3.fixChunkGenerationOutOfBound;
         configV4.fixesAndExpansion.endRings = configV3.fixEndRings;
