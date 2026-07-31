@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  */
 public final class Config {
     public int CONFIG_VERSION = 4;
-    public Common common = new Common();
+    public General general = new General();
     public WorldGen worldGen = new WorldGen();
     public FixesAndExpansion fixesAndExpansion = new FixesAndExpansion();
     public Utilities utilities = new Utilities();
@@ -60,7 +60,7 @@ public final class Config {
         public boolean publicTerrainPos = true;
     }
 
-    public static class Common {
+    public static class General {
         public int configScreenKeybind = (GLFW.GLFW_KEY_U << 3) | 2;
         public boolean showTerrainPos = true;
         public boolean publicTerrainPos = true;

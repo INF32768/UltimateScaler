@@ -241,8 +241,8 @@ public class ClothConfigBuilder {
         builder.setSavingRunnable(() -> {
             ConfigManager.config.worldGen.reposition.shift = globalOffsetEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
             ConfigManager.config.worldGen.reposition.scale = globalScaleEntry.getValue().stream().map(BigDecimal::new).toArray(BigDecimal[]::new);
-            ConfigManager.config.common.configScreenKeybind = (optionMenuEntry.getValue().getKeyCode().getValue() << 3) | optionMenuEntry.getValue().getModifier().getValue();
-            ConfigManager.config.common.showTerrainPos = showTerrainPosEntry.getValue();
+            ConfigManager.config.general.configScreenKeybind = (optionMenuEntry.getValue().getKeyCode().getValue() << 3) | optionMenuEntry.getValue().getModifier().getValue();
+            ConfigManager.config.general.showTerrainPos = showTerrainPosEntry.getValue();
             ConfigManager.config.worldGen.maintainPrecisionControl.farLandsPos = farLandsPosEntry.getValue();
             ConfigManager.config.worldGen.maintainPrecisionControl.customDivisor = maintainPrecisionCustomDivisorEntry.getValue();
             ConfigManager.config.worldGen.maintainPrecisionControl.limitReturnValue = limitReturnValueEntry.getValue();

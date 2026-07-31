@@ -125,9 +125,9 @@ public class ConfigManager {
             configV3 = new Toml().read(CONFIG_FILE).to(Config.ConfigImpl.class);
         }
         Config configV4 = new Config();
-        configV4.common.configScreenKeybind = getModifiedKeyCode(configV3.optionMenuKeyCode, configV3.optionMenuModifierValue);
-        configV4.common.publicTerrainPos = configV3.publicTerrainPos;
-        configV4.common.showTerrainPos = configV3.showTerrainPos;
+        configV4.general.configScreenKeybind = getModifiedKeyCode(configV3.optionMenuKeyCode, configV3.optionMenuModifierValue);
+        configV4.general.publicTerrainPos = configV3.publicTerrainPos;
+        configV4.general.showTerrainPos = configV3.showTerrainPos;
         configV4.worldGen.maintainPrecisionControl.farLandsPos = configV3.farLandsPos;
         configV4.worldGen.maintainPrecisionControl.limitReturnValue = configV3.limitReturnValue;
         configV4.worldGen.maintainPrecisionControl.customDivisor = configV3.maintainPrecisionCustomDivisor;
