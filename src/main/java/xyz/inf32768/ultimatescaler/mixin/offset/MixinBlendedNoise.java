@@ -28,7 +28,7 @@ public abstract class MixinBlendedNoise {
      */
     @ModifyArgs(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;doubleRange(DD)Lcom/mojang/serialization/Codec;"))
     private static void modifyScaleAndFactorRange(Args args) {
-        if (ConfigManager.config.utilities.expandDatapackValueRange) {
+        if (ConfigManager.getConfig().utilities.expandDatapackValueRange) {
             args.set(0, Double.NEGATIVE_INFINITY);
             args.set(1, Double.POSITIVE_INFINITY);
         }
@@ -43,7 +43,7 @@ public abstract class MixinBlendedNoise {
      */
     @ModifyArgs(method = "method_42385", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;doubleRange(DD)Lcom/mojang/serialization/Codec;"))
     private static void modifySmearScaleMultiplierRange(Args args) {
-        if (ConfigManager.config.utilities.expandDatapackValueRange) {
+        if (ConfigManager.getConfig().utilities.expandDatapackValueRange) {
             args.set(0, Double.NEGATIVE_INFINITY);
             args.set(1, Double.POSITIVE_INFINITY);
         }
@@ -54,7 +54,7 @@ public abstract class MixinBlendedNoise {
      */
     @ModifyVariable(method = "compute", at = @At("STORE"), ordinal = 0)
     private double modifyBlockX(double x, DensityFunction.FunctionContext pos) {
-        return ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X) * getScaledXzScale();
+        return ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X) * getScaledXzScale();
     }
 
     /**
@@ -62,7 +62,7 @@ public abstract class MixinBlendedNoise {
      */
     @ModifyVariable(method = "compute", at = @At("STORE"), ordinal = 1)
     private double modifyBlockY(double y, DensityFunction.FunctionContext pos) {
-        return ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() * getScaledYScale() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y) * getScaledYScale();
+        return ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() * getScaledYScale() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y) * getScaledYScale();
     }
 
     /**
@@ -70,7 +70,7 @@ public abstract class MixinBlendedNoise {
      */
     @ModifyVariable(method = "compute", at = @At("STORE"), ordinal = 2)
     private double modifyBlockZ(double z, DensityFunction.FunctionContext pos) {
-        return ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z) * getScaledXzScale();
+        return ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() * getScaledXzScale() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z) * getScaledXzScale();
     }
 
     /**

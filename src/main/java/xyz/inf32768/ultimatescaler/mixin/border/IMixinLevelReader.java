@@ -23,7 +23,7 @@ public interface IMixinLevelReader {
      */
     @Inject(method = "getMaxLocalRawBrightness(Lnet/minecraft/core/BlockPos;I)I", at = @At("HEAD"), cancellable = true)
     private void modifyLightLevel(BlockPos pos, int ambientDarkness, CallbackInfoReturnable<Integer> cir) {
-        if (ConfigManager.config.fixesAndExpansion.worldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             cir.setReturnValue(((BlockAndTintGetter) this).getRawBrightness(pos, ambientDarkness));
         }
     }

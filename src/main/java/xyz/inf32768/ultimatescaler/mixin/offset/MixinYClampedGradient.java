@@ -19,8 +19,8 @@ public abstract class MixinYClampedGradient {
      */
     @ModifyArgs(method = "compute", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clampedMap(DDDDD)D"))
     private void modifyArgs(Args args, DensityFunction.FunctionContext pos) {
-        if (ConfigManager.config.worldGen.reposition.extendedYAxisEffect) {
-            double y = ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y);
+        if (ConfigManager.getConfig().worldGen.reposition.extendedYAxisEffect) {
+            double y = ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y);
             args.set(0, y);
         }
     }

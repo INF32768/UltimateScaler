@@ -32,6 +32,6 @@ public abstract class MixinMineShaftPiece {
             @Local(type = Integer.class, ordinal = 4) int m,
             @Local(type = Integer.class, ordinal = 5) int n
     ) {
-        return ConfigManager.config.fixesAndExpansion.mineShaftCannotGenerate ? new BlockPos.MutableBlockPos(Util.average(i, l), Util.average(j, m), Util.average(k, n)) : new BlockPos.MutableBlockPos((i + l) / 2, (j + m) / 2, (k + n) / 2);
+        return ConfigManager.getConfig().fixesAndExpansion.mineShaftCannotGenerate ? new BlockPos.MutableBlockPos(Util.average(i, l), Util.average(j, m), Util.average(k, n)) : new BlockPos.MutableBlockPos((i + l) / 2, (j + m) / 2, (k + n) / 2);
     }
 }

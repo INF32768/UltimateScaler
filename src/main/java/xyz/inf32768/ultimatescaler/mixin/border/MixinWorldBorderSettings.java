@@ -21,7 +21,7 @@ public abstract class MixinWorldBorderSettings {
      */
     @Redirect(method = "read", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(DDD)D"))
     private static double modifyClamp(double value, double min, double max) {
-        if (ConfigManager.config.fixesAndExpansion.worldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             return value;
         } else {
             return Mth.clamp(value, min, max);

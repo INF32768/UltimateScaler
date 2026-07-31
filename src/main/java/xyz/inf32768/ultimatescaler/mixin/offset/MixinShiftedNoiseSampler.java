@@ -20,9 +20,9 @@ public abstract class MixinShiftedNoiseSampler {
      */
     @ModifyArgs(method = "compute", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/DensityFunction$NoiseHolder;getValue(DDD)D"))
     private void modifyNoiseSampleArgs(Args args, DensityFunction.FunctionContext pos) {
-        double d = (ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X)) * this.getXzScale() + this.getShiftX().compute(pos);
-        double e = (ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y)) * this.getYScale() + this.getShiftY().compute(pos);
-        double f = (ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z)) * this.getXzScale() + this.getShiftZ().compute(pos);
+        double d = (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X)) * this.getXzScale() + this.getShiftX().compute(pos);
+        double e = (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y)) * this.getYScale() + this.getShiftY().compute(pos);
+        double f = (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z)) * this.getXzScale() + this.getShiftZ().compute(pos);
 
         args.set(0, d);
         args.set(1, e);

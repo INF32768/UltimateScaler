@@ -20,7 +20,7 @@ public abstract class MixinForceLoadCommand {
      */
     @ModifyConstant(method = "changeForceLoad", constant = @Constant(intValue = -30000000))
     private static int modifyMinCoordinate(int original) {
-        return ConfigManager.config.fixesAndExpansion.worldBorder ? Integer.MIN_VALUE : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Integer.MIN_VALUE : original;
     }
 
     /**
@@ -28,6 +28,6 @@ public abstract class MixinForceLoadCommand {
      */
     @ModifyConstant(method = "changeForceLoad", constant = @Constant(intValue = 30000000))
     private static int modifyMaxCoordinate(int original) {
-        return ConfigManager.config.fixesAndExpansion.worldBorder ? Integer.MAX_VALUE : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Integer.MAX_VALUE : original;
     }
 }

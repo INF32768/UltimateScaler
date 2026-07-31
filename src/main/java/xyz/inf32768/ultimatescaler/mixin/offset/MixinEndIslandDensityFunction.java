@@ -25,7 +25,7 @@ public abstract class MixinEndIslandDensityFunction {
      */
     @ModifyVariable(method = "getHeightValue(Lnet/minecraft/world/level/levelgen/synth/SimplexNoise;II)F", at = @At("STORE"), ordinal = 2)
     private static int modifySampleX(int original, SimplexNoise sampler, int x, int z) {
-        return ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(16)).intValue() : original;
+        return ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(16)).intValue() : original;
     }
 
     /**
@@ -33,7 +33,7 @@ public abstract class MixinEndIslandDensityFunction {
      */
     @ModifyVariable(method = "getHeightValue(Lnet/minecraft/world/level/levelgen/synth/SimplexNoise;II)F", at = @At("STORE"), ordinal = 3)
     private static int modifySampleZ(int original, SimplexNoise sampler, int x, int z) {
-        return ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(16)).intValue() : original;
+        return ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(16)).intValue() : original;
     }
 
     /**
@@ -41,7 +41,7 @@ public abstract class MixinEndIslandDensityFunction {
      */
     @ModifyVariable(method = "getHeightValue(Lnet/minecraft/world/level/levelgen/synth/SimplexNoise;II)F", at = @At("STORE"), ordinal = 4)
     private static int modifySampleX1(int original, SimplexNoise sampler, int x, int z) {
-        return ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
+        return ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
     }
 
     /**
@@ -49,7 +49,7 @@ public abstract class MixinEndIslandDensityFunction {
      */
     @ModifyVariable(method = "getHeightValue(Lnet/minecraft/world/level/levelgen/synth/SimplexNoise;II)F", at = @At("STORE"), ordinal = 5)
     private static int modifySampleZ2(int original, SimplexNoise sampler, int x, int z) {
-        return ConfigManager.config.worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
+        return ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
     }
 
     /**
@@ -57,15 +57,15 @@ public abstract class MixinEndIslandDensityFunction {
      */
     @ModifyArgs(method = "getHeightValue", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;sqrt(F)F", ordinal = 0))
     private static void modifySqrt(Args args, SimplexNoise sampler, int x, int z) {
-        if (ConfigManager.config.fixesAndExpansion.endRings) {
-            if (ConfigManager.config.worldGen.reposition.highPrecisionMode) {
+        if (ConfigManager.getConfig().fixesAndExpansion.endRings) {
+            if (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode) {
                 BigInteger offsetX = Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8));
                 BigInteger offsetZ = Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8));
                 args.set(0, offsetX.multiply(offsetX).add(offsetZ.multiply(offsetZ)).floatValue());
             } else {
                 args.set(0, (float) ((double) x * (double) x + (double) z * (double) z));
             }
-        } else if (ConfigManager.config.worldGen.reposition.highPrecisionMode) {
+        } else if (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode) {
             int offsetX = Util.RepositionBigDecimal(x, Direction.Axis.X).toBigInteger().divide(BigInteger.valueOf(8)).intValue();
             int offsetZ = Util.RepositionBigDecimal(z, Direction.Axis.Z).toBigInteger().divide(BigInteger.valueOf(8)).intValue();
             args.set(0, (float) (offsetX * offsetX + offsetZ * offsetZ));
@@ -77,7 +77,7 @@ public abstract class MixinEndIslandDensityFunction {
      */
     @ModifyArgs(method = "compute", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/DensityFunctions$EndIslandDensityFunction;getHeightValue(Lnet/minecraft/world/level/levelgen/synth/SimplexNoise;II)F"))
     private void modifyNoisePos(Args args, DensityFunction.FunctionContext pos) {
-        if (ConfigManager.config.worldGen.reposition.highPrecisionMode) {
+        if (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode) {
             // 在原版中，原始的坐标是除以 8 后再传入实际的采样方法的，这里为了方便后续的计算，我们将原始坐标直接传入，并在后续的计算中把除以 8 给补上
             args.set(1, pos.blockX());
             args.set(2, pos.blockZ());

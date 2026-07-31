@@ -26,17 +26,22 @@ import java.util.Objects;
  */
 public class ConfigManager {
     private static final File CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve("ultimate_scaler.toml").toFile();
-    /**
-     * 配置实例，用于存储配置选项的值，运行时所有的配置选项的值都通过这个实例来访问和修改。
-     */
-    public static Config config;
+    // 配置实例，用于存储配置选项的值，运行时所有的配置选项的值都通过这个实例来访问和修改。
+    private static Config config;
 
-    static {
-        loadConfig(); // 此类加载了很可能是因为有谁要获取配置值，此时几乎必须读取配置否则空指针异常
+    /**
+     * 可供外部使用的获取配置实例的方法，
+     * @return 配置实例，可用于获取当前配置选项的值
+     */
+    public static Config getConfig() {
+        if (config == null) {
+            loadConfig();
+        }
+        return config;
     }
 
     /**
-     * 读取配置文件，并将读取到的配置选项的值赋值给 {@link ConfigManager#config} 实例。期间会检查并迁移旧版配置文件，并自动替换无效值。
+     * 读取配置文件，并将读取到的配置选项的值赋值给 {@link ConfigManager#getConfig()} 实例。期间会检查并迁移旧版配置文件，并自动替换无效值。
      *
      * @see Toml#to(Class)
      */
@@ -147,7 +152,7 @@ public class ConfigManager {
     }
 
     /**
-     * 将 {@link ConfigManager#config} 实例中的配置选项的值写入配置文件，并在文件开头添加链接。若配置文件不存在，则会自动创建。
+     * 将 {@link ConfigManager#getConfig()} 实例中的配置选项的值写入配置文件，并在文件开头添加链接。若配置文件不存在，则会自动创建。
      *
      * @throws IOException 配置文件读取或写入时出错
      * @see TomlWriter#write(Object, File)

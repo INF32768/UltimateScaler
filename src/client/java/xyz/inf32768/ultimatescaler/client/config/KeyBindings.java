@@ -28,7 +28,7 @@ public class KeyBindings {
      *
      * @return Shift 键是否正在被按下。
      */
-    private static boolean isShiftPressed() {
+    public static boolean isShiftPressed() {
         return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT) || InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_RIGHT_SHIFT);
     }
 
@@ -47,8 +47,8 @@ public class KeyBindings {
     public static void init() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             // 不知道为什么，这里的KeyBinding.isPressed()只能检测到一个按键，所以只能用InputConstants.isKeyDown()来判断组合按键是否被按下
-            if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), ConfigManager.getKeyCode(ConfigManager.config.common.configScreenKeybind)) && Minecraft.getInstance().screen == null) {
-                Modifier modifier = Modifier.of(ConfigManager.getKeyModifier(ConfigManager.config.common.configScreenKeybind));
+            if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), ConfigManager.getKeyCode(ConfigManager.getConfig().general.configScreenKeybind)) && Minecraft.getInstance().screen == null) {
+                Modifier modifier = Modifier.of(ConfigManager.getKeyModifier(ConfigManager.getConfig().general.configScreenKeybind));
                 if (isCtrlPressed() == modifier.hasControl() && isShiftPressed() == modifier.hasShift() && isAltPressed() == modifier.hasAlt()) {
                     Minecraft.getInstance().setScreen(ClothConfigBuilder.getConfigBuilder().build());
                 }

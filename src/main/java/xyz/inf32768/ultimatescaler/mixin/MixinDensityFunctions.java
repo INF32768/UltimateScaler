@@ -21,7 +21,7 @@ public abstract class MixinDensityFunctions {
      */
     @ModifyArgs(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;doubleRange(DD)Lcom/mojang/serialization/Codec;"))
     private static void modifyConstantRange(Args args) {
-        if (ConfigManager.config.utilities.expandDatapackValueRange) {
+        if (ConfigManager.getConfig().utilities.expandDatapackValueRange) {
             args.set(0, Double.NEGATIVE_INFINITY);
             args.set(1, Double.POSITIVE_INFINITY);
         }

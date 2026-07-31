@@ -20,7 +20,7 @@ public abstract class MixinWorldBorderCommand {
      */
     @ModifyArgs(method = "register", at = @At(value = "INVOKE", target = "Lcom/mojang/brigadier/arguments/DoubleArgumentType;doubleArg(DD)Lcom/mojang/brigadier/arguments/DoubleArgumentType;", remap = false))
     private static void modifyDoubleArg(Args args) {
-        if (ConfigManager.config.fixesAndExpansion.worldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             args.set(0, Double.NEGATIVE_INFINITY);
             args.set(1, Double.POSITIVE_INFINITY);
         }
@@ -35,7 +35,7 @@ public abstract class MixinWorldBorderCommand {
      */
     @Redirect(method = "setCenter", at = @At(value = "INVOKE", target = "Ljava/lang/Math;abs(F)F"))
     private static float modifyAbs(float value) {
-        return ConfigManager.config.fixesAndExpansion.worldBorder ? 0F : Math.abs(value);
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? 0F : Math.abs(value);
     }
 
     /**
@@ -47,7 +47,7 @@ public abstract class MixinWorldBorderCommand {
      */
     @ModifyConstant(method = "setSize", constant = @Constant(doubleValue = 1.0))
     private static double modifyConstant(double original) {
-        return ConfigManager.config.fixesAndExpansion.worldBorder ? 0D : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? 0D : original;
     }
 
     /**
@@ -55,6 +55,6 @@ public abstract class MixinWorldBorderCommand {
      */
     @ModifyConstant(method = "setSize", constant = @Constant(doubleValue = 59999968))
     private static double modifyConstant2(double original) {
-        return ConfigManager.config.fixesAndExpansion.worldBorder ? Double.POSITIVE_INFINITY : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Double.POSITIVE_INFINITY : original;
     }
 }

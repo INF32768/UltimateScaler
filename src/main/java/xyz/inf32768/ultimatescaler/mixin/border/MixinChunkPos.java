@@ -20,6 +20,6 @@ public abstract class MixinChunkPos {
      */
     @Redirect(method = "<clinit>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/ChunkPos;asLong(II)J"))
     private static long modifyToLong(int x, int z) {
-        return ConfigManager.config.fixesAndExpansion.worldBorder ? ChunkPos.asLong(134217728, 134217728) : ChunkPos.asLong(x, z);
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? ChunkPos.asLong(134217728, 134217728) : ChunkPos.asLong(x, z);
     }
 }

@@ -21,7 +21,7 @@ public abstract class MixinDedicatedServerProperties {
      */
     @ModifyArgs(method = "method_16715", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I"))
     private static void modifyMaxWorldSize(Args args) {
-        if (ConfigManager.config.fixesAndExpansion.worldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             args.set(1, Integer.MIN_VALUE);
             args.set(2, Integer.MAX_VALUE);
         }
