@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-**English** | [简体中文](CONTRIBUTING_CN.md)
+**English** | [简体中文](docs/CONTRIBUTING_CN.md)
 
 ## 🎉 Welcome!
 
