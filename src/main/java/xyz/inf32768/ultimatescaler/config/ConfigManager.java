@@ -31,6 +31,7 @@ public class ConfigManager {
 
     /**
      * 可供外部使用的获取配置实例的方法，
+     *
      * @return 配置实例，可用于获取当前配置选项的值
      */
     public static Config getConfig() {
@@ -87,8 +88,10 @@ public class ConfigManager {
         }
         try {
             // 确保配置文件中的方块 ID 有效
-            if (!config.worldGen.fluidReplace.defaultFluid.isEmpty()) Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.defaultFluid)));
-            if (!config.worldGen.fluidReplace.undergroundLava.isEmpty()) Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.undergroundLava)));
+            if (!config.worldGen.fluidReplace.defaultFluid.isEmpty())
+                Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.defaultFluid)));
+            if (!config.worldGen.fluidReplace.undergroundLava.isEmpty())
+                Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.undergroundLava)));
         } catch (NullPointerException e) {
             // 方块 ID 无效，使用默认值
             ModMetadata.LOGGER.warn("Invalid block id, resetting to default values", e);
@@ -133,10 +136,10 @@ public class ConfigManager {
         configV4.general.configScreenKeybind = getModifiedKeyCode(configV3.optionMenuKeyCode, configV3.optionMenuModifierValue);
         configV4.general.publicTerrainPos = configV3.publicTerrainPos;
         configV4.general.showTerrainPos = configV3.showTerrainPos;
-        configV4.worldGen.maintainPrecisionControl.farLandsPos = configV3.farLandsPos;
-        configV4.worldGen.maintainPrecisionControl.limitReturnValue = configV3.limitReturnValue;
-        configV4.worldGen.maintainPrecisionControl.customDivisor = configV3.maintainPrecisionCustomDivisor;
-        configV4.worldGen.maintainPrecisionControl.maxLogarithmValue = configV3.maxNoiseLogarithmValue;
+        configV4.worldGen.farLandsControl.farLandsPos = configV3.farLandsPos;
+        configV4.worldGen.farLandsControl.limitReturnValue = configV3.limitReturnValue;
+        configV4.worldGen.farLandsControl.customDivisor = configV3.maintainPrecisionCustomDivisor;
+        configV4.worldGen.farLandsControl.maxLogarithmValue = configV3.maxNoiseLogarithmValue;
         configV4.worldGen.reposition.highPrecisionMode = configV3.bigIntegerRewrite;
         configV4.worldGen.reposition.extendedYAxisEffect = configV3.extraYOffset;
         configV4.worldGen.reposition.shift = configV3.globalBigDecimalOffset;

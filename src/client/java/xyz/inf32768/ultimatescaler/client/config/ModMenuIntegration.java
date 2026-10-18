@@ -17,7 +17,7 @@ public class ModMenuIntegration implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         if (ModMetadata.IS_CLOTH_CONFIG_PRESENT) {
             // 仅在 Cloth Config API 安装时才可打开配置界面
-            return (screen) -> ClothConfigBuilder.getConfigBuilder().setParentScreen(screen).build();
+            return screen -> KeyBindings.isShiftPressed() ? ClothConfigBuilder.getConfigBuilder().setParentScreen(screen).build() : NewClothConfigBuilder.getMainConfigBuilder().setParentScreen(screen).build();
         } else {
             return null;
         }

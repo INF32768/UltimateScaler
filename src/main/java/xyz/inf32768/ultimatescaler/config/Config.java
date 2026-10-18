@@ -26,7 +26,6 @@ public final class Config {
         RELEASE,
         DEFAULT,
         REMOVED,
-        CUSTOM
     }
 
     /**
@@ -69,7 +68,7 @@ public final class Config {
     public static class WorldGen {
         public Reposition reposition = new Reposition();
         public FluidReplace fluidReplace = new FluidReplace();
-        public maintainPrecisionControl maintainPrecisionControl = new maintainPrecisionControl();
+        public FarLandsControl farLandsControl = new FarLandsControl();
 
         public static class Reposition {
             public BigDecimal[] shift = {BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO};
@@ -83,7 +82,7 @@ public final class Config {
             public String undergroundLava = "";
         }
 
-        public static class maintainPrecisionControl {
+        public static class FarLandsControl {
             public FarLandsPos farLandsPos = FarLandsPos.DEFAULT;
             public double customDivisor = 33554432;
             public boolean limitReturnValue = false;
