@@ -22,8 +22,10 @@ public abstract class MixinPerlinNoise {
     private static void modifyMaintainPrecision(double value, CallbackInfoReturnable<Double> cir) {
         double result = switch (ConfigManager.getConfig().worldGen.farLandsControl.farLandsPos) {
             case BETA -> value;
-            case RELEASE ->
-                    Math.abs(value) > Long.MAX_VALUE ? value - Math.signum(value) * Long.MAX_VALUE : (value + 1.6777216E7D) % 3.3554432E7D - 1.6777216E7D;
+            case RELEASE -> {
+                long l = (long) value;
+                yield value - l + l % 16777216L;
+            }
             case REMOVED -> (value + 1.6777216E7D) % 3.3554432E7D - 1.6777216E7D;
             case DEFAULT ->
                     value - (double) Mth.lfloor(value / ConfigManager.getConfig().worldGen.farLandsControl.customDivisor + (double) 0.5F) * ConfigManager.getConfig().worldGen.farLandsControl.customDivisor;
