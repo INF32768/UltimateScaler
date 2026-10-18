@@ -26,8 +26,9 @@ import java.util.Objects;
  */
 public class ConfigManager {
     private static final File CONFIG_FILE = FabricLoader.getInstance().getConfigDir().resolve("ultimate_scaler.toml").toFile();
+    private static final File CONFIG_FILE_V2 = FabricLoader.getInstance().getConfigDir().resolve("ultimatescaler.toml").toFile();
     // 配置实例，用于存储配置选项的值，运行时所有的配置选项的值都通过这个实例来访问和修改。
-    private static Config config;
+    private static volatile Config config;
 
     /**
      * 可供外部使用的获取配置实例的方法，
@@ -42,26 +43,54 @@ public class ConfigManager {
     }
 
     /**
-     * 读取配置文件，并将读取到的配置选项的值赋值给 {@link ConfigManager#getConfig()} 实例。期间会检查并迁移旧版配置文件，并自动替换无效值。
+     * 读取配置文件，并将读取到的配置选项的值赋值给 {@link ConfigManager#getConfig()} 实例。
+     * 期间会检查并迁移旧版配置文件，并自动替换无效值。若配置文件不存在，则会生成默认配置文件。
+     * <p>
+     * 每次调用都会重新读取文件，因此可用于配置热重载。
      *
      * @see Toml#to(Class)
      */
     public static void loadConfig() {
+        boolean migratedFromV2 = false;
+        boolean migratedFromV3 = false;
+        Config loadedConfig;
+
         if (!CONFIG_FILE.exists()) {
             // 默认配置文件不存在
-            config = tryMigrateConfigV2(); // 尝试迁移 V2 配置文件
-            if (config == null) {
-                config = new Config(); // V2 配置文件迁移失败或不存在，使用默认配置
+            try {
+                loadedConfig = tryMigrateConfigV2(); // 尝试迁移 V2 配置文件
+            } catch (Exception e) {
+                // 旧版配置文件格式错误，保留原文件并改用默认配置
+                ModMetadata.LOGGER.warn("Failed to migrate V2 config file, using default values: ", e);
+                loadedConfig = null;
+            }
+            if (loadedConfig == null) {
+                // V2 配置文件迁移失败或不存在，使用默认配置
+                config = new Config();
+                try {
+                    saveConfig(); // 首次启动时生成默认配置文件
+                } catch (IOException e) {
+                    ModMetadata.LOGGER.error("Failed to save config file", e);
+                }
                 return;
-            } else ModMetadata.LOGGER.info("Config file has been automatically updated from V2"); // 迁移成功，打印日志
+            }
+            migratedFromV2 = true;
+            ModMetadata.LOGGER.info("Config file has been automatically updated from V2"); // 迁移成功，打印日志
         } else {
             // 存在配置文件，尝试读取配置
             try {
-                if (new Toml().read(CONFIG_FILE).getLong("CONFIG_VERSION") == 3)
-                    config = tryMigrateConfigV3(null); // 检测到配置文件为 V3，尝试迁移到 V4
-                if (config == null)
-                    config = new Toml().read(CONFIG_FILE).to(Config.class); // 迁移失败或配置文件为 V4，直接读取（若读取失败抛出异常则会使用默认配置）
-                else ModMetadata.LOGGER.info("Config file has been automatically updated from V3"); // 迁移成功，打印日志
+                Toml toml = new Toml().read(CONFIG_FILE);
+                Long configVersion = toml.getLong("CONFIG_VERSION");
+                loadedConfig = null;
+                if (configVersion != null && configVersion == 3) {
+                    loadedConfig = tryMigrateConfigV3(null); // 检测到配置文件为 V3，尝试迁移到 V4
+                    if (loadedConfig != null) {
+                        migratedFromV3 = true;
+                        ModMetadata.LOGGER.info("Config file has been automatically updated from V3"); // 迁移成功，打印日志
+                    }
+                }
+                if (loadedConfig == null)
+                    loadedConfig = toml.to(Config.class); // 迁移失败或配置文件为 V4，直接读取（若读取失败抛出异常则会使用默认配置）
             } catch (Exception e) {
                 // 配置文件格式错误，由于不知道是哪里出错，因此只打印错误信息，并使用默认配置
                 ModMetadata.LOGGER.warn("Failed to load config file, using default values: ", e);
@@ -77,10 +106,10 @@ public class ConfigManager {
         // 执行到这，配置文件格式已经正确，接下来校验字段合法性
         try {
             for (Field entry : Config.class.getFields()) {
-                if (entry.get(config) == null) {
+                if (entry.get(loadedConfig) == null) {
                     // 字段值为空，使用默认值
                     ModMetadata.LOGGER.warn("Failed to load config entry, resetting to default value: {}", entry.getName());
-                    entry.set(config, Config.class.getField(entry.getName()).get(new Config()));
+                    entry.set(loadedConfig, Config.class.getField(entry.getName()).get(new Config()));
                 }
             }
         } catch (IllegalAccessException | NoSuchFieldException e) {
@@ -88,42 +117,50 @@ public class ConfigManager {
         }
         try {
             // 确保配置文件中的方块 ID 有效
-            if (!config.worldGen.fluidReplace.defaultFluid.isEmpty())
-                Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.defaultFluid)));
-            if (!config.worldGen.fluidReplace.undergroundLava.isEmpty())
-                Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(config.worldGen.fluidReplace.undergroundLava)));
+            if (!loadedConfig.worldGen.fluidReplace.defaultFluid.isEmpty())
+                Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(loadedConfig.worldGen.fluidReplace.defaultFluid)));
+            if (!loadedConfig.worldGen.fluidReplace.undergroundLava.isEmpty())
+                Objects.requireNonNull(RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(loadedConfig.worldGen.fluidReplace.undergroundLava)));
         } catch (NullPointerException e) {
             // 方块 ID 无效，使用默认值
             ModMetadata.LOGGER.warn("Invalid block id, resetting to default values", e);
-            config.worldGen.fluidReplace.defaultFluid = "";
-            config.worldGen.fluidReplace.undergroundLava = "";
+            loadedConfig.worldGen.fluidReplace.defaultFluid = "";
+            loadedConfig.worldGen.fluidReplace.undergroundLava = "";
+        }
+
+        config = loadedConfig;
+
+        if (migratedFromV2 || migratedFromV3) {
+            try {
+                // 迁移结果必须立即写回，否则下次启动时迁移会丢失
+                saveConfig();
+                if (migratedFromV2) Files.deleteIfExists(CONFIG_FILE_V2.toPath());
+            } catch (IOException e) {
+                // 写入失败时保留旧版文件，避免用户配置丢失
+                ModMetadata.LOGGER.error("Failed to save migrated config file, the legacy file has been kept", e);
+            }
         }
     }
 
     /**
-     * 尝试迁移旧版（V2）配置文件至最新版。会自动检查旧版配置文件是否存在，若存在则自动迁移。
+     * 尝试迁移旧版（V2）配置文件至最新版。会自动检查旧版配置文件是否存在，若存在则读取并迁移。
+     * <p>
+     * 注意：旧版文件不会在这里删除，而是由 {@link #loadConfig()} 在迁移结果成功写入新配置文件后删除。
      *
      * @return 迁移完成的配置文件。若不存在旧版配置文件则为 null。
      */
     @SuppressWarnings("deprecation")
     private static Config tryMigrateConfigV2() {
-        final File configFileV2 = FabricLoader.getInstance().getConfigDir().resolve("ultimatescaler.toml").toFile();
+        if (!CONFIG_FILE_V2.exists()) return null;
 
-        if (!configFileV2.exists()) return null;
-
-        Config.ConfigImpl configV3 = new Toml().read(configFileV2).to(Config.ConfigImpl.class);
-        try {
-            Files.deleteIfExists(configFileV2.toPath());
-        } catch (IOException ignored) {
-        } // 文件删不掉，不管它
-
+        Config.ConfigImpl configV3 = new Toml().read(CONFIG_FILE_V2).to(Config.ConfigImpl.class);
         return tryMigrateConfigV3(configV3);
     }
 
     /**
-     * 尝试迁移旧版（V3）配置文件至最新版。
+     * 尝试迁移旧版（V3）配置文件至最新版。会自动把已移除的 {@code CUSTOM} 选项转换为“{@code DEFAULT} + 自定义除数”。
      *
-     * @param configV3 可选的 V2 配置实例。若为 null，则尝试从配置文件中读取。
+     * @param configV3 可选的 V3 配置实例。若为 null，则尝试从配置文件中读取。
      * @return 迁移完成的配置文件。若不存在旧版配置文件则为 null。
      */
     @SuppressWarnings("deprecation")
@@ -136,9 +173,17 @@ public class ConfigManager {
         configV4.general.configScreenKeybind = getModifiedKeyCode(configV3.optionMenuKeyCode, configV3.optionMenuModifierValue);
         configV4.general.publicTerrainPos = configV3.publicTerrainPos;
         configV4.general.showTerrainPos = configV3.showTerrainPos;
-        configV4.worldGen.farLandsControl.farLandsPos = configV3.farLandsPos;
+        configV4.worldGen.farLandsControl.farLandsPos = switch (configV3.farLandsPos) {
+            case BETA -> Config.FarLandsPos.BETA;
+            case RELEASE -> Config.FarLandsPos.RELEASE;
+            case REMOVED -> Config.FarLandsPos.REMOVED;
+            case DEFAULT, CUSTOM -> Config.FarLandsPos.DEFAULT;
+        };
         configV4.worldGen.farLandsControl.limitReturnValue = configV3.limitReturnValue;
-        configV4.worldGen.farLandsControl.customDivisor = configV3.maintainPrecisionCustomDivisor;
+        // 旧版只有 CUSTOM 会使用自定义除数，DEFAULT 使用固定值 33554432。
+        // 为保证迁移前后行为一致，仅 CUSTOM 保留自定义除数，其余情况重置为默认值。
+        configV4.worldGen.farLandsControl.customDivisor = configV3.farLandsPos == Config.ConfigImpl.LegacyFarLandsPos.CUSTOM
+                ? configV3.maintainPrecisionCustomDivisor : 33554432;
         configV4.worldGen.farLandsControl.maxLogarithmValue = configV3.maxNoiseLogarithmValue;
         configV4.worldGen.reposition.highPrecisionMode = configV3.bigIntegerRewrite;
         configV4.worldGen.reposition.extendedYAxisEffect = configV3.extraYOffset;

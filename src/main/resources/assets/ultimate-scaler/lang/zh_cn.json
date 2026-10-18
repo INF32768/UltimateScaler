@@ -51,7 +51,7 @@
     "ultimatescaler.config.new.fae.world_border.tooltip": "移除 ±30000000 处的空气墙及 `tp`、`worldborder` 等命令的坐标限制。",
     "ultimatescaler.config.new.general": "常规设置",
     "ultimatescaler.config.new.general.option_menu_key": "配置界面快捷键",
-    "ultimatescaler.config.new.general.public_terrain_pos": "广播世界生成坐标",
+    "ultimatescaler.config.new.general.public_terrain_pos": "广播世界生成坐标（暂未实现）",
     "ultimatescaler.config.new.general.show_terrain_pos": "在调试屏幕中显示地形坐标",
     "ultimatescaler.config.new.labels_legend": "标签图例",
     "ultimatescaler.config.new.labels_description": "【标签说明】",

@@ -106,9 +106,10 @@ public class NewClothConfigBuilder {
                 .build();
 
         DistanceEffectMeta worldBorderMeta = new DistanceEffectMeta(DistanceEffectMeta.Symbol.INTENDED_RESTRICTION, DistanceEffectMeta.Color.GAME_LOGIC);
-        BooleanListEntry worldBorderEntry = entryBuilder.startBooleanToggle(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.world_border"), true, CommonLabels.DUAL_ENV, worldBorderMeta), config.fixesAndExpansion.worldBorder)
+        BooleanListEntry worldBorderEntry = entryBuilder.startBooleanToggle(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.world_border"), true, CommonLabels.DUAL_ENV, CommonLabels.REQUIRES_RESTART, worldBorderMeta), config.fixesAndExpansion.worldBorder)
                 .setDefaultValue(false)
-                .setTooltip(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.world_border.tooltip"), false, CommonLabels.DUAL_ENV, worldBorderMeta))
+                .setTooltip(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.world_border.tooltip"), false, CommonLabels.DUAL_ENV, CommonLabels.REQUIRES_RESTART, worldBorderMeta))
+                .requireRestart()
                 .build();
 
         DistanceEffectMeta chunkGenerationOOBMeta = new DistanceEffectMeta(DistanceEffectMeta.Symbol.INTENDED_RESTRICTION, DistanceEffectMeta.Color.CRASH_OR_FREEZE);

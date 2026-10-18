@@ -14,7 +14,8 @@ import xyz.inf32768.ultimatescaler.client.config.KeyBindings;
 public class UltimateScalerClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        if (ModMetadata.IS_CLOTH_CONFIG_PRESENT) {
+        // 快捷键依赖 Fabric API 的事件系统，配置界面依赖 Cloth Config API
+        if (ModMetadata.IS_FABRIC_API_PRESENT && ModMetadata.IS_CLOTH_CONFIG_PRESENT) {
             KeyBindings.init();
         }
     }

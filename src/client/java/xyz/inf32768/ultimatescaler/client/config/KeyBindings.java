@@ -50,7 +50,7 @@ public class KeyBindings {
             if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), ConfigManager.getKeyCode(ConfigManager.getConfig().general.configScreenKeybind)) && Minecraft.getInstance().screen == null) {
                 Modifier modifier = Modifier.of(ConfigManager.getKeyModifier(ConfigManager.getConfig().general.configScreenKeybind));
                 if (isCtrlPressed() == modifier.hasControl() && isShiftPressed() == modifier.hasShift() && isAltPressed() == modifier.hasAlt()) {
-                    Minecraft.getInstance().setScreen(ClothConfigBuilder.getConfigBuilder().build());
+                    Minecraft.getInstance().setScreen(NewClothConfigBuilder.getMainConfigBuilder().build());
                 }
             }
         });

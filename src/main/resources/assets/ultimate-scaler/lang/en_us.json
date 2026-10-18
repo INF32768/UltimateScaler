@@ -43,7 +43,7 @@
     "ultimatescaler.config.new.fae.world_border.tooltip": "Remove the air wall at ±30000000 and coordinate limits in commands such as tp and worldborder.",
     "ultimatescaler.config.new.general": "General Settings",
     "ultimatescaler.config.new.general.option_menu_key": "Open Config Menu Key",
-    "ultimatescaler.config.new.general.public_terrain_pos": "Broadcast Terrain Position",
+    "ultimatescaler.config.new.general.public_terrain_pos": "Broadcast Terrain Position (Not implemented yet)",
     "ultimatescaler.config.new.general.show_terrain_pos": "Show Terrain Position in Debug Screen",
     "ultimatescaler.config.new.header.old_screen": "Not used to the new screen? You can hold Shift and click this mod's icon in the mod menu to go back to the old screen.",
     "ultimatescaler.config.new.header.welcome.1": "\uD83D\uDCA1Welcome to the new Ultimate Scaler config screen! If you have any suggestions for improvements in this new version, feel free to ",

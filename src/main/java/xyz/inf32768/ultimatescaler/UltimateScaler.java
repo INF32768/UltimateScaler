@@ -2,7 +2,7 @@ package xyz.inf32768.ultimatescaler;
 
 import net.fabricmc.api.ModInitializer;
 import xyz.inf32768.ultimatescaler.commands.LocatePosition;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 import xyz.inf32768.ultimatescaler.config.ConfigReloader;
 
 /**
@@ -16,11 +16,8 @@ import xyz.inf32768.ultimatescaler.config.ConfigReloader;
 public class UltimateScaler implements ModInitializer {
     @Override
     public void onInitialize() {
-        try {
-            Class.forName(Config.class.getName());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e); // 这怎么可能呢
-        }
+        // 提前加载配置，并在首次启动时生成默认配置文件
+        ConfigManager.getConfig();
 
         if (ModMetadata.IS_FABRIC_API_PRESENT) {
             ConfigReloader.init();

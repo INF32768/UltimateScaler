@@ -41,7 +41,7 @@ public final class Config {
         public int optionMenuKeyCode = GLFW.GLFW_KEY_U;
         public short optionMenuModifierValue = 2;
         public boolean showTerrainPos = true;
-        public FarLandsPos farLandsPos = FarLandsPos.DEFAULT;
+        public LegacyFarLandsPos farLandsPos = LegacyFarLandsPos.DEFAULT;
         public double maintainPrecisionCustomDivisor = 33554432;
         public boolean limitReturnValue = false;
         public int maxNoiseLogarithmValue = 7;
@@ -57,6 +57,20 @@ public final class Config {
         public boolean replaceUndergroundLava = false;
         public String replaceUndergroundLavaBlock = "minecraft:air";
         public boolean publicTerrainPos = true;
+
+        /**
+         * 旧版的“边境之地位置”枚举。保留了新版已移除的 {@code CUSTOM}，以便正确读取 V3 及更早的配置文件。
+         *
+         * @deprecated 仅供旧版配置迁移使用。请使用 {@link Config.FarLandsPos} 代替。
+         */
+        @Deprecated(since = "0.4.0")
+        public enum LegacyFarLandsPos {
+            BETA,
+            RELEASE,
+            DEFAULT,
+            REMOVED,
+            CUSTOM,
+        }
     }
 
     public static class General {
