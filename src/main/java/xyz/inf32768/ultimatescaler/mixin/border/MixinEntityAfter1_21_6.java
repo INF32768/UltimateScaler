@@ -1,11 +1,11 @@
 package xyz.inf32768.ultimatescaler.mixin.border;
 
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link Entity} 类的 Mixin，仅在大于等于 1.21.6 的版本中生效。
@@ -25,7 +25,7 @@ public abstract class MixinEntityAfter1_21_6 {
      */
     @Redirect(method = "load", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(DDD)D"))
     private static double modifyClampX(double value, double min, double max) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             return value;
         } else {
             return Mth.clamp(value, min, max);

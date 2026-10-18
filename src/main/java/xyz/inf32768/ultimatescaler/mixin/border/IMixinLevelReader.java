@@ -1,13 +1,13 @@
 package xyz.inf32768.ultimatescaler.mixin.border;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.LevelReader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.LevelReader;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link LevelReader} 接口的 Mixin。
@@ -23,7 +23,7 @@ public interface IMixinLevelReader {
      */
     @Inject(method = "getMaxLocalRawBrightness(Lnet/minecraft/core/BlockPos;I)I", at = @At("HEAD"), cancellable = true)
     private void modifyLightLevel(BlockPos pos, int ambientDarkness, CallbackInfoReturnable<Integer> cir) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             cir.setReturnValue(((BlockAndTintGetter) this).getRawBrightness(pos, ambientDarkness));
         }
     }

@@ -5,7 +5,7 @@ import net.minecraft.world.level.border.WorldBorder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link WorldBorder.Settings} 类的 Mixin。
@@ -21,7 +21,7 @@ public abstract class MixinWorldBorderSettings {
      */
     @Redirect(method = "read", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(DDD)D"))
     private static double modifyClamp(double value, double min, double max) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             return value;
         } else {
             return Mth.clamp(value, min, max);

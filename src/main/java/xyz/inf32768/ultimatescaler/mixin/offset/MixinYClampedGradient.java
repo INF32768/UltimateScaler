@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xyz.inf32768.ultimatescaler.Util;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@code DensityFunctionTypes.YClampedGraident} 类的 Mixin，用于对密度函数 {@code minecraft:y_clamped_gradient} 施加偏移和缩放。
@@ -19,8 +19,8 @@ public abstract class MixinYClampedGradient {
      */
     @ModifyArgs(method = "compute", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clampedMap(DDDDD)D"))
     private void modifyArgs(Args args, DensityFunction.FunctionContext pos) {
-        if (Config.impl.extraYOffset) {
-            double y = Config.impl.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y);
+        if (ConfigManager.getConfig().worldGen.reposition.extendedYAxisEffect) {
+            double y = ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y);
             args.set(0, y);
         }
     }

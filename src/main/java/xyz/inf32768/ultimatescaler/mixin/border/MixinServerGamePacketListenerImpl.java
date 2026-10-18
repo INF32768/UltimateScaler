@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link ServerGamePacketListenerImpl} 类的 Mixin。
@@ -21,7 +21,7 @@ public abstract class MixinServerGamePacketListenerImpl {
      */
     @Inject(method = "clampHorizontal", at = @At("HEAD"), cancellable = true)
     private static void modifyClampHorizontal(double d, CallbackInfoReturnable<Double> cir) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             cir.setReturnValue(d);
         }
     }
@@ -35,7 +35,7 @@ public abstract class MixinServerGamePacketListenerImpl {
      */
     @Inject(method = "clampVertical", at = @At("HEAD"), cancellable = true)
     private static void modifyClampVertical(double d, CallbackInfoReturnable<Double> cir) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             cir.setReturnValue(d);
         }
     }

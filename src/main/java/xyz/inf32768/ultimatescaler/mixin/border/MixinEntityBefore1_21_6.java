@@ -1,11 +1,11 @@
 package xyz.inf32768.ultimatescaler.mixin.border;
 
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 
 @Mixin(Entity.class)
@@ -21,7 +21,7 @@ public abstract class MixinEntityBefore1_21_6 {
      */
     @Redirect(method = "method_5651", at = @At(value = "INVOKE", target = "Lnet/minecraft/class_3532;method_15350(DDD)D", remap = false), remap = false)
     private static double modifyClampX(double value, double min, double max) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             return value;
         } else {
             return Mth.clamp(value, min, max);

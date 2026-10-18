@@ -7,7 +7,6 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.ResourceManager;
 import xyz.inf32768.ultimatescaler.UltimateScaler;
 
-import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
@@ -43,15 +42,11 @@ public class ConfigReloader implements SimpleSynchronousResourceReloadListener {
      * 重新加载配置文件的方法，在 {@link #init()} 方法中注册为监听器后，游戏内重载数据时会调用此方法重新加载配置文件。
      *
      * @throws RuntimeException 在配置文件加载失败（或其他少数情况）时抛出
-     * @see Config#loadConfig()
+     * @see ConfigManager#loadConfig()
      */
     @Override
     public CompletableFuture<Void> reload(PreparationBarrier preparationBarrier, ResourceManager resourceManager, Executor executor, Executor executor2) {
-        try {
-            Config.loadConfig();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ConfigManager.loadConfig();
         return SimpleSynchronousResourceReloadListener.super.reload(preparationBarrier, resourceManager, executor, executor2);
     }
 

@@ -2,10 +2,8 @@ package xyz.inf32768.ultimatescaler;
 
 import net.fabricmc.api.ModInitializer;
 import xyz.inf32768.ultimatescaler.commands.LocatePosition;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 import xyz.inf32768.ultimatescaler.config.ConfigReloader;
-
-import java.io.IOException;
 
 /**
  * 通用主入口，负责初始化模组的客户端和服务端通用功能。以下是初始化顺序：
@@ -16,19 +14,16 @@ import java.io.IOException;
  * </ol>
  */
 public class UltimateScaler implements ModInitializer {
-	@Override
-	public void onInitialize() {
-        try {
-            Config.saveConfig();
-        } catch (IOException e) {
-            ModMetadata.LOGGER.error("Couldn't save config", e);
-        }
+    @Override
+    public void onInitialize() {
+        // 提前加载配置，并在首次启动时生成默认配置文件
+        ConfigManager.getConfig();
 
         if (ModMetadata.IS_FABRIC_API_PRESENT) {
-			ConfigReloader.init();
-			LocatePosition.init();
-		} else {
-			ModMetadata.LOGGER.warn("Fabric API is not present, some core features may not work properly!");
-		}
+            ConfigReloader.init();
+            LocatePosition.init();
+        } else {
+            ModMetadata.LOGGER.warn("Fabric API is not present, some core features may not work properly!");
+        }
     }
 }

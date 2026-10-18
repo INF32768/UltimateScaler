@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link MinecraftServer} 类的 Mixin。
@@ -23,6 +23,6 @@ public abstract class MixinMinecraftServer {
      */
     @Inject(method = "getAbsoluteMaxWorldSize", at = @At("HEAD"), cancellable = true)
     private void modifyMaxWorldBorderRadius(CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(Config.impl.expandWorldBorder ? Integer.MAX_VALUE : 29999984);
+        cir.setReturnValue(ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Integer.MAX_VALUE : 29999984);
     }
 }

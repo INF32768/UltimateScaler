@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xyz.inf32768.ultimatescaler.Util;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@code DensityFunctionTypes.Noise} 类的 Mixin，用于对密度函数 {@code minecraft:noise} 施加偏移和缩放。
@@ -20,9 +20,9 @@ public abstract class MixinNoise {
      */
     @ModifyArgs(method = "compute", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/DensityFunction$NoiseHolder;getValue(DDD)D"))
     private void modifyNoiseSampleArgs(Args args, DensityFunction.FunctionContext pos) {
-        double x = (Config.impl.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X)) * this.getXzScale();
-        double y = (Config.impl.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y)) * this.getYScale();
-        double z = (Config.impl.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z)) * this.getXzScale();
+        double x = (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X)) * this.getXzScale();
+        double y = (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockY(), Direction.Axis.Y).doubleValue() : Util.RepositionDouble(pos.blockY(), Direction.Axis.Y)) * this.getYScale();
+        double z = (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z)) * this.getXzScale();
 
         args.set(0, x);
         args.set(1, y);

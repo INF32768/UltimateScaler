@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import xyz.inf32768.ultimatescaler.Util;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@code DensityFunctionTypes.ShiftA} 类的 Mixin，用于对密度函数 {@code minecraft:shift_a} 施加偏移和缩放。
@@ -19,8 +19,8 @@ public abstract class MixinShiftA {
      */
     @ModifyArgs(method = "compute", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/DensityFunctions$ShiftA;compute(DDD)D"))
     private void modifyArgs(Args args, DensityFunction.FunctionContext pos) {
-        double x = Config.impl.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X);
-        double z = Config.impl.bigIntegerRewrite ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z);
+        double x = ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockX(), Direction.Axis.X).doubleValue() : Util.RepositionDouble(pos.blockX(), Direction.Axis.X);
+        double z = ConfigManager.getConfig().worldGen.reposition.highPrecisionMode ? Util.RepositionBigDecimal(pos.blockZ(), Direction.Axis.Z).doubleValue() : Util.RepositionDouble(pos.blockZ(), Direction.Axis.Z);
         args.set(0, x);
         args.set(2, z);
     }

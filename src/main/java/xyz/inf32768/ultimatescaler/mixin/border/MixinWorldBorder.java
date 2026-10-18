@@ -1,12 +1,12 @@
 package xyz.inf32768.ultimatescaler.mixin.border;
 
+import net.minecraft.world.level.border.WorldBorder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.minecraft.world.level.border.WorldBorder;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link WorldBorder} 类的 Mixin。
@@ -30,7 +30,7 @@ public abstract class MixinWorldBorder {
      */
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(CallbackInfo ci) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             this.setAbsoluteMaxSize(Integer.MAX_VALUE);
         }
     }

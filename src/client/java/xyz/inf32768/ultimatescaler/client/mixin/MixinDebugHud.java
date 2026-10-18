@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.inf32768.ultimatescaler.Util;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -52,14 +52,14 @@ public abstract class MixinDebugHud {
         }
 
         // 计算坐标
-        if (Config.impl.showTerrainPos) {
-            if (!pos.equals(previousCamPos) || !Arrays.equals(Config.impl.globalBigDecimalOffset, previousOffset) || !Arrays.equals(Config.impl.globalBigDecimalScale, previousScale)) {
+        if (ConfigManager.getConfig().general.showTerrainPos) {
+            if (!pos.equals(previousCamPos) || !Arrays.equals(ConfigManager.getConfig().worldGen.reposition.shift, previousOffset) || !Arrays.equals(ConfigManager.getConfig().worldGen.reposition.scale, previousScale)) {
                 // 缓存变量与当前实际不一致，需重新计算并更新缓存
                 previousCamPos = pos;
-                previousOffset = Config.impl.globalBigDecimalOffset;
-                previousScale = Config.impl.globalBigDecimalScale;
+                previousOffset = ConfigManager.getConfig().worldGen.reposition.shift;
+                previousScale = ConfigManager.getConfig().worldGen.reposition.scale;
 
-                if (Config.impl.bigIntegerRewrite) {
+                if (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode) {
                     String x = Util.RepositionBigDecimal(pos.getX(), Direction.Axis.X).toString();
                     String y = Util.RepositionBigDecimal(pos.getY(), Direction.Axis.Y).toString();
                     String z = Util.RepositionBigDecimal(pos.getZ(), Direction.Axis.Z).toString();
@@ -73,7 +73,7 @@ public abstract class MixinDebugHud {
             }
 
             // 将条目添加到信息列表中
-            if (Config.impl.bigIntegerRewrite) {
+            if (ConfigManager.getConfig().worldGen.reposition.highPrecisionMode) {
                 list.add(terrainPosLines[0]);
                 list.add(terrainPosLines[1]);
             } else {

@@ -1,12 +1,11 @@
 package xyz.inf32768.ultimatescaler.mixin;
 
+import net.minecraft.world.level.levelgen.DensityFunctions;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
-
-import net.minecraft.world.level.levelgen.DensityFunctions;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link DensityFunctions} 类的 Mixin，用于扩展数据包密度函数定义中的常数值的取值范围。
@@ -22,7 +21,7 @@ public abstract class MixinDensityFunctions {
      */
     @ModifyArgs(method = "<clinit>", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;doubleRange(DD)Lcom/mojang/serialization/Codec;"))
     private static void modifyConstantRange(Args args) {
-        if (Config.impl.expandDatapackValueRange) {
+        if (ConfigManager.getConfig().utilities.expandDatapackValueRange) {
             args.set(0, Double.NEGATIVE_INFINITY);
             args.set(1, Double.POSITIVE_INFINITY);
         }

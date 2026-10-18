@@ -46,9 +46,10 @@ public class LocatePosition {
 
     /**
      * 命令的执行逻辑，负责检验参数、调用二分查找器并反馈结果。
-     * @param pos 原始位置坐标
-     * @param scale 缩放比例，不可为 0
-     * @param offset 偏移量
+     *
+     * @param pos     原始位置坐标
+     * @param scale   缩放比例，不可为 0
+     * @param offset  偏移量
      * @param context 命令上下文，用于在聊天栏中反馈结果，在游戏中执行时会自动填入。
      * @return 找到的坐标（被钳制在 {@code int} 范围内，饱和溢出）
      */
@@ -64,8 +65,9 @@ public class LocatePosition {
 
     /**
      * 最小坐标查找器：通过二分查找找到一个坐标经过偏移和缩放后的对应坐标，也就是找到唯一的 {@code BigInteger} 整数 {@code n}，满足 {@code n.doubleValue() * scale + offset >= pos && n.subtract(BigIntger.ONE).doubleValue() * scale + offset < pos}，当 {@code scale < 0} 时不等号取反。
-     * @param pos 原始位置坐标
-     * @param scale 缩放比例，不可为 0
+     *
+     * @param pos    原始位置坐标
+     * @param scale  缩放比例，不可为 0
      * @param offset 偏移量
      * @return 目标整数 {@code n}
      */

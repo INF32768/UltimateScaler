@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 import xyz.inf32768.ultimatescaler.versionutil.RegistryAccessor;
 
 /**
@@ -27,15 +27,15 @@ public abstract class MixinNoiseBasedChunkGenerator {
     private static void createFluidLevelSampler(NoiseGeneratorSettings settings, CallbackInfoReturnable<Aquifer.FluidPicker> cir) {
         cir.setReturnValue((x, y, z) -> {
             // 获取配置的数值
-            double scale = Config.impl.globalBigDecimalScale[1].doubleValue();
-            double offset = Config.impl.globalBigDecimalOffset[1].doubleValue();
+            double scale = ConfigManager.getConfig().worldGen.reposition.scale[1].doubleValue();
+            double offset = ConfigManager.getConfig().worldGen.reposition.shift[1].doubleValue();
             // 计算偏移量
-            int lavaLevelY = Config.impl.extraYOffset ? (int) ((-54D - offset) / scale) : -54;
-            int seaLevelY = Config.impl.extraYOffset ? (int) ((settings.seaLevel() - offset) / scale) : settings.seaLevel();
+            int lavaLevelY = ConfigManager.getConfig().worldGen.reposition.extendedYAxisEffect ? (int) ((-54D - offset) / scale) : -54;
+            int seaLevelY = ConfigManager.getConfig().worldGen.reposition.extendedYAxisEffect ? (int) ((settings.seaLevel() - offset) / scale) : settings.seaLevel();
             // 替换流体
             // 注：由于 1.21.2 前，这里 get 方法的 intermediary 映射名有变化，因此需要使用兼容层。
-            Aquifer.FluidStatus lavaLevel = new Aquifer.FluidStatus(lavaLevelY, Config.impl.replaceUndergroundLava ? RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(Config.impl.replaceUndergroundLavaBlock)).defaultBlockState() : Blocks.LAVA.defaultBlockState());
-            Aquifer.FluidStatus waterLevel = new Aquifer.FluidStatus(seaLevelY, Config.impl.replaceDefaultFluid ? RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(Config.impl.replaceDefaultFluidBlock)).defaultBlockState() : settings.defaultFluid());
+            Aquifer.FluidStatus lavaLevel = new Aquifer.FluidStatus(lavaLevelY, ConfigManager.getConfig().worldGen.fluidReplace.undergroundLava.isEmpty() ? Blocks.LAVA.defaultBlockState() : RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.getConfig().worldGen.fluidReplace.undergroundLava)).defaultBlockState());
+            Aquifer.FluidStatus waterLevel = new Aquifer.FluidStatus(seaLevelY, ConfigManager.getConfig().worldGen.fluidReplace.defaultFluid.isEmpty() ? settings.defaultFluid() : RegistryAccessor.get(BuiltInRegistries.BLOCK, ResourceLocation.parse(ConfigManager.getConfig().worldGen.fluidReplace.defaultFluid)).defaultBlockState());
             // 应用偏移
             return y < Math.min(lavaLevelY, seaLevelY) ? lavaLevel : waterLevel;
         });

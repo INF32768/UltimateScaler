@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link PerlinNoise} 类的 Mixin，用于修改坐标变换算法，进而修改边境之地的位置。
@@ -20,18 +20,16 @@ public abstract class MixinPerlinNoise {
      */
     @Inject(method = "wrap", at = @At("HEAD"), cancellable = true)
     private static void modifyMaintainPrecision(double value, CallbackInfoReturnable<Double> cir) {
-        double result = switch (Config.impl.farLandsPos) {
+        double result = switch (ConfigManager.getConfig().worldGen.farLandsControl.farLandsPos) {
             case BETA -> value;
             case RELEASE ->
                     Math.abs(value) > Long.MAX_VALUE ? value - Math.signum(value) * Long.MAX_VALUE : (value + 1.6777216E7D) % 3.3554432E7D - 1.6777216E7D;
             case REMOVED -> (value + 1.6777216E7D) % 3.3554432E7D - 1.6777216E7D;
-            case CUSTOM ->
-                    value - (double) Mth.lfloor(value / Config.impl.maintainPrecisionCustomDivisor + (double) 0.5F) * Config.impl.maintainPrecisionCustomDivisor;
-            default ->
-                    value - (double) Mth.lfloor(value / (double) 3.3554432E7F + (double) 0.5F) * (double) 3.3554432E7F;
+            case DEFAULT ->
+                    value - (double) Mth.lfloor(value / ConfigManager.getConfig().worldGen.farLandsControl.customDivisor + (double) 0.5F) * ConfigManager.getConfig().worldGen.farLandsControl.customDivisor;
         };
-        if (Config.impl.limitReturnValue) {
-            result = Math.log10(Math.abs(result)) > Config.impl.maxNoiseLogarithmValue ? Math.pow(10, Math.log10(Math.abs(result)) - Math.floor(Math.log10(Math.abs(result)) - Config.impl.maxNoiseLogarithmValue)) * Math.signum(result) : result;
+        if (ConfigManager.getConfig().worldGen.farLandsControl.limitReturnValue) {
+            result = Math.log10(Math.abs(result)) > ConfigManager.getConfig().worldGen.farLandsControl.maxLogarithmValue ? Math.pow(10, Math.log10(Math.abs(result)) - Math.floor(Math.log10(Math.abs(result)) - ConfigManager.getConfig().worldGen.farLandsControl.maxLogarithmValue)) * Math.signum(result) : result;
         }
         cir.setReturnValue(result);
     }

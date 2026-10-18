@@ -1,12 +1,12 @@
 package xyz.inf32768.ultimatescaler.mixin.fixing;
 
+import net.minecraft.server.level.GenerationChunkHolder;
+import net.minecraft.world.level.ChunkPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
-import net.minecraft.server.level.GenerationChunkHolder;
-import net.minecraft.world.level.ChunkPos;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link GenerationChunkHolder} 类的 Mixin。
@@ -22,7 +22,7 @@ public abstract class MixinGenerationChunkHolder {
      */
     @ModifyArgs(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/ChunkPos;getChessboardDistance(Lnet/minecraft/world/level/ChunkPos;)I"))
     private void modifyInit(Args args, ChunkPos pos) {
-        if (Config.impl.fixChunkGenerationOutOfBound) {
+        if (ConfigManager.getConfig().fixesAndExpansion.chunkGenerationOutOfBound) {
             args.set(0, pos);
         }
     }

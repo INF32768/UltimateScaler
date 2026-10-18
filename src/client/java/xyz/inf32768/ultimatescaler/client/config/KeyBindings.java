@@ -1,14 +1,13 @@
 package xyz.inf32768.ultimatescaler.client.config;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import net.minecraft.client.Minecraft;
-import xyz.inf32768.ultimatescaler.ModMetadata;
 import me.shedaniel.clothconfig2.api.Modifier;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * 快捷键实用类，支持识别包含 {@code Ctrl}、{@code Shift} 和 {@code Alt} 的组合按键。
@@ -17,6 +16,7 @@ import xyz.inf32768.ultimatescaler.config.Config;
 public class KeyBindings {
     /**
      * 获取当前 Ctrl 键是否正在被按下，键盘上的两个 Ctrl 键都算数。
+     *
      * @return Ctrl 键是否正在被按下。
      */
     private static boolean isCtrlPressed() {
@@ -25,14 +25,16 @@ public class KeyBindings {
 
     /**
      * 获取当前 Shift 键是否正在被按下，键盘上的两个 Shift 键都算数。
+     *
      * @return Shift 键是否正在被按下。
      */
-    private static boolean isShiftPressed() {
+    public static boolean isShiftPressed() {
         return InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT) || InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_RIGHT_SHIFT);
     }
 
     /**
      * 获取当前 Alt 键是否正在被按下，键盘上的两个 Alt 键都算数。
+     *
      * @return Alt 键是否正在被按下。
      */
     private static boolean isAltPressed() {
@@ -43,15 +45,14 @@ public class KeyBindings {
      * 初始化并注册快捷键。目前仅有打开配置界面的快捷键。
      */
     public static void init() {
-        if (ModMetadata.IS_CLOTH_CONFIG_PRESENT) { // 仅在 Cloth Config API 安装时才可打开配置界面
-            ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                // 不知道为什么，这里的KeyBinding.isPressed()只能检测到一个按键，所以只能用InputConstants.isKeyDown()来判断组合按键是否被按下
-                if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), Config.impl.optionMenuKeyCode) && Minecraft.getInstance().screen == null) {
-                    if (isCtrlPressed() == Modifier.of(Config.impl.optionMenuModifierValue).hasControl() && isShiftPressed() == Modifier.of(Config.impl.optionMenuModifierValue).hasShift() && isAltPressed() == Modifier.of(Config.impl.optionMenuModifierValue).hasAlt()) {
-                        Minecraft.getInstance().setScreen(ClothConfigBuilder.getConfigBuilder().build());
-                    }
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            // 不知道为什么，这里的KeyBinding.isPressed()只能检测到一个按键，所以只能用InputConstants.isKeyDown()来判断组合按键是否被按下
+            if (InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), ConfigManager.getKeyCode(ConfigManager.getConfig().general.configScreenKeybind)) && Minecraft.getInstance().screen == null) {
+                Modifier modifier = Modifier.of(ConfigManager.getKeyModifier(ConfigManager.getConfig().general.configScreenKeybind));
+                if (isCtrlPressed() == modifier.hasControl() && isShiftPressed() == modifier.hasShift() && isAltPressed() == modifier.hasAlt()) {
+                    Minecraft.getInstance().setScreen(NewClothConfigBuilder.getMainConfigBuilder().build());
                 }
-            });
-        }
+            }
+        });
     }
 }

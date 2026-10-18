@@ -1,10 +1,10 @@
 package xyz.inf32768.ultimatescaler.mixin.border;
 
+import net.minecraft.server.commands.ForceLoadCommand;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import net.minecraft.server.commands.ForceLoadCommand;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link ForceLoadCommand} 类的 Mixin。
@@ -20,7 +20,7 @@ public abstract class MixinForceLoadCommand {
      */
     @ModifyConstant(method = "changeForceLoad", constant = @Constant(intValue = -30000000))
     private static int modifyMinCoordinate(int original) {
-        return Config.impl.expandWorldBorder ? Integer.MIN_VALUE : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Integer.MIN_VALUE : original;
     }
 
     /**
@@ -28,6 +28,6 @@ public abstract class MixinForceLoadCommand {
      */
     @ModifyConstant(method = "changeForceLoad", constant = @Constant(intValue = 30000000))
     private static int modifyMaxCoordinate(int original) {
-        return Config.impl.expandWorldBorder ? Integer.MAX_VALUE : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Integer.MAX_VALUE : original;
     }
 }

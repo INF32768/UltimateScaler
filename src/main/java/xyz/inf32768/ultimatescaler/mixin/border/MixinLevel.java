@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link Level} 类的 Mixin。
@@ -26,7 +26,7 @@ public abstract class MixinLevel {
      */
     @Inject(method = "isInSpawnableBounds", at = @At("HEAD"), cancellable = true)
     private static void modifyIsValid(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             cir.setReturnValue(true);
         }
     }
@@ -40,7 +40,7 @@ public abstract class MixinLevel {
      */
     @Inject(method = "isInWorldBoundsHorizontal", at = @At("HEAD"), cancellable = true)
     private static void modifyIsValidHorizontally(CallbackInfoReturnable<Boolean> cir) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             cir.setReturnValue(true);
         }
     }
@@ -54,7 +54,7 @@ public abstract class MixinLevel {
      */
     @ModifyConstant(method = "getHeight", constant = @Constant(intValue = -30000000))
     private int modifyMinCoordinate(int original) {
-        return Config.impl.expandWorldBorder ? Integer.MIN_VALUE : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Integer.MIN_VALUE : original;
     }
 
     /**
@@ -62,6 +62,6 @@ public abstract class MixinLevel {
      */
     @ModifyConstant(method = "getHeight", constant = @Constant(intValue = 30000000))
     private int modifyMaxCoordinate(int original) {
-        return Config.impl.expandWorldBorder ? Integer.MAX_VALUE : original;
+        return ConfigManager.getConfig().fixesAndExpansion.worldBorder ? Integer.MAX_VALUE : original;
     }
 }

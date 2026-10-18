@@ -1,11 +1,11 @@
 package xyz.inf32768.ultimatescaler.mixin.border;
 
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.player.Player;
-import xyz.inf32768.ultimatescaler.config.Config;
+import xyz.inf32768.ultimatescaler.config.ConfigManager;
 
 /**
  * {@link Player} 类的 Mixin。
@@ -21,7 +21,7 @@ public abstract class MixinPlayer {
      */
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(DDD)D"))
     private double redirectClamp(double value, double min, double max) {
-        if (Config.impl.expandWorldBorder) {
+        if (ConfigManager.getConfig().fixesAndExpansion.worldBorder) {
             return value;
         } else {
             return Mth.clamp(value, min, max);
