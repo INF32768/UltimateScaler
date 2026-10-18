@@ -29,7 +29,7 @@ deploy:
     release: $(VERSION)
     description:
     auth_token:
-      secure: mIxbyFSpUuMyOA9YhYQO55Y5v2HzI49xxtm1MjiCHuqRfKXZhxE1znPZO+knOueMIuq6xI51zkpmKNENLAx60R5q0RufPptQvWjaTS/phRObFBrw8W/P3KEHmwS0cV5C #有效期至2026-09-12
+      secure: mIxbyFSpUuMyOA9YhYQO5xLyXQCUJ8m+KVIJBkGCTTOwsuUc9V/eMqgJYuPIZXO65Cq/CKkoc8J44JV5DH2HMmi/olMKfO4c00JLWlCvICw4A25CGKCtsOzSEok8EwK2 #有效期至2027-06-30
     artifact: UltimateScaler-$(VERSION).jar
     draft: false
     prerelease: false
