@@ -5,9 +5,9 @@ environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
   VERSION: 0.4.0+1.21
   MODRINTH_TOKEN:
-    secure: bfjh/wWW2wVw0atTgZDwcelyOBIN6lt+UGMHk3KZtlbED4wmjuadyGEXWV8wF63LVfvO40GKqvZKJul1Uy6XdU53K1Zvw0IEVV0iT3lWjKQ= #已过期，将于重构完成时替换
+    secure: fWiy469s1i9inUqolxCiEOBxKmO/OJbMUstIZnF0Nakh4Bkn7tW6zxRaK4jeJkI/iRkzRlLxX5q1sTSBfNRunnx6ohXyErCGq89GBWHHQJ0= #有效期至2027-06-30
   CURSEFORGE_API_KEY:
-    secure: /RPZ/RoQddhnUHnXdS5JqC84Pe/yERje6+Dc/1KEiXnnckybjPBSvynyHNujYB17 #已过期，将于重构完成时替换
+    secure: Lsc69LdODomCgKl91L82ICrPHJk8DPV9brLVSfYmrxpIYyGdB4xJOrkhFpSfJIJt #无限期有效，计划于2027-06-30手动替换
 cache:
   - C:\Users\appveyor\.gradle\caches\fabric-loom
   - C:\Users\appveyor\.gradle\caches\modules-2
@@ -29,7 +29,7 @@ deploy:
     release: $(VERSION)
     description:
     auth_token:
-      secure: mIxbyFSpUuMyOA9YhYQO5xLyXQCUJ8m+KVIJBkGCTTOwsuUc9V/eMqgJYuPIZXO65Cq/CKkoc8J44JV5DH2HMmi/olMKfO4c00JLWlCvICw4A25CGKCtsOzSEok8EwK2 #有效期至2027-06-30
+      secure: mIxbyFSpUuMyOA9YhYQO53caIbPBIH3zwahKMu9buYBl3It5v5APVCkfPKjR2PI8UfkTl1vP/S2u6LIAHnk1h8Zq5K5wqT3TfY1NBpBAhRZPrMt1LZnQ8B1NcQI3YKN2 #有效期至2027-06-30
     artifact: UltimateScaler-$(VERSION).jar
     draft: false
     prerelease: false
