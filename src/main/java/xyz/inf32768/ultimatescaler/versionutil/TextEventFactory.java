@@ -38,17 +38,17 @@ public class TextEventFactory {
         // 从 ClickEvent 和 HoverEvent 类中提取需要的构造方法
         if (VersionUtil.isVersionAtLeast(VERSION_THRESHOLD)) {
             try {
-                CLICK_EVENT_COPY_TO_CLIPBOARD_CONSTRUCTOR = Class.forName(ClickEvent.class.getName() + "$CopyToClipboard").getConstructor(String.class);
-                CLICK_EVENT_OPEN_URL_CONSTRUCTOR = Class.forName(ClickEvent.class.getName() + "$OpenUrl").getConstructor(URI.class);
-                HOVER_EVENT_SHOW_TEXT_CONSTRUCTOR = Class.forName(HoverEvent.class.getName() + "$ShowText").getConstructor(Component.class);
+                CLICK_EVENT_COPY_TO_CLIPBOARD_CONSTRUCTOR = ClickEvent.CopyToClipboard.class.getConstructor(String.class);
+                CLICK_EVENT_OPEN_URL_CONSTRUCTOR = ClickEvent.OpenUrl.class.getConstructor(URI.class);
+                HOVER_EVENT_SHOW_TEXT_CONSTRUCTOR = HoverEvent.ShowText.class.getConstructor(Component.class);
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException(e);
             }
         } else {
             try {
-                CLICK_EVENT_COPY_TO_CLIPBOARD_CONSTRUCTOR = Class.forName(ClickEvent.class.getName()).getConstructor(ClickEvent.Action.class, String.class);
+                CLICK_EVENT_COPY_TO_CLIPBOARD_CONSTRUCTOR = ClickEvent.class.getConstructor(ClickEvent.Action.class, String.class);
                 CLICK_EVENT_OPEN_URL_CONSTRUCTOR = CLICK_EVENT_COPY_TO_CLIPBOARD_CONSTRUCTOR;
-                HOVER_EVENT_SHOW_TEXT_CONSTRUCTOR = Class.forName(HoverEvent.class.getName()).getConstructor(HoverEvent.Action.class, Object.class);
+                HOVER_EVENT_SHOW_TEXT_CONSTRUCTOR = HoverEvent.class.getConstructor(HoverEvent.Action.class, Object.class);
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException(e);
             }
