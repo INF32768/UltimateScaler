@@ -11,6 +11,7 @@ import xyz.inf32768.ultimatescaler.versionutil.RegistryAccessor;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -88,7 +89,7 @@ public class ConfigManager {
         try {
             if (CONFIG_FILE.exists()) {
                 // 存在配置文件，尝试读取配置
-                Toml toml = new Toml().read(CONFIG_FILE);
+                Toml toml = readToml(CONFIG_FILE);
                 Long configVersion = toml.getLong("CONFIG_VERSION");
                 if (configVersion != null && configVersion == 3) {
                     loadedConfig = tryMigrateConfigV3(null); // 检测到配置文件为 V3，尝试迁移到 V4
@@ -253,6 +254,25 @@ public class ConfigManager {
     }
 
     /**
+     * 读取 TOML 文件，并在交给 toml4j 解析前为需要保留精度的十进制数组补上引号。
+     * <p>
+     * toml4j 会把裸数字解析为 {@code Long}/{@code Double}，因此直接读取未经处理的文本会丢失
+     * {@link java.math.BigDecimal} 的精度。这里只改写 {@link TomlDecimalArrayQuoter} 认识的
+     * 几个数组，其余解析工作仍完全交给 toml4j。
+     *
+     * @param file 要读取的文件
+     * @return 解析后的 TOML
+     */
+    private static Toml readToml(File file) {
+        try {
+            String content = Files.readString(file.toPath(), StandardCharsets.UTF_8);
+            return new Toml().read(TomlDecimalArrayQuoter.quoteDecimalArrays(content));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
      * 尝试迁移旧版（V2）配置文件至最新版。会自动检查旧版配置文件是否存在，若存在则读取并迁移。
      * <p>
      * 注意：旧版文件不会在这里删除，而是由 {@link #loadConfig()} 在迁移结果成功写入新配置文件后删除。
@@ -263,7 +283,7 @@ public class ConfigManager {
     private static Config tryMigrateConfigV2() {
         if (!CONFIG_FILE_V2.exists()) return null;
 
-        Config.ConfigImpl configV3 = new Toml().read(CONFIG_FILE_V2).to(Config.ConfigImpl.class);
+        Config.ConfigImpl configV3 = readToml(CONFIG_FILE_V2).to(Config.ConfigImpl.class);
         return tryMigrateConfigV3(configV3);
     }
 
@@ -277,7 +297,7 @@ public class ConfigManager {
     private static Config tryMigrateConfigV3(Config.ConfigImpl configV3) {
         if (configV3 == null) {
             if (!Files.exists(CONFIG_FILE.toPath())) return null;
-            configV3 = new Toml().read(CONFIG_FILE).to(Config.ConfigImpl.class);
+            configV3 = readToml(CONFIG_FILE).to(Config.ConfigImpl.class);
         }
         Config configV4 = new Config();
         configV4.general.configScreenKeybind = getModifiedKeyCode(configV3.optionMenuKeyCode, configV3.optionMenuModifierValue);
@@ -313,9 +333,10 @@ public class ConfigManager {
      * 将 {@link ConfigManager#getConfig()} 实例中的配置选项的值写入配置文件，并在文件开头添加链接。若配置文件不存在，则会自动创建。
      * <p>
      * 写入采用“临时文件 + 替换”的方式，避免写入中途出错导致原有配置文件被截断。
+     * 需要保留精度的 {@link java.math.BigDecimal} 数组会先由 {@link TomlDecimalArrayQuoter} 加上引号。
      *
      * @throws IOException 配置文件读取或写入时出错
-     * @see TomlWriter#write(Object, File)
+     * @see TomlWriter#write(Object)
      */
     public static void saveConfig() throws IOException {
         synchronized (CONFIG_LOCK) {
@@ -340,7 +361,8 @@ public class ConfigManager {
         boolean existed = Files.exists(target);
         Path temporary = Files.createTempFile(directory, "ultimate_scaler-", ".toml.tmp");
         try {
-            new TomlWriter().write(configToSave, temporary.toFile());
+            String toml = new TomlWriter().write(configToSave);
+            Files.writeString(temporary, TomlDecimalArrayQuoter.quoteDecimalArrays(toml), StandardCharsets.UTF_8);
 
             // 在文件开头添加 Wiki 引导
             List<String> lines = Files.readAllLines(temporary);

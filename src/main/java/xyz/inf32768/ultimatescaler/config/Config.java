@@ -85,6 +85,8 @@ public final class Config {
         public FarLandsControl farLandsControl = new FarLandsControl();
 
         public static class Reposition {
+            // 这两个数组在 TOML 中以带引号的字符串保存，由 ConfigManager 负责转换，
+            // 避免 toml4j 把裸数字解析成 Long/Double 时丢失精度。
             public BigDecimal[] shift = {BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO};
             public BigDecimal[] scale = {BigDecimal.ONE, BigDecimal.ONE, BigDecimal.ONE};
             public boolean extendedYAxisEffect = false;
