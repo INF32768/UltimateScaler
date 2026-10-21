@@ -107,20 +107,20 @@ public class NewClothConfigBuilder {
 
         DistanceEffectMeta worldBorderMeta = new DistanceEffectMeta(DistanceEffectMeta.Symbol.INTENDED_RESTRICTION, DistanceEffectMeta.Color.GAME_LOGIC);
         BooleanListEntry worldBorderEntry = entryBuilder.startBooleanToggle(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.world_border"), true, CommonLabels.DUAL_ENV, CommonLabels.REQUIRES_RESTART, worldBorderMeta), config.fixesAndExpansion.worldBorder)
-                .setDefaultValue(false)
+                .setDefaultValue(true)
                 .setTooltip(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.world_border.tooltip"), false, CommonLabels.DUAL_ENV, CommonLabels.REQUIRES_RESTART, worldBorderMeta))
                 .requireRestart()
                 .build();
 
         DistanceEffectMeta chunkGenerationOOBMeta = new DistanceEffectMeta(DistanceEffectMeta.Symbol.INTENDED_RESTRICTION, DistanceEffectMeta.Color.CRASH_OR_FREEZE);
         BooleanListEntry chunkGenerationOOBEntry = entryBuilder.startBooleanToggle(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.chunk_generation_out_of_bound"), true, CommonLabels.SERVER_ONLY, chunkGenerationOOBMeta), config.fixesAndExpansion.chunkGenerationOutOfBound)
-                .setDefaultValue(false)
+                .setDefaultValue(true)
                 .setTooltip(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.chunk_generation_out_of_bound.tooltip"), false, CommonLabels.SERVER_ONLY, chunkGenerationOOBMeta))
                 .build();
 
         DistanceEffectMeta mineShaftMeta = new DistanceEffectMeta(DistanceEffectMeta.Symbol.INTEGER_OVERFLOW, DistanceEffectMeta.Color.CRASH_OR_FREEZE);
         BooleanListEntry mineShaftCannotGenerateEntry = entryBuilder.startBooleanToggle(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.mineshaft_cannot_generate"), true, CommonLabels.SERVER_ONLY, mineShaftMeta), config.fixesAndExpansion.mineShaftCannotGenerate)
-                .setDefaultValue(false)
+                .setDefaultValue(true)
                 .setTooltip(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.fae.mineshaft_cannot_generate.tooltip"), false, CommonLabels.SERVER_ONLY, mineShaftMeta))
                 .build();
 
