@@ -78,7 +78,7 @@ public class NewClothConfigBuilder {
 
     private static Runnable buildUtilitiesCategory(ConfigCategory category, ConfigEntryBuilder entryBuilder) {
         BooleanListEntry expandDatapackValueRangeEntry = entryBuilder.startBooleanToggle(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.utilities.expand_datapack_value_range"), true, CommonLabels.SERVER_ONLY, CommonLabels.REQUIRES_RESTART), config.utilities.expandDatapackValueRange)
-                .setDefaultValue(false)
+                .setDefaultValue(true)
                 .setTooltip(ConfigAnnotation.addAnnotations(Component.translatable("ultimatescaler.config.new.utilities.expand_datapack_value_range.tooltip"), false, CommonLabels.SERVER_ONLY, CommonLabels.REQUIRES_RESTART))
                 .requireRestart()
                 .build();
