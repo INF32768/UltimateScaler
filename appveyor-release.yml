@@ -11,6 +11,9 @@ environment:
 cache:
   - C:\Users\appveyor\.gradle\caches\fabric-loom
   - C:\Users\appveyor\.gradle\caches\modules-2
+before_build:
+  - ps: >-
+      $env:CHANGELOG = Get-Content -Path "CHANGELOG.md" -Raw
 build_script:
   - cmd: >-
       gradlew build --no-daemon
@@ -27,7 +30,7 @@ deploy:
   - provider: GitHub
     tag: v$(VERSION)
     release: $(VERSION)
-    description:
+    description: $(CHANGELOG)
     auth_token:
       secure: mIxbyFSpUuMyOA9YhYQO53caIbPBIH3zwahKMu9buYBl3It5v5APVCkfPKjR2PI8UfkTl1vP/S2u6LIAHnk1h8Zq5K5wqT3TfY1NBpBAhRZPrMt1LZnQ8B1NcQI3YKN2 #有效期至2027-06-30
     artifact: UltimateScaler-$(VERSION).jar
