@@ -13,20 +13,38 @@
 
 Note: This document is primarily for developers and advanced users, for casual players who want to experience the content, please click on the badge above to go to the CurseForge or Modrinth page, where there are detailed installation instructions, screenshots, and user discussions.
 
-> **Development Status: 🛠️ Refactoring in progress**
+> **✅ Development Status: Refactoring complete**
 >
-> We're modernizing our codebase and workflows with goals such as semantic version control, automated CI/CD pipelines, normalized commit history, and improved contributor guidelines. [Click here](https://github.com/INF32768/UltimateScaler/wiki/Project_Refactoring) to go to the project wiki for more details.
+> The major refactoring has been completed and released with version 0.4.0. It rebuilds the project's foundation —
+> including the V4 configuration system, a new configuration screen, the modern Fabric toolchain, and a reorganized
+> CI/CD and documentation workflow — without adding new gameplay features. See the [0.4.0 changelog](CHANGELOG.md) and
+> the [refactoring record](https://github.com/INF32768/UltimateScaler/wiki/Project.Refactoring.en) for details.
+
+> **📢 A note from the maintainer: semi-hibernation until June 2027**
+>
+> The mod author, [INF32768](https://github.com/INF32768), is now in their final year of high school and will be
+> preparing for the Gaokao (China's national college entrance examination) until June 2027. During this roughly
+> nine-month semi-hibernation period, the mod will not receive content updates. A proxy maintainer,
+> [@SmallmanSeries](https://github.com/SmallmanSeries), will answer issues, review and handle pull requests, and fix
+> critical bugs on the author's behalf. If you have any questions or need help during this period, please contact them.
 
 ## Technology Overview
 
 This mod implements the following core capabilities through a series of underlying modifications to Minecraft's terrain generation system:
 
 - **🧬 Terrain Offset**: Steadily offset the terrain at large scales by intercepting and modifying noise sampling coordinates. At present, it has been able to offset most terrain generations.
-- **🔧 Distance Effects Fixes**: Fixed certain distance phenomena such as the "End Ring", abandoned mines not spawning, etc., and even fixed the far lands themselves.
+- **🔧 Distance Effects Fixes**: Fixed certain distance effects such as the "End Ring", mineshafts not spawning, etc., and even fixed the far lands themselves.
 - **🌐 Remove soft restrictions**: Remove various artificially set restrictions, such as world boundaries, coordinate values in commands, and certain values in data packs.
 - **🔬 More Modifications**: Countless miscellaneous modifications, such as modifying values in noise sampling algorithms or recreating classic "sky grids".
 
-Almost all functions are optional and can be turned on or off according to your needs.
+Almost all functions are optional and can be turned on or off according to your needs. For the full list of supported density functions and technical details, see the [Worldgen Reposition](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.WorldgenReposition.en) and [Configuration Reference](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.en) pages.
+
+## Documentation & Wiki
+
+Configuration references, distance-effect research, and project documentation are maintained in the
+[Ultimate Scaler Wiki](https://github.com/INF32768/UltimateScaler/wiki). New users can start from the
+[Wiki home page](https://github.com/INF32768/UltimateScaler/wiki/Home); for all configuration options, see the
+[Configuration Reference](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.en).
 
 ## Start development
 
@@ -46,7 +64,7 @@ cd UltimateScaler
 
 Then, find the jar file in the `build/libs` directory (select the one without `source` in the file name) and put it in the `.minecraft/mods` directory.
 
-**Configuration file**: `.minecraft/config/ultimate_scaler.toml` (You can open the configuration GUI in the game using a hotkey, which is `Ctrl U` by default. If you manually modify the configuration file, you can execute the `/reload` command in the game for it to take effect.)
+**Configuration file**: `.minecraft/config/ultimate_scaler.toml`. You can open the new configuration screen in-game with the default hotkey (`Ctrl+U`), or edit the file directly and run `/reload` to apply the changes. See the [Configuration Reference](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.en) for all options.
 
 **Contribution:** We welcome all contributions, including issue reports, feature suggestions, and code commits. Before you begin, please read the [Contribution Guidelines](docs/CONTRIBUTING.md).
 
@@ -70,30 +88,10 @@ These builds include the latest features and fixes, but may also contain unstabl
 
 ## Update Schedule
 
-The update schedule has been moved to the project Wiki, please click [here](https://github.com/INF32768/UltimateScaler/wiki/Project_Roadmap).
+The update schedule has been moved to the project Wiki, please click [here](https://github.com/INF32768/UltimateScaler/wiki/Project.Roadmap.en).
 
 ## License
 
 This project is open source under the MIT license. See [LICENSE](LICENSE) document for details.
 
-This project has a built-in toml4j library, and its license is MIT, see [LICENSE-toml4j](third-party-licenses/LICENSE-toml4j) for details.
-
----
-
-## Appendix: Technical Details
-
-_This section contains detailed technical specifications, which will be migrated to the project wiki after the project is rebuilt and stabilized._ 
-
-### A1. List of currently supported density function offsets
-
-This mod currently supports offsetting the following core density functions through coordinate transformation:
-
-- `old_blended_noise`
-- `noise`
-- `shifted_noise`
-- `shift_A`
-- `shift_B`
-- `shift`
-- `weird_scaled_sampler`
-- `y_clamped_gradient` (optional)
-- `end_island` (requires BigInteger rewrite)
+This project bundles the toml4j library; its license is MIT. See [LICENSE-toml4j](third-party-licenses/LICENSE-toml4j) for details.

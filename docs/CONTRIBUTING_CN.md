@@ -67,7 +67,7 @@ git commit -m "fix(core): prevent crash when noise sampler is null"
 ### 代码风格
 - 遵循现有的代码格式（我们主要遵循 Java 通用约定）。
 - 为新增的公共类和方法编写清晰的 Javadoc 注释。
-- 确保你的更改能通过现有测试（`./gradlew test`）。
+- 确保你的更改能够通过编译和构建验证（`./gradlew build`）。
 
 ### 发起 Pull Request
 1.  将你的分支推送到你的 Fork：

@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-**English** | [简体中文](docs/CONTRIBUTING_CN.md)
+**English** | [简体中文](CONTRIBUTING_CN.md)
 
 ## 🎉 Welcome!
 
@@ -26,8 +26,8 @@ We believe that the strength of community comes from every small contribution. T
 
 No matter if you're reporting a bug or proposing a new feature, we welcome **submitting an Issue**! To ensure that we can respond efficiently, we've prepared two pre-filled templates:
 
-*   **[Report a bug](https://github.com/INF32768/UltimateScaler/issues/new?template=bug_report_zh.yml)** for reproducible bugs.
-*   **[Provide feedback](https://github.com/INF32768/UltimateScaler/issues/new?template=suggestion_zh.yml)** for new features or improvements.
+*   **[Report a bug](https://github.com/INF32768/UltimateScaler/issues/new?template=bug_report_en.yml)** for reproducible bugs.
+*   **[Provide feedback](https://github.com/INF32768/UltimateScaler/issues/new?template=suggestion_en.yml)** for new features or improvements.
 
 Before submitting, [search existing Issues](https://github.com/INF32768/UltimateScaler/issues) and [read the Wiki](https://github.com/INF32768/UltimateScaler/wiki) might help you find the answer quickly.
 
@@ -67,7 +67,7 @@ git commit -m "fix(core): prevent crash when noise sampler is null"
 ### Code Style
 - Follow existing code formatting (we mainly follow Java common conventions).
 - Write clear Javadoc comments for new public classes and methods.
-- Make sure your changes pass the existing test (`./gradlew test`).
+- Make sure your changes compile and pass the build verification (`./gradlew build`).
 
 ### Initiate a Pull Request
 1. Push your branch to your fork:

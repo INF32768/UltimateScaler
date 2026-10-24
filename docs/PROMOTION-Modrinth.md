@@ -19,7 +19,7 @@
 
 1.  **安装模组**后进入游戏世界。
 2.  按下 **`Ctrl + U`** 打开配置界面（需要 Cloth Config Mod）。
-3.  找到 **“边境之地位置”** 选项，将其切换为 `Pre-B-1.7.3`——这是许多研究的起点；随后，找到 **“全局坐标偏移(X, Y, Z)”** 并展开，尝试在第一行输入一个你可能在哪里听到过的的坐标，比如：
+3.  找到 **“边境之地位置”** 选项，将其切换为 **“Beta 1.7.3 前”**——这是许多研究的起点；随后，在 **“世界生成设置 → 重定位”** 中找到 **“偏移 (X, Y, Z)”**，尝试在第一行输入一个你可能在哪里听到过的坐标，比如：
     - `12550824` （经典的边境之地坐标）
     - `4218498800` （Minecraft 1.18+ 新增的主世界边境之地水平分层之一，很少有人知道）
 
@@ -29,7 +29,7 @@
 
 当你对基础探索感到满足后，Ultimate Scaler 的真正力量才刚刚展现。它为硬核玩家和整合包作者提供了深度定制的可能：
 
-- **🧪 实验性功能**：开启“BigInteger 重写”，追求数学上的**完美精确**偏移，适用于高级研究。
+- **🧪 实验性功能**：开启“高精度模式”，追求数学上的**完美精确**偏移，适用于高级研究。
 - **🔧 距离现象修复**：修复某些距离现象，甚至是修复边境之地本身。
 - **🔓 解除软性限制**：解除各种人为设定的限制，如世界边界、命令中坐标值和数据包中某些数值的限制等，让你在边境之地的任何地方都能自由行动。
 - **🧰 实用工具**：如`/locate pos` 命令可**精确计算**偏移后的坐标，助你规划路线。
@@ -41,8 +41,8 @@
 _1.18.2+ 主世界边境之地的新模样_
 ![](https://cdn.modrinth.com/data/ktrA4Qtm/images/65a8a103738f38da8a936db2e214837abf80b026.jpeg)
 _上文提到的 1.18+ 主世界边境之地的新水平分层，生成于 X/Z ≈ 4218498800 处_
-![](https://cdn.modrinth.com/data/ktrA4Qtm/images/c2d564e2ed0ab4b741b7c3035c565df38b74feed.png)
-_0.3.3.2 的配置界面一览_
+![](https://cdn.modrinth.com/data/ktrA4Qtm/images/3352600627b55ad8d4e006dd6074f8028a32a41d.jpeg)
+_新版配置界面一览_
 
 > 查看更多截图与详细效果展示，请访问我们的 [画廊](https://modrinth.com/mod/ultimate-scaler/gallery)。
 >
@@ -65,9 +65,13 @@ _0.3.3.2 的配置界面一览_
 
 **通过每日构建版，你不仅是使用者，更是项目的共筑者。**
 
+### 📚 **Wiki 与文档**
+
+想进一步了解配置、距离现象或项目进展？[Ultimate Scaler Wiki](https://github.com/INF32768/UltimateScaler/wiki) 收录了完整的配置参考、世界生成重定位与 `/locate pos` 指南、常见问题、距离现象研究，以及项目规划与开发文档。可以从 [Wiki 首页](https://github.com/INF32768/UltimateScaler/wiki/Home.zh) 开始，或直接查看[配置全解](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.zh)。
+
 ### 📖 **寻求帮助与深入探索**
 
--   **遇到了问题？** 请先查看模组内嵌的配置说明，如果未能解决，欢迎**发表评论**。
+-   **遇到了问题？** 请先查看配置界面中的提示或项目 Wiki，如果未能解决，欢迎**发表评论**。
 -   **想要了解更多？** 欢迎关注我的 **[B站频道](https://space.bilibili.com/433710240)**，我会不定期分享探索心得、技术解析与未来开发计划。
 -   **你是开发者或硬核研究者？** 我们的 **[GitHub 仓库](https://github.com/INF32768/UltimateScaler)** 完全开源，欢迎查阅代码、提交建议或贡献力量。
 
@@ -95,7 +99,7 @@ You don't need to understand complex noise algorithms. Follow this simple "out-o
 
 1.  Enter your game world **after installing the mod**.
 2.  Press **`Ctrl + U`** to open the configuration screen (Requires Cloth Config Mod).
-3.  Find the **"Far Lands Position"** option and switch it to `Pre-B-1.7.3`—the starting point for much research. Then, find and expand **"Global Coordinate Offset (X, Y, Z)"**. Try entering a coordinate you might have heard of, such as:
+3.  Find the **"Far Lands Position"** option and switch it to **"Pre Beta 1.7.3"**—the starting point for much research. Then, under **"World Generation Settings → Reposition"**, find **"Shift (X, Y, Z)"**. Try entering a coordinate you might have heard of, such as:
     -   `12550824` (The classic Far Lands coordinate)
     -   `4218498800` (One of the new horizontal layering points for the Overworld Far Lands added in Minecraft 1.18+, known to few)
 
@@ -105,8 +109,8 @@ You don't need to understand complex noise algorithms. Follow this simple "out-o
 
 Once you're satisfied with basic exploration, the true power of Ultimate Scaler is just beginning to unfold. It offers deep customization possibilities for hardcore players and modpack authors:
 
-*   **🧪 Experimental Features**: Enable "BigInteger Rewrite" to pursue **mathematically perfect precision** in offsets, suitable for advanced research.
-*   **🔧 Distance Phenomenon Fixes**: Repair certain distance-related artifacts, or even "fix" the Far Lands themselves.
+*   **🧪 Experimental Features**: Enable "High Precision Mode" to pursue **mathematically perfect precision** in offsets, suitable for advanced research.
+*   **🔧 Fixes for Distance Effects**: Repair certain distance-related artifacts, or even "fix" the Far Lands themselves.
 *   **🔓 Remove Soft Limits**: Lift various artificially imposed restrictions, such as world borders, command coordinate limits, and certain value limits in datapacks, granting you freedom of movement anywhere in the Far Lands.
 *   **🧰 Utility Tools**: Commands like `/locate pos` can **precisely calculate** offset coordinates, aiding in route planning.
 *   **🔬 More Modification Features**: Such as altering numerical values in coordinate transformation algorithms or recreating the classic "Sky Grid," providing underlying support for creating unique, extreme worlds.
@@ -117,8 +121,8 @@ Once you're satisfied with basic exploration, the true power of Ultimate Scaler 
 _The new appearance of the Overworld Far Lands in 1.18.2+_
 ![](https://cdn.modrinth.com/data/ktrA4Qtm/images/65a8a103738f38da8a936db2e214837abf80b026.jpeg)
 _The new horizontal layering of the 1.18+ Overworld Far Lands mentioned above, generated at X/Z ≈ 4218498800_
-![](https://cdn.modrinth.com/data/ktrA4Qtm/images/c2d564e2ed0ab4b741b7c3035c565df38b74feed.png)
-_An overview of the configuration screen in version 0.3.3.2_
+![](https://cdn.modrinth.com/data/ktrA4Qtm/images/3352600627b55ad8d4e006dd6074f8028a32a41d.jpeg)
+_An overview of the new configuration screen_
 
 > Visit our [Gallery](https://modrinth.com/mod/ultimate-scaler/gallery) for more images and detailed showcases.
 
@@ -140,9 +144,13 @@ The binary files for Nightly Builds are deployed on a unified GitHub Releases pa
 
 **By using Nightly Builds, you are not just a user, but a co-builder of the project.**
 
+### 📚 **Wiki & Documentation**
+
+Want to learn more about configuration, distance effects, or the project's progress? The [Ultimate Scaler Wiki](https://github.com/INF32768/UltimateScaler/wiki) collects the full configuration reference, the Worldgen Reposition and `/locate pos` guides, the FAQ, distance-effect research, and project planning and development documentation. Start from the [Wiki home page](https://github.com/INF32768/UltimateScaler/wiki/Home), or go straight to the [Configuration Reference](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.en).
+
 ### 📖 **Getting Help & Diving Deeper**
 
-*   **Encountered a problem?** First, check the in-mod configuration descriptions. If unresolved, feel free to **leave a comment**.
+*   **Encountered a problem?** First, check the in-game tooltips or the project Wiki. If unresolved, feel free to **leave a comment**.
 *   **Are you a developer or hardcore researcher?** Our **[GitHub Repository](https://github.com/INF32768/UltimateScaler)** is fully open-source. You are welcome to examine the code, submit suggestions, or contribute.
 
 ### ⚠️ **Important Safety Notes**

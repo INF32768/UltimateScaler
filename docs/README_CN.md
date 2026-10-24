@@ -13,9 +13,17 @@
 
 注：此文档主要面向开发者和高级用户，对于想要体验内容的普通玩家，请点击上面的徽章进入 CurseForge 或 Modrinth 页面，那里有详细的安装说明、截图和用户讨论。
 
-> **🛠️ 开发状态：重构进行时**
+> **✅ 开发状态：重构完成**
 >
-> 我们正在对代码库与工作流进行现代化重构，目标包括：**语义化版本控制**、**自动化 CI/CD 流水线**、**规范化提交历史**与**完善的贡献者指南**。[点击此处](https://github.com/INF32768/UltimateScaler/wiki/Project_Refactoring_zh)前往项目Wiki了解更多详情。
+> 项目的大规模重构已经完成，并随 0.4.0 版本发布。本次更新重建了项目基础——包括 V4 配置系统、新版配置界面、现代
+> Fabric 工具链，以及重新组织的 CI/CD 与文档流程——没有新增玩法内容。详情请见
+> [0.4.0 更新日志](CHANGELOG_CN.md) 与 [重构记录](https://github.com/INF32768/UltimateScaler/wiki/Project.Refactoring.zh)。
+
+> **📢 维护者公告：项目进入半休眠期，预计持续至 2027 年 6 月**
+>
+> 模组作者 [INF32768](https://github.com/INF32768) 已进入高三，需要备战高考，直至 2027 年 6 月高考结束。在长达约 9 个月的
+> 半休眠期内，模组将不再收到内容更新。代理维护者 [@SmallmanSeries](https://github.com/SmallmanSeries) 将在此期间代替作者
+> 回复 Issues、处理 Pull Requests，并修复重大漏洞。如有问题或需要帮助，请在此期间联系他。
 
 ## 技术概览
 
@@ -26,7 +34,14 @@
 - **🌐 解除软性限制**：解除各种人为设定的限制，如世界边界、命令中坐标值和数据包中某些数值的限制等。
 - **🔬 更多修改功能**：数不胜数的杂项修改功能，比如修改噪声采样算法中的数值，或是复现经典的“天空网格”等。
 
-几乎所有功能都是可选的，可以根据自己的需求选择开启或关闭。
+几乎所有功能都是可选的，可以根据自己的需求选择开启或关闭。完整的受支持密度函数列表与技术细节，请参阅[世界生成重定位功能详解](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.WorldgenReposition.zh)和[配置全解](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.zh)。
+
+## 文档与 Wiki
+
+配置参考、距离现象研究资料与项目文档都整理在
+[Ultimate Scaler Wiki](https://github.com/INF32768/UltimateScaler/wiki) 中。初次使用可以从
+[Wiki 首页](https://github.com/INF32768/UltimateScaler/wiki/Home.zh) 开始；全部配置项说明见
+[配置全解](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.zh)。
 
 ## 开始开发
 
@@ -46,7 +61,7 @@ cd UltimateScaler
 
 随后，在 `build/libs` 目录下找到 jar 文件（选择文件名中不带有`source`的），将其放入 `.minecraft/mods` 目录即可。
 
-**配置文件：**`.minecraft/config/ultimate_scaler.toml`（可在游戏内使用快捷键打开配置GUI，默认`Ctrl+U`，若手动修改配置文件，在游戏内执行`/reload`命令即可生效）。
+**配置文件：**`.minecraft/config/ultimate_scaler.toml`。可在游戏内使用默认快捷键（`Ctrl+U`）打开新版配置界面，也可以直接编辑配置文件，然后在游戏内执行 `/reload` 应用修改。全部配置项说明见[配置全解](https://github.com/INF32768/UltimateScaler/wiki/UserGuide.Configuration.zh)。
 
 **贡献：** 我们欢迎包括问题报告、功能建议和代码提交在内的所有贡献。在开始前，请阅读 [贡献指南](CONTRIBUTING.md)。
 
@@ -70,28 +85,10 @@ cd UltimateScaler
 
 ## 更新计划
 
-更新计划已搬迁至项目 Wiki，请点击[此处](https://github.com/INF32768/UltimateScaler/wiki/Project_Roadmap_zh)查看。
+更新计划已搬迁至项目 Wiki，请点击[此处](https://github.com/INF32768/UltimateScaler/wiki/Project.Roadmap.zh)查看。
 
 ## 许可证
 
 本项目依据 MIT 许可证开源。详见 [LICENSE](../LICENSE) 文件。
 
-本项目内置了 toml4j 库，其许可证为 MIT，详见 [LICENSE-toml4j](../third-party-licenses/LICENSE-toml4j)
-
----
-
-## 附录：技术细节
-
-*此部分包含详细的技术规范，内容将在项目重构稳定后迁移至项目Wiki。*
-
-### A1. 当前支持的密度函数偏移列表
-本模组目前通过坐标变换，支持对以下核心密度函数进行偏移：
-- `old_blended_noise`
-- `noise`
-- `shifted_noise`
-- `shift_A`
-- `shift_B`
-- `shift`
-- `weird_scaled_sampler`
-- `y_clamped_gradient`（可选）
-- `end_island`（需开启 BigInteger 重写）
+本项目捆绑了 toml4j 库，其许可证为 MIT，详见 [LICENSE-toml4j](../third-party-licenses/LICENSE-toml4j)。
