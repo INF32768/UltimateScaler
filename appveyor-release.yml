@@ -3,6 +3,7 @@ skip_non_tags: true
 clone_depth: 1
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
+  PROJECT_NAME: ultimate-scaler
   VERSION: 0.4.0+1.21
   MODRINTH_TOKEN:
     secure: fWiy469s1i9inUqolxCiEOBxKmO/OJbMUstIZnF0Nakh4Bkn7tW6zxRaK4jeJkI/iRkzRlLxX5q1sTSBfNRunnx6ohXyErCGq89GBWHHQJ0= #有效期至2027-06-30
@@ -21,11 +22,13 @@ build_script:
       gradlew curseforge --no-daemon
       
       gradlew modrinth --no-daemon
+
+      gradlew modrinthSyncBody --no-daemon
 artifacts:
-  - path: .\build\libs\Ultimate-Scaler-$(VERSION).jar
-    name: UltimateScaler-$(VERSION).jar
-  - path: .\build\libs\Ultimate-Scaler-$(VERSION)-sources.jar
-    name: UltimateScaler-$(VERSION)-sources.jar
+  - path: .\build\libs\$(PROJECT_NAME)-$(VERSION).jar
+    name: $(PROJECT_NAME)-$(VERSION).jar
+  - path: .\build\libs\$(PROJECT_NAME)-$(VERSION)-sources.jar
+    name: $(PROJECT_NAME)-$(VERSION)-sources.jar
 deploy:
   - provider: GitHub
     tag: v$(VERSION)
@@ -33,6 +36,6 @@ deploy:
     description: $(CHANGELOG)
     auth_token:
       secure: mIxbyFSpUuMyOA9YhYQO53caIbPBIH3zwahKMu9buYBl3It5v5APVCkfPKjR2PI8UfkTl1vP/S2u6LIAHnk1h8Zq5K5wqT3TfY1NBpBAhRZPrMt1LZnQ8B1NcQI3YKN2 #有效期至2027-06-30
-    artifact: UltimateScaler-$(VERSION).jar
+    artifact: $(PROJECT_NAME)-$(VERSION).jar
     draft: false
     prerelease: false

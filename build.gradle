@@ -50,7 +50,6 @@ curseforge {
 }
 
 modrinth {
-    dependsOn tasks.modrinthSyncBody
     projectId = "ultimate-scaler"
     versionType = "release"
     versionName = "Ultimate Scaler " + version
