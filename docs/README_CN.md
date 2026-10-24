@@ -22,7 +22,7 @@
 > **📢 维护者公告：项目进入半休眠期，预计持续至 2027 年 6 月**
 >
 > 模组作者 [INF32768](https://github.com/INF32768) 已进入高三，需要备战高考，直至 2027 年 6 月高考结束。在长达约 9 个月的
-> 半休眠期内，模组将不再收到内容更新。代理维护者 [@SmallmanSeries](https://github.com/SmallmanSeries) 将在此期间代替作者
+> 半休眠期内，模组将不再收到内容更新。代理维护者 [冒险家岐哥](https://github.com/SmallmanSeries) 将在此期间代替作者
 > 回复 Issues、处理 Pull Requests，并修复重大漏洞。如有问题或需要帮助，请在此期间联系他。
 
 ## 技术概览

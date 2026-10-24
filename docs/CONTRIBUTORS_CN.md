@@ -14,3 +14,6 @@ _任何人都可以通过多种方式上榜！关于更多信息，请参阅[贡
 | [1SWASP_J1407b](https://github.com/1SWASP-J1407b-bilibili) | 汇报了多个漏洞，提供了多个建议和代码实现参考                                                                       | 2025-06-20 |                                                                              |
 | [IVBXData](https://github.com/IVBXData)                    | 提交了 [Issue (#2)](https://github.com/INF32768/UltimateScaler/issues/2)                        | 2025-08-31 |                                                                              |
 | [AndrewthepikaDev](https://github.com/AndrewthepikaDev)    | 提交了 [Issue (#9)](https://github.com/INF32768/UltimateScaler/issues/9)                        | 2026-06-10 |                                                                              |
+| [MFSCelebrate](https://github.com/MFSCelebrate) | 提交了 [Issue (#13)](https://github.com/INF32768/UltimateScaler/issues/13) 和 [PR (#14)](https://github.com/INF32768/UltimateScaler/pull/14) | 2026-08-01 |
+| [AxorBisInfinitive](https://github.com/AxorBisInfinitive) | 提交了 [Issue (#16)](https://github.com/INF32768/UltimateScaler/issues/13) | 2026-10-20 |
+| [冒险家岐哥](https://github.com/SmallmanSeries) | 在模组半休眠期担任代理维护者 | |
