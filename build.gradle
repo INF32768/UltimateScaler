@@ -5,7 +5,7 @@ plugins {
     id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
     id 'maven-publish'
     id "com.modrinth.minotaur" version "2.8.10"
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id 'net.darkhax.curseforgegradle' version '1.3.33'
     id 'com.gradleup.shadow' version '9.3.1'
 }
 
@@ -21,32 +21,6 @@ repositories {
     // for more information about repositories.
     maven { url "https://maven.shedaniel.me" }
     maven { url "https://maven.terraformersmc.com" }
-}
-
-curseforge {
-	apiKey = System.getenv("CURSEFORGE_API_KEY") ?: ""
-	project {
-		id = '1323296'
-		changelogType = 'markdown'
-        changelog = rootProject.file("CHANGELOG.md")
-		releaseType = "release"
-		for (String version : supported_mc_versions)
-			addGameVersion version
-		relations {
-			requiredDependency "fabric-api"
-			optionalDependency "cloth-config"
-		}
-        mainArtifact(remapJar) {
-            displayName = "Ultimate Scaler $project.version"
-        }
-
-    	afterEvaluate {
-	    	uploadTask.dependsOn remapJar
-	    }
-	}
-	options {
-		forgeGradleIntegration = false
-	}
 }
 
 modrinth {
@@ -149,6 +123,25 @@ shadowJar {
 remapJar {
     dependsOn shadowJar
     inputFile.set(shadowJar.archiveFile)
+}
+
+// Publishes the remapped jar to CurseForge. CurseGradle 1.4.0 is unmaintained and breaks on
+// Gradle 8+ (it calls the removed AbstractArchiveTask#getArchivePath), so CurseForgeGradle is used.
+// The upload() call itself wires the remapJar task dependency through the @InputFiles FileCollection.
+tasks.register('publishCurseForge', net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    apiToken = System.getenv('CURSEFORGE_API_KEY') ?: ''
+    mustRunAfter 'build'
+
+    def artifact = upload('1323296', remapJar)
+    artifact.changelog = rootProject.file('CHANGELOG.md')
+    artifact.changelogType = 'markdown'
+    artifact.releaseType = 'release'
+    artifact.displayName = "Ultimate Scaler ${project.version}"
+    artifact.addGameVersion(*supported_mc_versions)
+    artifact.addModLoader('Fabric')             // the fabric-loom-remap plugin id is not auto-detected
+    artifact.addEnvironment('Client', 'Server') // fabric.mod.json declares "environment": "*"
+    artifact.addRequirement('fabric-api')
+    artifact.addOptional('cloth-config')
 }
 
 // configure the maven publication

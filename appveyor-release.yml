@@ -19,7 +19,7 @@ build_script:
   - cmd: >-
       gradlew build --no-daemon
       
-      gradlew curseforge --no-daemon
+      gradlew publishCurseForge --no-daemon
       
       gradlew modrinth --no-daemon
 
