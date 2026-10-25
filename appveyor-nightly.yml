@@ -1,7 +1,8 @@
 version: $(VERSION)-alpha (#{build})
 skip_tags: true
 environment:
-  JAVA_HOME: C:\Program Files\Java\jdk21
+  # CurseForgeGradle 1.3.x requires the Gradle JVM on Java 25; the mod still targets Java 21.
+  JAVA_HOME: C:\Program Files\Java\jdk25
   GITHUB_TOKEN:
     secure: mIxbyFSpUuMyOA9YhYQO53caIbPBIH3zwahKMu9buYBl3It5v5APVCkfPKjR2PI8UfkTl1vP/S2u6LIAHnk1h8Zq5K5wqT3TfY1NBpBAhRZPrMt1LZnQ8B1NcQI3YKN2 #有效期至2027-06-30
   PROJECT_NAME: ultimate-scaler

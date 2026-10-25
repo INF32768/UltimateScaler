@@ -46,7 +46,7 @@
 ## 开始开发
 
 **环境配置：**
-- **JDK 21+**
+- **JDK 25+（Gradle 守护进程）**（CurseForgeGradle 发布插件要求）；模组本体仍编译并运行在 Java 21
 - **Fabric Toolchain**
 - **依赖**: Fabric API (运行时), Cloth Config API (可选，用于GUI)
 

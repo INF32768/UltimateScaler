@@ -49,7 +49,7 @@ Configuration references, distance-effect research, and project documentation ar
 ## Start development
 
 **Environment Configuration:**
-- **JDK 21+**
+- **JDK 25+ for Gradle** (the CurseForgeGradle publishing plugin requires it); the mod itself still compiles and targets Java 21
 - **Fabric Toolchain**
 - **Dependencies**: Fabric API (runtime), Cloth Config API (optional, for GUI)
 
